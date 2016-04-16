@@ -14,4 +14,12 @@ if ( ! defined( 'WPINC' ) ) {
 	die;
 }
 
+define("CTS_PLUGIN_PATH", plugin_dir_path(__FILE__));
+require_once CTS_PLUGIN_PATH . 'inc/class-constara-slider.php';
+
+function init_constara_slider(){
+	$ctsp = new Constara_Slider();
+	$ctsp->run();
+}
+init_constara_slider();
 
