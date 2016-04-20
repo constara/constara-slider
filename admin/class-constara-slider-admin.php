@@ -95,7 +95,7 @@ class CTS_Admin {
 	}
 
 	
-	public function cts_slider($atts){
+	public function cts_slider_shortcode($atts){
 	    extract( shortcode_atts( array(
 	        'slider'            => '',
 	        'autoplay'          => 'yes',

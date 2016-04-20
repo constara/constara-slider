@@ -36,7 +36,7 @@ class Constara_Slider {
 	$this->loader->add_action('manage_edit-cts_slides_category_columns', $admin, 'slider_column');
 	$this->loader->add_action('after_switch_theme' ,$admin, 'flush_rewrite_rules');
     $this->loader->add_filter('manage_cts_slides_category_custom_column', $admin, 'manage_slider_columns', 10, 3);
-	$this->loader->add_shortcode('cts_slider', $admin, 'cts_slider');
+	$this->loader->add_shortcode('cts_slider', $admin, 'cts_slider_shortcode');
 
 	}
 
@@ -51,6 +51,10 @@ class Constara_Slider {
 
 	public function get_version(){
 		return $this->version;
+	}
+
+	public function get_plugin_slug(){
+		return $this->plugin_slug;
 	}
 
 }
