@@ -39,13 +39,14 @@ class Constara_Slider {
 		$this->loader->add_action('manage_edit-cts_slides_category_columns', $admin, 'slider_column');
 		$this->loader->add_action('after_switch_theme' ,$admin, 'flush_rewrite_rules');
 		$this->loader->add_filter('manage_cts_slides_category_custom_column', $admin, 'manage_slider_columns', 10, 3);
-		$this->loader->add_shortcode('cts_slider', $admin, 'cts_slider_shortcode');
 
 	}
 
 	private function define_site_hooks(){
 		$site = new CTS_Site($this->get_version());
 		$this->loader->add_action('wp_enqueue_scripts', $site, 'enqueue_scripts');
+		$this->loader->add_shortcode('cts_slider', $site, 'cts_slider_shortcode');
+
 	}
 
 	public function run(){
