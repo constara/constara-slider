@@ -6,6 +6,7 @@
  * Date: 11.04.2016
  * Time: 1:13
  */
+
 class CTS_Admin {
 
 	protected $version;
@@ -14,12 +15,21 @@ class CTS_Admin {
 		$this->version = $version;
 	}
 
+	public function enqueue_scripts($hook){
+		if ('post-new.php' == $hook || 'post.php' == $hook && 'cts_slide' == get_post_type()){
+			wp_enqueue_style('jquery-ui', CTS_PLUG_ADMIN_URL . 'css/jquery-ui.css');
+			wp_enqueue_script('jquery-ui-slider', array('jquery'));
+			wp_enqueue_style('cts-slider', CTS_PLUG_ADMIN_URL . 'css/slider.css', $this->get_version());
+			wp_enqueue_script('cts-slider', CTS_PLUG_ADMIN_URL . 'js/slider.js', array('jquery'), $this->get_version());
+		}
+	}
+
 	public function register_post_type(){
 				
 		register_post_type('cts_slide', array(
 			'labels'		=> array(
 				'name' 				=> __('Slider','tracker' ),
-				'menu_name'			=> __('Slider','tracker' ),
+				'menu_name'			=> __('CT Slider','tracker' ),
 				'all_items'			=> __('Slides','tracker' ),
 				'add_new' 			=> __('Add New Slide','tracker'),
 				'singular_name' 	=> __('Slide','tracker' ),
@@ -61,6 +71,64 @@ class CTS_Admin {
 			'rewrite' 			=> array('slug' => 'slides-category'),
 		));
 	}
+
+	public function register_metaboxes(){
+		add_meta_box('slide-option', __('Slide Options', 'tracker'), array($this,'cts_slide_option'), 'cts_slide', 'normal', 'default');
+
+	}
+	
+	public function cts_slide_option($post){
+		wp_create_nonce(__FILE__, 'cts_slide_options');
+		$post_id = $post->ID;
+		$show_title = get_post_meta($post_id, '_cts_slide_show_title', true);
+		$title_position = get_post_meta($post_id, '_cts_slide_title_position', true);
+		$slide_link = get_post_meta($post_id, '_cts_slide_link', true);
+		?>
+		<p> <label for="cts_slide_show_title"><?php _e('Show slide title', 'tracker'); ?></label>
+			<input type="checkbox" name="cts_slide_show_title" value="true" <?php checked($show_title, 'true'); ?>>
+		</p>
+		<p>
+			<label for="cts_slide_title_position"><?php _e('Title position', 'tracker'); ?></label>
+			<input type="text" size="5" name="cts_slide_title_position" id="cts_slide_title_position" value="<?php echo $title_position; ?>">
+			<span id="set_default_title_position" class="button"><?php _e('set default', 'tracker'); ?></span>
+		<div id="title-position"></div>
+		<div class="title-position-desc"><?php _e('Choose title position for slide. Less value - higher title position', 'tracker'); ?></div>
+		</p>
+		<p>
+			<label for="cts_slide_link"><?php _e('Slide link', 'tracker'); ?></label>
+			<input type="text" name="cts_slide_link" id="cts_slide_link" size="70" value="<?php echo esc_attr($slide_link); ?>">
+		</p>
+	<?php }
+
+	public function save_metaboxes($post_id){
+		//slide options
+		if (isset($_POST['cts_slide_title_position'])){
+			if(defined('DOING_AUTOSAVE') && DOING_AUTOSAVE){
+				return;
+			}
+			wp_verify_nonce(__FILE__, 'cts_slide_options');
+
+			update_post_meta(
+				$post_id,
+				'_cts_slide_show_title',
+				$_POST['cts_slide_show_title']
+			);
+
+			update_post_meta(
+				$post_id,
+				'_cts_slide_title_position',
+				sanitize_text_field($_POST['cts_slide_title_position'])
+			);
+
+			update_post_meta(
+				$post_id,
+				'_cts_slide_link',
+				esc_url_raw($_POST['cts_slide_link'])
+			);
+
+
+		}
+	}
 	
 	public function slider_column($slider_columns){
 		$new_columns = array(
@@ -93,7 +161,6 @@ class CTS_Admin {
 				break;
 		}
 	}
-
 	
 	public function cts_slider_shortcode($atts){
 	    extract( shortcode_atts( array(
@@ -141,18 +208,42 @@ class CTS_Admin {
 	        }'>
 
 	        <?php while ($slides->have_posts()){
-	            $slides->the_post();?>
-	            
-	            <div class="slide" style="background: linear-gradient(to bottom, rgba(0,0,0,0.09) 0%,rgba(0,0,0,0.19) 100%), url('<?php echo get_the_post_thumbnail_url();?>') center center no-repeat;">
-		            <div class="slide_content_block" >
-		                <h1 class="title"><?php the_title();?></h1>
-		                <div class="desc"><?php the_content(); ?></div>
-		            </div>
+	            $slides->the_post();
+			    $show_title = get_post_meta(get_the_ID(), '_cts_slide_show_title', true);
+			    $title_position = get_post_meta(get_the_ID(), '_cts_slide_title_position', true);
+			    $slide_link = get_post_meta(get_the_ID(), '_cts_slide_link', true);
+			    echo $show_title . ' ' . $title_position . ' ' . $slide_link;
 
-	            </div> <!-- .slide -->	          
-	        <?php }
+			    echo '<div class="slide" style="background: linear-gradient(to bottom, rgba(0,0,0,0.09) 0%,rgba(0,0,0,0.19) 100%), url(' . get_the_post_thumbnail_url() . ') center center no-repeat;">';
+			    ?>
+			    <div class="slide-content-block" style="<?php if (isset($title_position)){echo 'top:' . $title_position . '%';} ?>">
+				    <?php
+				    if ($show_title == 'true') {
 
-	        echo '</div>';//.slider
+					    if (!empty($slide_link)) {?>
+						    <a href="<?php echo esc_url($slide_link); ?>">
+							    <h1 class="title">
+								    <?php echo get_the_title(); ?>
+							    </h1>
+						    </a>
+					    <?php } else {
+						    echo sprintf('<h1 class="title"></h1>', get_the_title());
+					    }
+
+				    }?>
+				    <div class="desc"><?php echo get_the_content(); ?></div>
+			    </div>
+
+			    <?php
+			    if (!empty($slide_link)) {
+				    echo sprintf('<a class="slide-link" href="%s"></a>',$slide_link);
+			    }
+			    echo '</div>';// .slide
+
+		    }
+
+		    echo '</div>';
+		    
 	        wp_reset_postdata();
 	    }
 	}
@@ -161,4 +252,7 @@ class CTS_Admin {
 		flush_rewrite_rules();
 	}
 
+	public function get_version(){
+		return $this->version;
+	}
 }?>

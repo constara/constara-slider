@@ -72,17 +72,17 @@
 .slick-arrow.slick-hidden {
   display: none; }
 
-.slide_content_block {
+.slide-content-block {
   position: relative;
   top: 40%;
   color: #fff;
   max-width: 80%;
   margin: 0 auto; }
-  .slide_content_block h1 {
+  .slide-content-block h1 {
     font-size: 48px;
     margin: 18px auto;
     text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6); }
-  .slide_content_block p {
+  .slide-content-block p {
     font-size: 20px;
     font-weight: lighter; }
 
@@ -146,10 +146,10 @@ ul.slick-dots li.slick-active button {
   .slick-slide {
     height: 138px; }
 
-  .slide_content_block h1 {
+  .slide-content-block h1 {
     font-size: 1em; }
 
-  .slide_content_block p {
+  .slide-content-block p {
     font-size: 1em; }
 
   ul.slick-dots {
@@ -164,10 +164,10 @@ ul.slick-dots li.slick-active button {
   .slick-slide {
     height: 233px; }
 
-  .slide_content_block h1 {
+  .slide-content-block h1 {
     font-size: 1.3em; }
 
-  .slide_content_block p {
+  .slide-content-block p {
     font-size: 1em; }
 
   ul.slick-dots {
@@ -176,10 +176,10 @@ ul.slick-dots li.slick-active button {
   .slick-slide {
     height: 323px; }
 
-  .slide_content_block h1 {
+  .slide-content-block h1 {
     font-size: 1.4em; }
 
-  .slide_content_block p {
+  .slide-content-block p {
     font-size: 1em; }
 
   ul.slick-dots {
@@ -188,10 +188,10 @@ ul.slick-dots li.slick-active button {
   .slick-slide {
     height: 418px; }
 
-  .slide_content_block h1 {
+  .slide-content-block h1 {
     font-size: 1.6em; }
 
-  .slide_content_block p {
+  .slide-content-block p {
     font-size: 1em; }
 
   ul.slick-dots {
@@ -200,23 +200,21 @@ ul.slick-dots li.slick-active button {
   .slick-slide {
     height: 504px; }
 
-  .slide_content_block h1 {
+  .slide-content-block h1 {
     font-size: 2.3em; }
 
-  .slide_content_block p {
+  .slide-content-block p {
     font-size: 1em; } }
 @media (min-width: 1280px) {
   .slick-slide {
     height: 552px; }
 
-  .slide_content_block h1 {
+  .slide-content-block h1 {
     font-size: 2.6em; }
 
-  .slide_content_block p {
+  .slide-content-block p {
     font-size: 1em; } }
 .slide-link {
   display: block;
   height: 100%;
   width: 100%; }
-
-/*# sourceMappingURL=slick.min.css.map */

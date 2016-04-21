@@ -30,13 +30,16 @@ class Constara_Slider {
 	}
 
 	private function define_admin_hooks(){
-	$admin = new CTS_Admin($this->get_version());
-	$this->loader->add_action('init', $admin, 'register_post_type');
-	$this->loader->add_action('init', $admin, 'register_taxonomy');
-	$this->loader->add_action('manage_edit-cts_slides_category_columns', $admin, 'slider_column');
-	$this->loader->add_action('after_switch_theme' ,$admin, 'flush_rewrite_rules');
-    $this->loader->add_filter('manage_cts_slides_category_custom_column', $admin, 'manage_slider_columns', 10, 3);
-	$this->loader->add_shortcode('cts_slider', $admin, 'cts_slider_shortcode');
+		$admin = new CTS_Admin($this->get_version());
+		$this->loader->add_action('admin_enqueue_scripts', $admin, 'enqueue_scripts');
+		$this->loader->add_action('init', $admin, 'register_post_type');
+		$this->loader->add_action('init', $admin, 'register_taxonomy');
+		$this->loader->add_action('add_meta_boxes', $admin, 'register_metaboxes');
+		$this->loader->add_action('save_post', $admin, 'save_metaboxes');
+		$this->loader->add_action('manage_edit-cts_slides_category_columns', $admin, 'slider_column');
+		$this->loader->add_action('after_switch_theme' ,$admin, 'flush_rewrite_rules');
+		$this->loader->add_filter('manage_cts_slides_category_custom_column', $admin, 'manage_slider_columns', 10, 3);
+		$this->loader->add_shortcode('cts_slider', $admin, 'cts_slider_shortcode');
 
 	}
 

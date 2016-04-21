@@ -15,10 +15,9 @@ class Constara_Slider_Loader {
 	protected $shortcodes;
 
 	public function __construct() {
-
 		$this->actions = array();
+		$this->filters = array();
 		$this->shortcodes = array();
-
 	}
 
 	public function add_action($hook, $component, $callback, $priority = 10, $args = 1) {
