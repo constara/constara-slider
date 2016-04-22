@@ -73,6 +73,7 @@ class CTS_Admin {
 	}
 
 	public function register_metaboxes(){
+		add_meta_box('slide-media', __('Slide media', 'tracker'), array($this,'cts_slide_media'), 'cts_slide', 'normal', 'default');
 		add_meta_box('slide-option', __('Slide Options', 'tracker'), array($this,'cts_slide_option'), 'cts_slide', 'normal', 'default');
 
 	}
@@ -98,6 +99,17 @@ class CTS_Admin {
 			<label for="cts_slide_link"><?php _e('Slide link', 'tracker'); ?></label>
 			<input type="text" name="cts_slide_link" id="cts_slide_link" size="70" value="<?php echo esc_attr($slide_link); ?>">
 		</p>
+	<?php }
+
+	public function cts_slide_media($post){
+		wp_create_nonce(__FILE__, 'cts_slide_media');
+		$post_id = $post->ID;
+		?>
+		<p><label for="cts_slide_media_url"><?php _e('Slide media url', 'cts-slider'); ?></label>
+			<input type="text" class="widefat" name="cts_slide_media_url" id="cts_slide_media_url">
+			<span class="button" id="get-slide-media-url"  class="get-slide-media-url" >Get media link</span>
+		</p>
+
 	<?php }
 
 	public function save_metaboxes($post_id){

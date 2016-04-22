@@ -23,7 +23,9 @@ class CTS_Site {
 			<div class="slider" <?php echo $slider->get_opts(); ?> >
 				<?php while ($slider->query->have_posts()){
 					$slider->query->the_post();
-					$slide = new CTS_Slide(get_the_ID());?>
+					$slide = new CTS_Slide(get_the_ID());
+					 
+					?>
 					
 					
 					<div class="slide" <?php $slide->get_style() ?>  >
