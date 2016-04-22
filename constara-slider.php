@@ -19,10 +19,10 @@ define("CTS_PLUGIN_URL", plugin_dir_url(__FILE__));
 define('CTS_PLUG_ADMIN_URL', plugin_dir_url(__FILE__) . 'admin/');
 define('CTS_PLUGIN_ADMIN_PATH', plugin_dir_path(__FILE__) . 'admin/');
 
-require_once CTS_PLUGIN_PATH . 'inc/class-constara-slider.php';
+require_once CTS_PLUGIN_PATH . 'inc/class-constara-slider-plugin.php';
 
 function init_constara_slider(){
-	$ctsp = new Constara_Slider();
+	$ctsp = new Constara_Slider_Plugin();
 	$ctsp->run();
 }
 init_constara_slider();

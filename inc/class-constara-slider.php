@@ -1,64 +1,76 @@
 <?php
 
 /**
- * Class is responsible for loading the dependencies, setting the locale, and coordinating the hooks
- * Date: 11.04.2016
- * Time: 1:48
+ * Created by PhpStorm.
+ * User: kutas
+ * Date: 21.04.2016
+ * Time: 23:59
  */
-class Constara_Slider {
+class CTS_Slider{
 
-	protected $loader;
+    protected $attr;
 
-	protected $plugin_slug;
+    public $query;
 
-	protected $version;
+    public function __construct($attr){
+        $this->attr = $this->set_attr($attr);
+        $this->query = $this->do_query($this->attr['name']);
+    }
 
-	public function __construct() {
-		$this->plugin_slug = 'constara-slider';
-		$this->version = '0.1';
-		$this->load_dependencies();
-		$this->define_admin_hooks();
-		$this->define_site_hooks();
-	}
+    protected function set_attr($attr){
+        $slider_opts = array();
+        extract( shortcode_atts( array(
+            'slider'            => '',
+            'autoplay'          => 'yes',
+            'autoplayspeed'     => '6000',
+            'speed'             => '1000',
+            'fade'              => 'yes',
+            'adaptiveheight'    => 'false',
+            'dots'              => 'yes',
+            'arrows'            => 'yes',
+        ), $attr) );
+        $slider_opts['name'] = $slider;
+        $slider_opts['autoplay'] = ('yes' == $autoplay) ? 'true' : 'false';
+        $slider_opts['autoplayspeed'] = intval($autoplayspeed);
+        $slider_opts['speed'] = intval($speed);
+        $slider_opts['fade'] = ('yes' == $fade) ? 'true' : 'false';
+        $slider_opts['adaptiveheight'] = ('yes' == $adaptiveheight) ? 'true' : 'false';
+        $slider_opts['dots'] = ('yes' == $dots) ? 'true' : 'false';
+        $slider_opts['arrows'] = ('yes' == $arrows) ? 'true' : 'false';
 
-	private function load_dependencies(){
-		require_once plugin_dir_path(dirname(__FILE__)) . 'admin/class-constara-slider-admin.php';
-		require_once plugin_dir_path(__FILE__) . 'class-constara-slider-site.php';
-		require_once plugin_dir_path(__FILE__) . 'class-constara-slider-loader.php';
+        return $slider_opts;
+    }
 
-		$this->loader = new Constara_Slider_Loader();
-	}
+    public function do_query($name){
+        //set arrt for query
+        $query_attr = array(
+            'post_type'         => 'cts_slide',
+            'posts_per_page'    => -1,
+            'order'             => 'ASC',
+            'tax_query'         => array(
+                array(
+                    'taxonomy'  => 'cts_slides_category',
+                    'field'     => 'slug',
+                    'terms'     => $name,
+                )
+            )    );
 
-	private function define_admin_hooks(){
-		$admin = new CTS_Admin($this->get_version());
-		$this->loader->add_action('admin_enqueue_scripts', $admin, 'enqueue_scripts');
-		$this->loader->add_action('init', $admin, 'register_post_type');
-		$this->loader->add_action('init', $admin, 'register_taxonomy');
-		$this->loader->add_action('add_meta_boxes', $admin, 'register_metaboxes');
-		$this->loader->add_action('save_post', $admin, 'save_metaboxes');
-		$this->loader->add_action('manage_edit-cts_slides_category_columns', $admin, 'slider_column');
-		$this->loader->add_action('after_switch_theme' ,$admin, 'flush_rewrite_rules');
-		$this->loader->add_filter('manage_cts_slides_category_custom_column', $admin, 'manage_slider_columns', 10, 3);
+        $query = new WP_Query($query_attr);
+        return $query;
 
-	}
+    }
 
-	private function define_site_hooks(){
-		$site = new CTS_Site($this->get_version());
-		$this->loader->add_action('wp_enqueue_scripts', $site, 'enqueue_scripts');
-		$this->loader->add_shortcode('cts_slider', $site, 'cts_slider_shortcode');
+    public function get_opts(){
+        $opts = "data-slick='{";
+        foreach ($this->attr as $opt => $value){
+            if ($opt == 'name'){
+                continue;
+            }
+            $opts .= sprintf('"$1%s" : $2%s', $opt, $value);
+        }
+        $opts .= "}'";
 
-	}
-
-	public function run(){
-		$this->loader->run();
-	}
-
-	public function get_version(){
-		return $this->version;
-	}
-
-	public function get_plugin_slug(){
-		return $this->plugin_slug;
-	}
+        return $opts;
+    }
 
 }
