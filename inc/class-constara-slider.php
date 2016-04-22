@@ -66,8 +66,10 @@ class CTS_Slider{
             if ($opt == 'name'){
                 continue;
             }
-            $opts .= sprintf('"$1%s" : $2%s', $opt, $value);
+            $opts .= sprintf('"%s": %s, ',$opt, $value);
         }
+        $opts = substr($opts,0,-2);
+
         $opts .= "}'";
 
         return $opts;
