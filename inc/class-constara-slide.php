@@ -32,10 +32,10 @@ class CTS_Slide{
         $opts = array();
         $opts['title'] = $post->post_title;
         $opts['content'] = $post->post_content;
-        $opts['show_title'] = get_post_meta($post->ID, '_cts_slide_show_title', true);
+        $opts['hide_title'] =sanitize_title(get_post_meta($post->ID, '_cts_slide_hide_title', true));
         $opts['title_position'] = get_post_meta($post->ID, '_cts_slide_title_position', true);
-        $opts['slide_link'] = get_post_meta($post->ID, '_cts_slide_link', true);
-        $opts['img_url'] = get_post_meta($post->ID, '_cts_slide_img_url', true);
+        $opts['link_url'] = esc_url(get_post_meta($post->ID, '_cts_slide_link_url', true));
+        $opts['img_url'] = esc_url(get_post_meta($post->ID, '_cts_slide_img_url', true));
 
         return $opts;
     }
@@ -44,7 +44,7 @@ class CTS_Slide{
     }
 
     public function has_link(){
-        if (empty($this->opts['slide_link'])){
+        if (empty($this->opts['link_url'])){
             return false;
         } else {
             return true;
@@ -57,6 +57,14 @@ class CTS_Slide{
     }
 
     public function the_img(){
+    }
+
+    public function show_title(){
+        if ($this->opts['hide_title']){
+            return '';
+        } else {
+            return $this->opts['title'];
+        }
     }
 
     private function get_id(){

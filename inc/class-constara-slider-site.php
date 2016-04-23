@@ -29,13 +29,21 @@ class CTS_Site {
 					
 					
 					<div class="slide" <?php $slide->get_style() ?>  >
-						<img src="<?php echo $slide->get_opt('img_url');?>">
-						<h1>
-							<?php echo $slide->get_opt('title'); ?>
-						</h1>
-						<div class="desc">
-							<?php echo  $slide->get_opt('content'); ?>
-						</div>
+						<?php if ($slide->has_link()){?>
+							<a href="<?php echo $slide->get_opt('link_url');?>">
+						<?php } ?>
+
+							<img src="<?php echo $slide->get_opt('img_url');?>">
+							<h1>
+								<?php echo $slide->show_title(); ?>
+							</h1>
+							<div class="desc">
+								<?php echo  $slide->get_opt('content'); ?>
+							</div>
+
+						<?php if ($slide->has_link()){?>
+							</a>
+						<?php } ?>
 					</div>
 					
 			<?php }?>

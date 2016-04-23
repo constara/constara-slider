@@ -77,29 +77,6 @@ class CTS_Admin {
 		add_meta_box('slide-option', __('Slide Options', 'tracker'), array($this,'cts_slide_option'), 'cts_slide', 'normal', 'default');
 
 	}
-	
-	public function cts_slide_option($post){
-		wp_create_nonce(__FILE__, 'cts_slide_options');
-		$post_id = $post->ID;
-		$show_title = get_post_meta($post_id, '_cts_slide_show_title', true);
-		$title_position = get_post_meta($post_id, '_cts_slide_title_position', true);
-		$slide_link = get_post_meta($post_id, '_cts_slide_link', true);
-		?>
-		<p> <label for="cts_slide_show_title"><?php _e('Show slide title', 'tracker'); ?></label>
-			<input type="checkbox" name="cts_slide_show_title" value="true" <?php checked($show_title, 'true'); ?>>
-		</p>
-		<p>
-			<label for="cts_slide_title_position"><?php _e('Title position', 'tracker'); ?></label>
-			<input type="text" size="5" name="cts_slide_title_position" id="cts_slide_title_position" value="<?php echo $title_position; ?>">
-			<span id="set_default_title_position" class="button"><?php _e('set default', 'tracker'); ?></span>
-		<div id="title-position"></div>
-		<div class="title-position-desc"><?php _e('Choose title position for slide. Less value - higher title position', 'tracker'); ?></div>
-		</p>
-		<p>
-			<label for="cts_slide_link"><?php _e('Slide link', 'tracker'); ?></label>
-			<input type="text" name="cts_slide_link" id="cts_slide_link" size="70" value="<?php echo esc_attr($slide_link); ?>">
-		</p>
-	<?php }
 
 	public function cts_slide_media($post){
 		wp_create_nonce(__FILE__, 'cts_slide_media');
@@ -113,6 +90,29 @@ class CTS_Admin {
 
 	<?php }
 
+	public function cts_slide_option($post){
+		wp_create_nonce(__FILE__, 'cts_slide_options');
+		$post_id = $post->ID;
+		$show_title = get_post_meta($post_id, '_cts_slide_hide_title', true);
+		$title_position = get_post_meta($post_id, '_cts_slide_title_position', true);
+		$slide_link = get_post_meta($post_id, '_cts_slide_link_url', true);
+		?>
+		<p> <label for="cts_slide_hide_title"><?php _e('Hide slide title', 'tracker'); ?></label>
+			<input type="checkbox" name="cts_slide_hide_title" value="true" <?php checked($show_title, 'true'); ?>>
+		</p>
+		<p>
+			<label for="cts_slide_title_position"><?php _e('Title position', 'tracker'); ?></label>
+			<input type="text" size="5" name="cts_slide_title_position" id="cts_slide_title_position" value="<?php echo $title_position; ?>">
+			<span id="set_default_title_position" class="button"><?php _e('set default', 'tracker'); ?></span>
+		<div id="title-position"></div>
+		<div class="title-position-desc"><?php _e('Choose title position for slide. Less value - higher title position', 'tracker'); ?></div>
+		</p>
+		<p>
+			<label for="cts_slide_link_url"><?php _e('Slide link', 'tracker'); ?></label>
+			<input type="text" name="cts_slide_link_url" id="cts_slide_link_url" size="70" value="<?php echo esc_attr($slide_link); ?>">
+		</p>
+	<?php }
+
 	public function save_metaboxes($post_id){
 		//slide options
 		if (isset($_POST['cts_slide_title_position'])){
@@ -123,8 +123,8 @@ class CTS_Admin {
 
 			update_post_meta(
 				$post_id,
-				'_cts_slide_show_title',
-				$_POST['cts_slide_show_title']
+				'_cts_slide_hide_title',
+				$_POST['cts_slide_hide_title']
 			);
 
 			update_post_meta(
@@ -135,8 +135,8 @@ class CTS_Admin {
 
 			update_post_meta(
 				$post_id,
-				'_cts_slide_link',
-				esc_url_raw($_POST['cts_slide_link'])
+				'_cts_slide_link_url',
+				esc_url_raw($_POST['cts_slide_link_url'])
 			);
 		}
 
