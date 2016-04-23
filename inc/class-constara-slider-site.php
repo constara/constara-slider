@@ -29,7 +29,7 @@ class CTS_Site {
 					
 					
 					<div class="slide" <?php $slide->get_style() ?>  >
-						<?php $slide->the_img();?>
+						<img src="<?php echo $slide->get_opt('img_url');?>">
 						<h1>
 							<?php echo $slide->get_opt('title'); ?>
 						</h1>

@@ -3,7 +3,7 @@
  */
 jQuery(document).ready(function ($) {
     
-    $('#get-slide-media-url').click(function () {
+    $('#get-slide-img-url').click(function () {
         var frame;
         if (frame){
             frame.open();
@@ -23,7 +23,7 @@ jQuery(document).ready(function ($) {
         frame.open();
 
         frame.on('select', function(){
-            var url_field = $('#cts_slide_media_url');
+            var url_field = $('#cts_slide_img_url');
             var attachment = frame.state().get('selection').first().toJSON();
             var url = attachment.url;
             console.log(url);

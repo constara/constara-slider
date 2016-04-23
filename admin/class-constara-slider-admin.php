@@ -44,7 +44,7 @@ class CTS_Admin {
 			'show_ui'		=>	true,
 			'has_archive'	=>	false,
 			'hierarchical'	=>	false,
-			'supports'		=>	array('title','editor','thumbnail'),
+			'supports'		=>	array('title','editor'),
 			'menu_icon'		=> 'dashicons-images-alt2',
 		));
 	}
@@ -104,10 +104,11 @@ class CTS_Admin {
 	public function cts_slide_media($post){
 		wp_create_nonce(__FILE__, 'cts_slide_media');
 		$post_id = $post->ID;
+		$slide_img_url = get_post_meta($post_id, '_cts_slide_img_url', true);
 		?>
-		<p><label for="cts_slide_media_url"><?php _e('Slide media url', 'cts-slider'); ?></label>
-			<input type="text" class="widefat" name="cts_slide_media_url" id="cts_slide_media_url">
-			<span class="button" id="get-slide-media-url"  class="get-slide-media-url" >Get media link</span>
+		<p><label for="cts_slide_img_url"><?php _e('Slide image url', 'cts-slider'); ?></label>
+			<input type="text" class="widefat" name="cts_slide_img_url" id="cts_slide_img_url" value="<?php echo esc_url($slide_img_url); ?>">
+			<span class="button" id="get-slide-img-url"  class="get-slide-img-url" >Get image</span>
 		</p>
 
 	<?php }
@@ -137,8 +138,20 @@ class CTS_Admin {
 				'_cts_slide_link',
 				esc_url_raw($_POST['cts_slide_link'])
 			);
+		}
 
+		//slide media
+		if (isset($_POST['cts_slide_img_url'])){
+			if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE){
+				return;
+			}
+			wp_verify_nonce(__FILE__, 'cts_slide_media');
 
+			update_post_meta(
+				$post_id,
+				'_cts_slide_img_url',
+				esc_url_raw($_POST['cts_slide_img_url'])
+			);
 		}
 	}
 	

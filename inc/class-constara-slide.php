@@ -35,6 +35,7 @@ class CTS_Slide{
         $opts['show_title'] = get_post_meta($post->ID, '_cts_slide_show_title', true);
         $opts['title_position'] = get_post_meta($post->ID, '_cts_slide_title_position', true);
         $opts['slide_link'] = get_post_meta($post->ID, '_cts_slide_link', true);
+        $opts['img_url'] = get_post_meta($post->ID, '_cts_slide_img_url', true);
 
         return $opts;
     }
@@ -56,7 +57,6 @@ class CTS_Slide{
     }
 
     public function the_img(){
-        echo the_post_thumbnail();
     }
 
     private function get_id(){
