@@ -22,7 +22,7 @@ define('CTS_PLUGIN_ADMIN_PATH', plugin_dir_path(__FILE__) . 'admin/');
 require_once CTS_PLUGIN_PATH . 'inc/class-constara-slider-plugin.php';
 
 function init_constara_slider(){
-	$ctsp = new Constara_Slider_Plugin();
+	$ctsp = Constara_Slider_Plugin::getInstance();
 	$ctsp->run();
 }
 init_constara_slider();

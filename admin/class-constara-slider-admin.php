@@ -9,9 +9,18 @@
 
 class CTS_Admin {
 
+	static private $instance = null;
+
 	protected $version;
 
-	public function __construct($version) {
+	static public function getInstance($version){
+		if (is_null(self::$instance)){
+			self::$instance = new CTS_Admin($version);
+		}
+		return self::$instance;
+	}
+
+	private function __construct($version) {
 		$this->version = $version;
 	}
 

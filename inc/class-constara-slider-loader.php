@@ -8,11 +8,20 @@
  */
 class Constara_Slider_Loader {
 
+	static private $instance = null;
+
 	protected $actions;
 
 	protected $filters;
 
 	protected $shortcodes;
+
+	public static function getInstance() {
+		if (is_null(self::$instance)){
+			self::$instance = new Constara_Slider_Loader();
+		}
+		return self::$instance;
+	}
 
 	public function __construct() {
 		$this->actions = array();
