@@ -50,6 +50,10 @@ class Constara_Slider_Plugin {
 		$this->loader->add_action('manage_edit-cts_slides_category_columns', $admin, 'slider_column');
 		$this->loader->add_action('after_switch_theme' ,$admin, 'flush_rewrite_rules');
 		$this->loader->add_filter('manage_cts_slides_category_custom_column', $admin, 'manage_slider_columns', 10, 3);
+		$this->loader->add_action('cts_slides_category_add_form_fields', $admin, 'slider_create_add_options');
+		$this->loader->add_action('cts_slides_category_edit_form_fields', $admin, 'slider_edit_add_options');
+		$this->loader->add_action('edited_cts_slides_category', $admin, 'slider_add_options_save');
+		$this->loader->add_action('create_cts_slides_category', $admin, 'slider_add_options_save');
 
 	}
 

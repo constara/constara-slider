@@ -21,7 +21,6 @@ class CTS_Site {
 	}
 
 	public function enqueue_scripts(){
-		error_log('enqueue_script_site');
 		wp_enqueue_script('slick-carousel', plugins_url('js/slick.min.js', dirname(__FIlE__)), array('jquery'), $this->get_version());
 		wp_enqueue_script('cts-slider', plugins_url('js/slider.js', dirname(__FIlE__)), array('jquery'), $this->get_version());		
 		wp_enqueue_style('slick-carousel', plugins_url('css/slick.min.css', dirname(__FIlE__)), $this->get_version());		
@@ -34,9 +33,7 @@ class CTS_Site {
 			<div class="slider" <?php echo $slider->get_opts(); ?> >
 				<?php while ($slider->query->have_posts()){
 					$slider->query->the_post();
-					$slide = new CTS_Slide(get_the_ID());
-
-					?>
+					$slide = new CTS_Slide(get_the_ID());?>
 
 
 					<div class="slide" <?php $slide->get_style() ?>  >

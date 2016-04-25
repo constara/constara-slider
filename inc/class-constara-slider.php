@@ -8,17 +8,23 @@
  */
 class CTS_Slider{
 
-    protected $attr;
+    protected $name;
+
+    protected $data_slick;
+
+    protected $data_slider;
 
     public $query;
 
     public function __construct($attr){
-        $this->attr = $this->set_attr($attr);
-        $this->query = $this->do_query($this->attr['name']);
+        $this->name = $this->set_name($attr);
+        $this->data_slick = $this->set_data_slick($attr);
+        $this->data_slider = $this->set_data_slider($this->name);
+        $this->query = $this->do_query($this->name);
     }
 
-    protected function set_attr($attr){
-        $slider_opts = array();
+    protected function set_data_slick($attr){
+        $data_slick = array();
         extract( shortcode_atts( array(
             'slider'            => '',
             'autoplay'          => 'yes',
@@ -29,17 +35,32 @@ class CTS_Slider{
             'dots'              => 'yes',
             'arrows'            => 'yes',
         ), $attr) );
-        $slider_opts['name'] = $slider;
-        $slider_opts['autoplay'] = ('yes' == $autoplay) ? 'true' : 'false';
-        $slider_opts['autoplayspeed'] = intval($autoplayspeed);
-        $slider_opts['speed'] = intval($speed);
-        $slider_opts['fade'] = ('yes' == $fade) ? 'true' : 'false';
-        $slider_opts['adaptiveheight'] = ('yes' == $adaptiveheight) ? 'true' : 'false';
-        $slider_opts['dots'] = ('yes' == $dots) ? 'true' : 'false';
-        $slider_opts['arrows'] = ('yes' == $arrows) ? 'true' : 'false';
+        $data_slick['name'] = $slider;
+        $data_slick['autoplay'] = ('yes' == $autoplay) ? 'true' : 'false';
+        $data_slick['autoplayspeed'] = intval($autoplayspeed);
+        $data_slick['speed'] = intval($speed);
+        $data_slick['fade'] = ('yes' == $fade) ? 'true' : 'false';
+        $data_slick['adaptiveheight'] = ('yes' == $adaptiveheight) ? 'true' : 'false';
+        $data_slick['dots'] = ('yes' == $dots) ? 'true' : 'false';
+        $data_slick['arrows'] = ('yes' == $arrows) ? 'true' : 'false';
 
-        return $slider_opts;
+        return $data_slick;
     }
+
+    protected function set_data_slider($slider_name){
+        $options = get_option($slider_name);
+        return $options;
+    }
+
+
+    protected function set_name($attr){
+        $name = '' ;
+        if(!empty($attr['slider']) && is_string($attr['slider'])){
+            $name = $attr['slider'];
+        }
+        return $name;
+    }
+
 
     public function do_query($name){
         //set arrt for query
@@ -61,18 +82,28 @@ class CTS_Slider{
     }
 
     public function get_opts(){
-        $opts = "data-slick='{";
-        foreach ($this->attr as $opt => $value){
-            if ($opt == 'name'){
-                continue;
-            }
-            $opts .= sprintf('"%s": %s, ',$opt, $value);
+        $opts = '';
+
+        $data_slick = "data-slick='{";
+        foreach ($this->data_slick as $opt => $value){
+            if ($opt == 'name') continue;
+            $data_slick .= sprintf('"%s": %s, ',$opt, $value);
         }
-        $opts = substr($opts,0,-2);
+        $data_slick = substr($data_slick,0,-2);
+        $data_slick .= "}'";
 
-        $opts .= "}'";
 
+        $data_slider = "data-slider='{";
+        foreach ($this->data_slider as $opt => $val){
+            $data_slider .= sprintf('"%s": %s, ', $opt, $val);
+        }
+        $data_slider = substr($data_slider, 0, -2);
+        $data_slider .= "}'";
+
+
+        $opts .= $data_slick . ' ' . $data_slider;
         return $opts;
     }
+
 
 }

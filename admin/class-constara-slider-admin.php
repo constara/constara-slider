@@ -177,7 +177,6 @@ class CTS_Admin {
 	}
 	
 	public function manage_slider_columns($column, $column_name, $theme_id){
-		error_log($theme_id);
 		$slider = get_term($theme_id, 'cts_slides_category');
 		switch ($column_name) {
 			case 'shortcode':
@@ -195,7 +194,34 @@ class CTS_Admin {
 				break;
 		}
 	}
-	
+
+
+	public function slider_create_add_options(){?>
+		<div class="form-field">
+			<label for="trc_slider_opts[height]"><?php _e('Slider height', 'cts-slider'); ?></label>
+			<input type="text" name="trc_slider_opts[height]" >
+
+		</div>
+
+	<?php }
+
+	public function slider_edit_add_options($term){
+		$options = get_option($term->slug);?>
+		<tr class="form-field">
+			<th scope="row" valign="top"><?php _e('Slider height', 'cts-slider'); ?></th>
+			<td>
+				<input type="text" name="trc_slider_opts[height]"  value="<?php echo $options['height']; ?>">
+			</td>
+		</tr>
+	<?php }
+
+	public function slider_add_options_save($term_id){
+		$term = get_term($term_id, 'cts_slides_category');
+		$option_name = $term->slug;
+		if (isset($_POST['trc_slider_opts'])){
+			update_option($option_name, $_POST['trc_slider_opts']);
+		}
+	}
 	
 
 	public function flush_rewrite_rules(){
