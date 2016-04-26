@@ -95,7 +95,7 @@ class CTS_Slider{
 
         $data_slider = "data-slider='{";
         foreach ($this->data_slider as $opt => $val){
-            $data_slider .= sprintf('"%s": %s, ', $opt, $val);
+            $data_slider .= sprintf('"%s": "%s", ', $opt, $val);
         }
         $data_slider = substr($data_slider, 0, -2);
         $data_slider .= "}'";
