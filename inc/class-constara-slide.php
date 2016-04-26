@@ -24,14 +24,21 @@ class CTS_Slide{
         $this->post_obj = get_post($id);
     }
     
-    public function get_style(){
-            return 'style=""';
+    public function get_style($selector){
+        switch ($selector){
+            case 'content':
+                return 'style="top:' . $this->get_opt('title_position') . '%;"';
+                break;
+            default:
+                return null;
+                break;
+        }
     }
 
     private function get_opts(WP_Post $post){
         $opts = array();
         $opts['title'] = $post->post_title;
-        $opts['content'] = $post->post_content;
+        $opts['desc'] = $post->post_content;
         $opts['hide_title'] =sanitize_title(get_post_meta($post->ID, '_cts_slide_hide_title', true));
         $opts['title_position'] = get_post_meta($post->ID, '_cts_slide_title_position', true);
         $opts['link_url'] = esc_url(get_post_meta($post->ID, '_cts_slide_link_url', true));

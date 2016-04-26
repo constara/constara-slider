@@ -37,11 +37,10 @@ class CTS_Site {
 				$slide = new CTS_Slide(get_the_ID());?>
 
 
-				<div class="cts-slide" <?php $slide->get_style() ?>  >
-
+				<div class="cts-slide" >
 
 						<img src="<?php echo $slide->get_opt('img_url');?>" class="cts-slide-img" >
-							<div class="cts-content-block">
+							<div class="cts-content-block" <?php echo $slide->get_style('content') ?>>
 								<?php if ($slide->has_link()){?>
 									<a href="<?php echo $slide->get_opt('link_url');?>">
 								<?php } ?>
@@ -49,7 +48,7 @@ class CTS_Site {
 								<?php if ($slide->has_link()){?>
 									</a>
 								<?php } ?>
-								<div class="desc"><?php echo  $slide->get_opt('content'); ?></div>
+								<div class="desc"><?php echo  $slide->get_opt('desc'); ?></div>
 							</div>
 
 				</div>
