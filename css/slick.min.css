@@ -55,7 +55,8 @@
   [dir="rtl"] .slick-slide {
     float: right; }
   .slick-slide img {
-    display: block; }
+    display: block;
+    width: 100%; }
   .slick-slide.slick-loading img {
     display: none; }
   .slick-slide.dragging img {
@@ -218,3 +219,5 @@ ul.slick-dots li.slick-active button {
   display: block;
   height: 100%;
   width: 100%; }
+
+/*# sourceMappingURL=slick.min.css.map */

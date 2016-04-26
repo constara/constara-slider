@@ -30,18 +30,18 @@ class CTS_Site {
 		
 		$slider = new CTS_Slider($atts);
 		if ($slider->query->have_posts()){?>
-			<div class="slider" <?php echo $slider->get_opts(); ?> >
+			<div class="cts-slider" <?php echo $slider->get_opts(); ?> >
 				<?php while ($slider->query->have_posts()){
 					$slider->query->the_post();
 					$slide = new CTS_Slide(get_the_ID());?>
 
 
-					<div class="slide" <?php $slide->get_style() ?>  >
+					<div class="cts-slide" <?php $slide->get_style() ?>  >
 						<?php if ($slide->has_link()){?>
 							<a href="<?php echo $slide->get_opt('link_url');?>">
 						<?php } ?>
 
-							<img src="<?php echo $slide->get_opt('img_url');?>">
+							<img src="<?php echo $slide->get_opt('img_url');?>" class="cts-slide-img" >
 							<h1>
 								<?php echo $slide->show_title(); ?>
 							</h1>
