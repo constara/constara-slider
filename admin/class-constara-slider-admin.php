@@ -24,6 +24,11 @@ class CTS_Admin {
 		$this->version = $version;
 	}
 
+	public function load_lang_textdomain(){
+		load_plugin_textdomain('cts-slider', false, CTS_PLUGIN_BASENAME . '/languages');
+		error_log(CTS_PLUGIN_BASENAME . '/languages');
+	}
+
 	public function enqueue_scripts($hook){
 		if ('post-new.php' == $hook || 'post.php' == $hook && 'cts_slide' == get_post_type()){
 			wp_enqueue_style('jquery-ui', CTS_PLUG_ADMIN_URL . 'css/jquery-ui.css');
@@ -37,14 +42,14 @@ class CTS_Admin {
 				
 		register_post_type('cts_slide', array(
 			'labels'		=> array(
-				'name' 				=> __('Slider','tracker' ),
-				'menu_name'			=> __('CT Slider','tracker' ),
-				'all_items'			=> __('Slides','tracker' ),
-				'add_new' 			=> __('Add New Slide','tracker'),
-				'singular_name' 	=> __('Slide','tracker' ),
-				'add_item'			=> __('New Slide','tracker'),
-				'add_new_item' 		=> __('Add New Slide','tracker'),
-				'edit_item' 		=> __('Edit Slide','tracker')
+				'name' 				=> __('Slider','cts-slider' ),
+				'menu_name'			=> __('CT Slider','cts-slider' ),
+				'all_items'			=> __('Slides','cts-slider' ),
+				'add_new' 			=> __('Add New Slide','cts-slider'),
+				'singular_name' 	=> __('Slide','cts-slider' ),
+				'add_item'			=> __('New Slide','cts-slider'),
+				'add_new_item' 		=> __('Add New Slide','cts-slider'),
+				'edit_item' 		=> __('Edit Slide','cts-slider')
 			),
 			'public'		=> false,
 			'show_in_menu'	=>	true,
@@ -61,17 +66,17 @@ class CTS_Admin {
 	public function register_taxonomy(){
 		register_taxonomy('cts_slides_category', 'cts_slide', array(
 			'labels' 			=> array(
-				'name' 				=> __('Sliders', 'tracker'),
-				'singular_name'		=> __('Slider', 'tracker'),
-				'search_items' 		=> __('Search Sliders', 'tracker'),
-				'all_items' 		=> __('All Sliders', 'tracker'),
-				'parent_item' 		=> __('Parent Slider', 'tracker'),
-				'parent_item_colon' => __('Parent Slider:', 'tracker'),
-				'edit_item' 		=> __('Edit Slider', 'tracker'),
-				'update_item' 		=> __('Update Slider', 'tracker'),
-				'add_new_item' 		=> __('Add New Slider', 'tracker'),
-				'new_item_name' 	=> __('New Slider Name', 'tracker'),
-				'menu_name' 		=> __('Sliders', 'tracker'),
+				'name' 				=> __('Sliders', 'cts-slider'),
+				'singular_name'		=> __('Slider', 'cts-slider'),
+				'search_items' 		=> __('Search Sliders', 'cts-slider'),
+				'all_items' 		=> __('All Sliders', 'cts-slider'),
+				'parent_item' 		=> __('Parent Slider', 'cts-slider'),
+				'parent_item_colon' => __('Parent Slider:', 'cts-slider'),
+				'edit_item' 		=> __('Edit Slider', 'cts-slider'),
+				'update_item' 		=> __('Update Slider', 'cts-slider'),
+				'add_new_item' 		=> __('Add New Slider', 'cts-slider'),
+				'new_item_name' 	=> __('New Slider Name', 'cts-slider'),
+				'menu_name' 		=> __('Sliders', 'cts-slider'),
 			),
 			'hierarchical' 		=> true,
 			'show_ui' 			=> true,
@@ -82,8 +87,8 @@ class CTS_Admin {
 	}
 
 	public function register_metaboxes(){
-		add_meta_box('slide-media', __('Slide media', 'tracker'), array($this,'cts_slide_media'), 'cts_slide', 'normal', 'default');
-		add_meta_box('slide-option', __('Slide Options', 'tracker'), array($this,'cts_slide_option'), 'cts_slide', 'normal', 'default');
+		add_meta_box('slide-media', __('Slide media', 'cts-slider'), array($this,'cts_slide_media'), 'cts_slide', 'normal', 'default');
+		add_meta_box('slide-option', __('Slide Options', 'cts-slider'), array($this,'cts_slide_option'), 'cts_slide', 'normal', 'default');
 
 	}
 
@@ -106,18 +111,18 @@ class CTS_Admin {
 		$title_position = get_post_meta($post_id, '_cts_slide_title_position', true);
 		$slide_link = get_post_meta($post_id, '_cts_slide_link_url', true);
 		?>
-		<p> <label for="cts_slide_hide_title"><?php _e('Hide slide title', 'tracker'); ?></label>
+		<p> <label for="cts_slide_hide_title"><?php _e('Hide slide title', 'cts-slider'); ?></label>
 			<input type="checkbox" name="cts_slide_hide_title" value="true" <?php checked($show_title, 'true'); ?>>
 		</p>
 		<p>
-			<label for="cts_slide_title_position"><?php _e('Title position', 'tracker'); ?></label>
+			<label for="cts_slide_title_position"><?php _e('Title position', 'cts-slider'); ?></label>
 			<input type="text" size="5" name="cts_slide_title_position" id="cts_slide_title_position" value="<?php echo $title_position; ?>">
-			<span id="set_default_title_position" class="button"><?php _e('set default', 'tracker'); ?></span>
+			<span id="set_default_title_position" class="button"><?php _e('set default', 'cts-slider'); ?></span>
 		<div id="title-position"></div>
-		<div class="title-position-desc"><?php _e('Choose title position for slide. Less value - higher title position', 'tracker'); ?></div>
+		<div class="title-position-desc"><?php _e('Choose title position for slide. Less value - higher title position', 'cts-slider'); ?></div>
 		</p>
 		<p>
-			<label for="cts_slide_link_url"><?php _e('Slide link', 'tracker'); ?></label>
+			<label for="cts_slide_link_url"><?php _e('Slide link', 'cts-slider'); ?></label>
 			<input type="text" name="cts_slide_link_url" id="cts_slide_link_url" size="70" value="<?php echo esc_attr($slide_link); ?>">
 		</p>
 	<?php }
@@ -167,11 +172,11 @@ class CTS_Admin {
 	public function slider_column($slider_columns){
 		$new_columns = array(
 		'cb' => '<input type="checkbox" />',
-		'name' => __('Name', 'tracker'),
-		'shortcode' => __('Shortcode', 'tracker'),
-		//'description' => __('Description', 'tracker'),
-		'slug' => __('Slug', 'tracker'),
-		'posts' => __('Posts', 'tracker')
+		'name' => __('Name', 'cts-slider'),
+		'shortcode' => __('Shortcode', 'cts-slider'),
+		//'description' => __('Description', 'cts-slider'),
+		'slug' => __('Slug', 'cts-slider'),
+		'posts' => __('Slides', 'cts-slider')
 		);
 		return $new_columns;
 	}

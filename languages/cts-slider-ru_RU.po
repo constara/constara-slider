@@ -1,0 +1,164 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Constara Slider\n"
+"POT-Creation-Date: 2016-04-26 17:30+0300\n"
+"PO-Revision-Date: 2016-04-26 17:34+0300\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: ru_RU\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.7\n"
+"X-Poedit-Basepath: ..\n"
+"X-Poedit-WPHeader: constara-slider.php\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;"
+"esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;"
+"_n_noop:1,2;_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPathExcluded-0: *.js\n"
+
+#: admin/class-constara-slider-admin.php:44
+#: admin/class-constara-slider-admin.php:69
+msgid "Slider"
+msgstr "Слайдер"
+
+#: admin/class-constara-slider-admin.php:45
+msgid "CT Slider"
+msgstr "CT Слайдер"
+
+#: admin/class-constara-slider-admin.php:46
+#: admin/class-constara-slider-admin.php:178
+msgid "Slides"
+msgstr "Слайды"
+
+#: admin/class-constara-slider-admin.php:47
+#: admin/class-constara-slider-admin.php:50
+msgid "Add New Slide"
+msgstr "Добавить слайд"
+
+#: admin/class-constara-slider-admin.php:48
+msgid "Slide"
+msgstr "Слайд"
+
+#: admin/class-constara-slider-admin.php:49
+msgid "New Slide"
+msgstr "Новый слайд"
+
+#: admin/class-constara-slider-admin.php:51
+msgid "Edit Slide"
+msgstr "Редактировать слайд"
+
+#: admin/class-constara-slider-admin.php:68
+#: admin/class-constara-slider-admin.php:78
+msgid "Sliders"
+msgstr "Слайдеры"
+
+#: admin/class-constara-slider-admin.php:70
+msgid "Search Sliders"
+msgstr "Искать слайдеры"
+
+#: admin/class-constara-slider-admin.php:71
+msgid "All Sliders"
+msgstr "Все слайдеры"
+
+#: admin/class-constara-slider-admin.php:72
+msgid "Parent Slider"
+msgstr ""
+
+#: admin/class-constara-slider-admin.php:73
+msgid "Parent Slider:"
+msgstr ""
+
+#: admin/class-constara-slider-admin.php:74
+msgid "Edit Slider"
+msgstr "Редактировать слайдер"
+
+#: admin/class-constara-slider-admin.php:75
+msgid "Update Slider"
+msgstr "Обновить слайдер"
+
+#: admin/class-constara-slider-admin.php:76
+msgid "Add New Slider"
+msgstr "Добавить новый слайдер"
+
+#: admin/class-constara-slider-admin.php:77
+msgid "New Slider Name"
+msgstr "Имя нового слайдера"
+
+#: admin/class-constara-slider-admin.php:89
+msgid "Slide media"
+msgstr "Медиа слайда"
+
+#: admin/class-constara-slider-admin.php:90
+msgid "Slide Options"
+msgstr "Настройка слайда"
+
+#: admin/class-constara-slider-admin.php:99
+msgid "Slide image url"
+msgstr "URL изображения слайда"
+
+#: admin/class-constara-slider-admin.php:113
+msgid "Hide slide title"
+msgstr "Не показывать заголовок"
+
+#: admin/class-constara-slider-admin.php:117
+msgid "Title position"
+msgstr "Позиция заголовка"
+
+#: admin/class-constara-slider-admin.php:119
+msgid "set default"
+msgstr "сбросить"
+
+#: admin/class-constara-slider-admin.php:121
+msgid "Choose title position for slide. Less value - higher title position"
+msgstr ""
+"Укажите позицию заголовка. Чем меньше значение - тем выше расположение "
+"заголовка"
+
+#: admin/class-constara-slider-admin.php:124
+msgid "Slide link"
+msgstr "Ссылка слайда"
+
+#: admin/class-constara-slider-admin.php:174
+msgid "Name"
+msgstr "Имя"
+
+#: admin/class-constara-slider-admin.php:175
+msgid "Shortcode"
+msgstr "Шорткод"
+
+#: admin/class-constara-slider-admin.php:177
+msgid "Slug"
+msgstr "Краткое название"
+
+#: admin/class-constara-slider-admin.php:205
+#: admin/class-constara-slider-admin.php:215
+msgid "Slider height"
+msgstr "Высота слайдера"
+
+#. Plugin Name of the plugin/theme
+msgid "Constara Slider"
+msgstr "Constara Слайдер"
+
+#. Plugin URI of the plugin/theme
+msgid "http://URI_Of_Page_Describing_Plugin_and_Updates"
+msgstr ""
+
+#. Description of the plugin/theme
+msgid "A brief description of the Plugin."
+msgstr ""
+
+#. Author of the plugin/theme
+msgid "Constara Team"
+msgstr ""
+
+#. Author URI of the plugin/theme
+msgid "http://URI_Of_The_Plugin_Author"
+msgstr ""
+
+#~ msgid "Posts"
+#~ msgstr "Записи"

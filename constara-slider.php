@@ -13,7 +13,7 @@ License: A "Slug" license name e.g. GPL2
 if ( ! defined( 'WPINC' ) ) {
 	die;
 }
-
+define("CTS_PLUGIN_BASENAME", plugin_basename(dirname(__FILE__)));
 define("CTS_PLUGIN_PATH", plugin_dir_path(__FILE__));
 define("CTS_PLUGIN_URL", plugin_dir_url(__FILE__));
 define('CTS_PLUG_ADMIN_URL', plugin_dir_url(__FILE__) . 'admin/');

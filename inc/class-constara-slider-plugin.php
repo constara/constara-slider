@@ -42,6 +42,7 @@ class Constara_Slider_Plugin {
 
 	private function define_admin_hooks(){
 		$admin = CTS_Admin::getInstance($this->version);
+		$this->loader->add_action('plugins_loaded', $admin, 'load_lang_textdomain');
 		$this->loader->add_action('admin_enqueue_scripts', $admin, 'enqueue_scripts');
 		$this->loader->add_action('init', $admin, 'register_post_type');
 		$this->loader->add_action('init', $admin, 'register_taxonomy');
@@ -54,6 +55,7 @@ class Constara_Slider_Plugin {
 		$this->loader->add_action('cts_slides_category_edit_form_fields', $admin, 'slider_edit_add_options');
 		$this->loader->add_action('edited_cts_slides_category', $admin, 'slider_add_options_save');
 		$this->loader->add_action('create_cts_slides_category', $admin, 'slider_add_options_save');
+
 
 	}
 
