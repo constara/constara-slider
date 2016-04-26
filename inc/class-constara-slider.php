@@ -83,7 +83,7 @@ class CTS_Slider{
 
     public function get_opts(){
         $opts = '';
-
+        //options for slick.js script
         $data_slick = "data-slick='{";
         foreach ($this->data_slick as $opt => $value){
             if ($opt == 'name') continue;
@@ -92,7 +92,7 @@ class CTS_Slider{
         $data_slick = substr($data_slick,0,-2);
         $data_slick .= "}'";
 
-
+        //options for slider from user
         $data_slider = "data-slider='{";
         foreach ($this->data_slider as $opt => $val){
             $data_slider .= sprintf('"%s": "%s", ', $opt, $val);
