@@ -49,6 +49,9 @@ class CTS_Slider{
 
     protected function set_data_slider($slider_name){
         $options = get_option($slider_name);
+
+       
+        
         return $options;
     }
 

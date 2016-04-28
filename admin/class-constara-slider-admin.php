@@ -26,16 +26,16 @@ class CTS_Admin {
 
 	public function load_lang_textdomain(){
 		load_plugin_textdomain('cts-slider', false, CTS_PLUGIN_BASENAME . '/languages');
-		error_log(CTS_PLUGIN_BASENAME . '/languages');
 	}
 
 	public function enqueue_scripts($hook){
-		if ('post-new.php' == $hook || 'post.php' == $hook && 'cts_slide' == get_post_type()){
+		if ('edit-tags.php' == $hook || 'cts_slide' == get_post_type()){
 			wp_enqueue_style('jquery-ui', CTS_PLUG_ADMIN_URL . 'css/jquery-ui.css');
 			wp_enqueue_script('jquery-ui-slider', array('jquery'));
 			wp_enqueue_style('cts-slider', CTS_PLUG_ADMIN_URL . 'css/slider.css', $this->get_version());
 			wp_enqueue_script('cts-slider', CTS_PLUG_ADMIN_URL . 'js/slider.js', array('jquery'), $this->get_version());
 		}
+
 	}
 
 	public function register_post_type(){
@@ -200,22 +200,65 @@ class CTS_Admin {
 		}
 	}
 
-
 	public function slider_create_add_options(){?>
-		<div class="form-field">
-			<label for="trc_slider_opts[height]"><?php _e('Slider height', 'cts-slider'); ?></label>
-			<input type="text" name="trc_slider_opts[height]" >
+		<div class="form-field cts-slider-create-options">
+			<div class="height">
+				<?php _e('Slider height', 'cts-slider'); ?>
+				<div>
+					<label for="trc_slider_opts[heightType]"><?php _e('Auto', 'cts-slider'); ?></label>
+					<input type="radio" name="trc_slider_opts[heightType]" value="auto">
+				</div>
+				<div>
+					<label for="trc_slider_opts[heightType]"><?php _e('Fixed', 'cts-slider'); ?></label>
+					<input type="radio" name="trc_slider_opts[heightType]" value="fixed">
+					<input type="text" name="trc_slider_opts[heightValue]" >
+					<span>px.</span>
+				</div>
+				<div>
+					<label for="trc_slider_opts[heightType]"><?php _e('Ratio', 'cts-slider'); ?></label>
+					<input type="radio" name="trc_slider_opts[heightType]" value="ratio">
+					<label for="trc_slider_opts[ratio][width]"></label>
+					<input type="text" name="trc_slider_opts[ratio][width]" >:
+					<input type="text" name="trc_slider_opts[ratio][height]" >
+				</div>
+				<div>
+					<label for="trc_slider_opts[heightType]"><?php _e('Full', 'cts-slider'); ?></label>
+					<input type="radio" name="trc_slider_opts[heightType]" value="full">
+				</div>
+			</div>
+
 
 		</div>
 
 	<?php }
 
 	public function slider_edit_add_options($term){
-		$options = get_option($term->slug);?>
-		<tr class="form-field">
+		$options = get_option($term->slug);
+		print_r($options);?>
+		<tr class="form-field cts-slider-edit-options">
 			<th scope="row" valign="top"><?php _e('Slider height', 'cts-slider'); ?></th>
 			<td>
-				<input type="text" name="trc_slider_opts[height]"  value="<?php echo $options['height']; ?>">
+			<div>
+				<label for="trc_slider_opts[heightType]"><?php _e('Auto', 'cts-slider'); ?></label>
+				<input type="radio" name="trc_slider_opts[heightType]" value="auto" <?php checked('auto', $options['heightType']); ?> >
+			</div>
+			<div>
+				<label for="trc_slider_opts[heightType]"><?php _e('Fixed', 'cts-slider'); ?></label>
+				<input type="radio" name="trc_slider_opts[heightType]" value="fixed" <?php checked('fixed', $options['heightType']); ?> >
+				<input type="text" name="trc_slider_opts[heightValue]" value="<?php echo esc_attr($options['heightValue']); ?>" >
+				<span>px.</span>
+			</div>
+			<div>
+				<label for="trc_slider_opts[heightType]"><?php _e('Ratio', 'cts-slider'); ?></label>
+				<input type="radio" name="trc_slider_opts[heightType]" value="ratio" <?php checked('ratio', $options['heightType']); ?> >
+				<label for="trc_slider_opts[ratio][width]"></label>
+				<input type="text" name="trc_slider_opts[ratioWidth]" value="<?php echo esc_attr($options['ratioWidth']); ?>" >:
+				<input type="text" name="trc_slider_opts[ratioHeight]" value="<?php echo esc_attr($options['ratioHeight']); ?>" >
+			</div>
+			<div>
+				<label for="trc_slider_opts[heightType]"><?php _e('Full', 'cts-slider'); ?></label>
+				<input type="radio" name="trc_slider_opts[heightType]" value="full" <?php checked('full', $options['heightType']); ?> >
+			</div>
 			</td>
 		</tr>
 	<?php }
@@ -224,7 +267,23 @@ class CTS_Admin {
 		$term = get_term($term_id, 'cts_slides_category');
 		$option_name = $term->slug;
 		if (isset($_POST['trc_slider_opts'])){
-			update_option($option_name, $_POST['trc_slider_opts']);
+			$options = $_POST['trc_slider_opts'];
+			$data_slider = array();
+			$data_slider['heightType'] = $options['heightType'];
+			switch ($options['heightType']){
+				case 'fixed':
+					$data_slider['heightValue'] = sanitize_text_field($options['heightValue']);
+					break;
+				case 'ratio':
+					$data_slider['ratioWidth'] = sanitize_text_field($options['ratioWidth']);
+					$data_slider['ratioHeight'] = sanitize_text_field($options['ratioHeight']);
+					break;
+				default:
+					break;
+			}
+
+
+			update_option($option_name, $data_slider);
 		}
 	}
 	
