@@ -1,5 +1,9 @@
 .img-preview {
   width: 100%; }
 
+.slide-preview {
+  max-width: 150px;
+  max-height: 60px; }
+
 .cts-slider-create-options input[type="text"] {
   width: 20%; }

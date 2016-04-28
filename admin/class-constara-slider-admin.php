@@ -171,6 +171,20 @@ class CTS_Admin {
 			);
 		}
 	}
+
+	public function set_slide_columns($columns){
+		array_splice($columns, 2, 0 , array('img-preview'=>__('Thumbnail', 'cts-slide')));
+		return $columns;
+	}
+
+	public function slide_columns($column, $post_id){
+
+		switch ($column){
+			case 'image-preview':
+				$img_url = get_post_meta($post_id, '_cts_slide_img_url', true);
+				echo sprintf('<img src="%s" class="slide-preview">', $img_url);
+		}
+	}
 	
 	public function slider_column($slider_columns){
 		$new_columns = array(
