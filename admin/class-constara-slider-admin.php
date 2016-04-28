@@ -97,9 +97,12 @@ class CTS_Admin {
 		$post_id = $post->ID;
 		$slide_img_url = get_post_meta($post_id, '_cts_slide_img_url', true);
 		?>
-		<p><label for="cts_slide_img_url"><?php _e('Slide image url', 'cts-slider'); ?></label>
+		<p class="cts-slide-media">
+			<img class="img-preview" src="<?php echo esc_url($slide_img_url); ?>">
+			<label for="cts_slide_img_url"><?php _e('Slide image url', 'cts-slider'); ?></label>
 			<input type="text" class="widefat" name="cts_slide_img_url" id="cts_slide_img_url" value="<?php echo esc_url($slide_img_url); ?>">
-			<span class="button" id="get-slide-img-url"  class="get-slide-img-url" >Get image</span>
+			<span class="button" id="get-slide-img-url" ><?php _e('Get image', 'cts-slider');?></span>
+			<span class="button" id="rm-slide-img-url" ><?php _e('Remove image', 'cts-slider'); ?></span>
 		</p>
 
 	<?php }

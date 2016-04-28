@@ -2,7 +2,7 @@
  * Created by kutas on 21.04.2016.
  */
 jQuery(document).ready(function ($) {
-    
+    //media
     $('#get-slide-img-url').click(function () {
         var frame;
         if (frame){
@@ -24,15 +24,28 @@ jQuery(document).ready(function ($) {
 
         frame.on('select', function(){
             var url_field = $('#cts_slide_img_url');
+            var img = $('.img-preview');
             var attachment = frame.state().get('selection').first().toJSON();
             var url = attachment.url;
-            console.log(url);
             url_field.val(url);
+            img.attr('src', url);
 
         });
 
     });
+
+    $('#cts_slide_img_url').change(function () {
+        var url = $(this).val();
+        $('.img-preview').attr('src', url);
+    });
     
+    $('#rm-slide-img-url').click(function () {
+        var url_field = $('#cts_slide_img_url');
+        var img = $('.img-preview');
+        url_field.val('');
+        img.attr('src', '');
+    });
+    //options
     var default_position = 40;//set default value
     var title_position = parseInt($('#cts_slide_title_position').val());
     if(isNaN(title_position)){
