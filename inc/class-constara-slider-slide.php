@@ -6,7 +6,7 @@
  * Date: 21.04.2016
  * Time: 21:41
  */
-class CTS_Slide{
+class Constara_Slider_Slide{
 
     private $id;
 

@@ -2,7 +2,7 @@
 /*
 * Class for enqueues scripts, styles for front page.
 */
-class CTS_Site {
+class Constara_Slider_Site {
 
 	
 	protected $version;
@@ -15,7 +15,7 @@ class CTS_Site {
 	static function getInstance($version){
 
 		if (is_null(self::$instance)){
-			self::$instance = new CTS_Site($version);
+			self::$instance = new Constara_Slider_Site($version);
 		}
 		return self::$instance;
 	}
@@ -29,12 +29,12 @@ class CTS_Site {
 
 	public function cts_slider_shortcode($atts){
 		
-	$slider = new CTS_Slider($atts);
+	$slider = new Constara_Slider_Slider($atts);
 	if ($slider->query->have_posts()){?>
 		<div class="cts-slider" <?php echo $slider->get_opts(); ?> >
 			<?php while ($slider->query->have_posts()){
 				$slider->query->the_post();
-				$slide = new CTS_Slide(get_the_ID());?>
+				$slide = new Constara_Slider_Slide(get_the_ID());?>
 
 
 				<div class="cts-slide" >

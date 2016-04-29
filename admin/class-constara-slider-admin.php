@@ -7,7 +7,7 @@
  * Time: 1:13
  */
 
-class CTS_Admin {
+class Constara_Slider_Admin {
 
 	static private $instance = null;
 
@@ -15,7 +15,7 @@ class CTS_Admin {
 
 	static public function getInstance($version){
 		if (is_null(self::$instance)){
-			self::$instance = new CTS_Admin($version);
+			self::$instance = new Constara_Slider_Admin($version);
 		}
 		return self::$instance;
 	}

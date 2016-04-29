@@ -6,7 +6,7 @@
  * Date: 21.04.2016
  * Time: 23:59
  */
-class CTS_Slider{
+class Constara_Slider_Slider{
 
     protected $name;
 

@@ -32,8 +32,8 @@ class Constara_Slider_Plugin {
 
 	private function load_dependencies(){
 		require_once CTS_PLUGIN_ADMIN_PATH . 'class-constara-slider-admin.php';
-		require_once CTS_PLUGIN_PATH . 'inc/class-constara-slider.php';
-		require_once CTS_PLUGIN_PATH . 'inc/class-constara-slide.php';
+		require_once CTS_PLUGIN_PATH . 'inc/class-constara-slider-slider.php';
+		require_once CTS_PLUGIN_PATH . 'inc/class-constara-slider-slide.php';
 		require_once CTS_PLUGIN_PATH . 'inc/class-constara-slider-loader.php';
 		require_once CTS_PLUGIN_PATH . 'inc/class-constara-slider-site.php';
 
@@ -41,7 +41,7 @@ class Constara_Slider_Plugin {
 	}
 
 	private function define_admin_hooks(){
-		$admin = CTS_Admin::getInstance($this->version);
+		$admin = Constara_Slider_Admin::getInstance($this->version);
 		$this->loader->add_action('plugins_loaded', $admin, 'load_lang_textdomain');
 		$this->loader->add_action('admin_enqueue_scripts', $admin, 'enqueue_scripts');
 		$this->loader->add_action('init', $admin, 'register_post_type');
@@ -62,7 +62,7 @@ class Constara_Slider_Plugin {
 	}
 
 	private function define_site_hooks(){
-		$site = CTS_Site::getInstance($this->get_version());
+		$site = Constara_Slider_Site::getInstance($this->get_version());
 		$this->loader->add_action('wp_enqueue_scripts', $site, 'enqueue_scripts');
 		$this->loader->add_shortcode('cts_slider', $site, 'cts_slider_shortcode');
 
