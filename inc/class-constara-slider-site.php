@@ -27,19 +27,22 @@ class Constara_Slider_Site {
 		wp_enqueue_style('cts-default-theme', CTS_PLUGIN_URL . 'css/themes/default.css', $this->get_version());
 	}
 
-	public function cts_slider_shortcode($atts){
+	public function cts_slider_shortcode($attr){
 		
-	$slider = new Constara_Slider_Slider($atts);
-	if ($slider->query->have_posts()){?>
+	$slider = new Constara_Slider_Slider($attr);
+		if ($slider->query->have_posts()){
+		?>
 		<div class="cts-slider" <?php echo $slider->get_opts(); ?> >
 			<?php while ($slider->query->have_posts()){
 				$slider->query->the_post();
-				$slide = new Constara_Slider_Slide(get_the_ID());?>
+				$slide = new Constara_Slider_Slide(get_the_ID());
+				?>
 
 
 				<div class="cts-slide" >
 
 						<img src="<?php echo $slide->get_opt('img_url');?>" class="cts-slide-img" >
+					
 							<div class="cts-content-block" <?php echo $slide->get_style('content') ?>>
 								<?php if ($slide->has_link()){?>
 									<a href="<?php echo $slide->get_opt('link_url');?>">

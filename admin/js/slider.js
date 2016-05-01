@@ -2,6 +2,7 @@
  * Created by kutas on 21.04.2016.
  */
 jQuery(document).ready(function ($) {
+    "use strict";
     //media
     $('#get-slide-img-url').click(function () {
         var frame;

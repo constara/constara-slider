@@ -10,6 +10,8 @@ class Constara_Slider_Slider{
 
     protected $name;
 
+    protected $slider_options;
+
     protected $data_slick;
 
     protected $data_slider;
@@ -18,41 +20,35 @@ class Constara_Slider_Slider{
 
     public function __construct($attr){
         $this->name = $this->set_name($attr);
-        $this->data_slick = $this->set_data_slick($attr);
-        $this->data_slider = $this->set_data_slider($this->name);
+        $this->slider_options = $this->set_slider_options($this->name);
+        $this->data_slick = $this->set_data_slick($this->slider_options);
+        $this->data_slider = $this->set_data_slider($this->slider_options);
         $this->query = $this->do_query($this->name);
     }
 
-    protected function set_data_slick($attr){
+    protected function set_slider_options($slider_name){
+        $slider_options = get_option($slider_name);
+        return $slider_options;
+    }
+
+
+    protected function set_data_slick($slider_options){
+        $slick_options = $slider_options['slick'];
         $data_slick = array();
-        extract( shortcode_atts( array(
-            'slider'            => '',
-            'autoplay'          => 'yes',
-            'autoplayspeed'     => '6000',
-            'speed'             => '1000',
-            'fade'              => 'yes',
-            'adaptiveheight'    => 'false',
-            'dots'              => 'yes',
-            'arrows'            => 'yes',
-        ), $attr) );
-        $data_slick['name'] = $slider;
-        $data_slick['autoplay'] = ('yes' == $autoplay) ? 'true' : 'false';
-        $data_slick['autoplayspeed'] = intval($autoplayspeed);
-        $data_slick['speed'] = intval($speed);
-        $data_slick['fade'] = ('yes' == $fade) ? 'true' : 'false';
-        $data_slick['adaptiveheight'] = ('yes' == $adaptiveheight) ? 'true' : 'false';
-        $data_slick['dots'] = ('yes' == $dots) ? 'true' : 'false';
-        $data_slick['arrows'] = ('yes' == $arrows) ? 'true' : 'false';
+        $data_slick['autoplay']         = $slick_options['autoplay'];
+        $data_slick['autoplayspeed']    = intval($slick_options['autoplayspeed']);
+        $data_slick['speed']            = intval($slick_options['speed']);
+        $data_slick['fade']             = $slick_options['fade'];
+        $data_slick['adaptiveheight']   = $slick_options['adaptiveheight'];
+        $data_slick['dots']             = $slick_options['dots'];
+        $data_slick['arrows']           = $slick_options['arrows'];
 
         return $data_slick;
     }
 
-    protected function set_data_slider($slider_name){
-        $options = get_option($slider_name);
-
-       
-        
-        return $options;
+    protected function set_data_slider($slider_options){
+        $data_slider = $slider_options['slider'];
+        return $data_slider;
     }
 
 
@@ -89,7 +85,6 @@ class Constara_Slider_Slider{
         //options for slick.js script
         $data_slick = "data-slick='{";
         foreach ($this->data_slick as $opt => $value){
-            if ($opt == 'name') continue;
             $data_slick .= sprintf('"%s": %s, ',$opt, $value);
         }
         $data_slick = substr($data_slick,0,-2);
@@ -106,6 +101,7 @@ class Constara_Slider_Slider{
 
         $opts .= $data_slick . ' ' . $data_slider;
         return $opts;
+        error_log($opts);
     }
 
 
