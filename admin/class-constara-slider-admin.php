@@ -51,7 +51,7 @@ class Constara_Slider_Admin {
 				'add_new_item' 		=> __('Add New Slide','cts-slider'),
 				'edit_item' 		=> __('Edit Slide','cts-slider')
 			),
-			'public'		=> false,
+			'public'		=>  false,
 			'show_in_menu'	=>	true,
 			'rewrite' 		=> 	array('slug' => 'slides'),
 			'menu_position' => 	4,
@@ -59,7 +59,7 @@ class Constara_Slider_Admin {
 			'has_archive'	=>	false,
 			'hierarchical'	=>	false,
 			'supports'		=>	array('title','editor'),
-			'menu_icon'		=> 'dashicons-images-alt2',
+			'menu_icon'		=>  CTS_PLUGIN_URL . 'img/menu_icon.svg',
 		));
 	}
 
