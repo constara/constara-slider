@@ -22,6 +22,28 @@ class Constara_Slider_Admin {
 
 	private function __construct($version) {
 		$this->version = $version;
+		$this->wp_hooks();
+
+	}
+
+	private function wp_hooks(){
+		add_action('plugins_loaded', array($this, 'load_lang_textdomain') );
+		add_action('admin_enqueue_scripts', array($this, 'enqueue_scripts') );
+		add_action('init', array($this, 'register_post_type') );
+		add_action('init', array($this, 'register_taxonomy') );
+		add_action('save_post', array($this, 'save_metaboxes') );
+		add_action('manage_edit-cts_slides_category_columns', array($this, 'slider_column') );
+		add_action('after_switch_theme' ,array($this, 'flush_rewrite_rules') );
+		add_filter('manage_cts_slides_category_custom_column', array($this, 'manage_slider_columns') , 10, 3);
+		add_action('cts_slides_category_add_form_fields', array($this, 'slider_create_add_options') );
+		add_action('cts_slides_category_edit_form_fields', array($this, 'slider_edit_add_options') );
+		add_action('edited_cts_slides_category', array($this, 'slider_add_options_save') );
+		add_action('create_cts_slides_category', array($this, 'slider_add_options_save') );
+		add_filter('manage_cts_slide_posts_columns', array($this, 'set_slide_columns') );
+		add_action('manage_cts_slide_posts_custom_column', array($this, 'slide_columns') , 10 ,2);
+		if ( is_admin() ){
+			add_action('add_meta_boxes', array($this, 'register_metaboxes') );
+		}
 	}
 
 	public function load_lang_textdomain(){
