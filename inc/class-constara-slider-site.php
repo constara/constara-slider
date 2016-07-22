@@ -41,25 +41,14 @@ class Constara_Slider_Site {
 		<div class="cts-slider" <?php echo $slider->get_opts(); ?> >
 			<?php while ($slider->query->have_posts()){
 				$slider->query->the_post();
-				$slide = new Constara_Slider_Slide(get_the_ID());
-				?>
+				$slide = new Constara_Slider_Slide( get_post() );?>
 
-
-				<div class="cts-slide" >
-
-						<img src="<?php echo $slide->get_opt('img_url');?>" class="cts-slide-img" >
-					
-							<div class="cts-content-block" <?php echo $slide->get_style('content') ?>>
-								<?php if ($slide->has_link()){?>
-									<a href="<?php echo $slide->get_opt('link_url');?>">
-								<?php } ?>
-								<h1><?php echo $slide->show_title(); ?>	</h1>
-								<?php if ($slide->has_link()){?>
-									</a>
-								<?php } ?>
-								<div class="desc"><?php echo  $slide->get_opt('desc'); ?></div>
-							</div>
-
+				<div class="cts-slide" style="<?php $slide->the_slide_style(); ?>">
+					<div class="cts-content-box" style="<?php $slide->the_content_style(); ?>">
+						<?php $slide->the_title();
+						$slide->the_desc();
+						?>
+					</div>
 				</div>
 
 		<?php }?>

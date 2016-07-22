@@ -8,22 +8,29 @@
  */
 class Constara_Slider_Slide{
 
-    private $id;
 
-    private $post_obj;
+
+    private $slide_obj;
 
     protected $opts;
 
-    public function __construct($slide_id){
-        $this->id = $slide_id;
-        $this->post_obj =  get_post($this->id);
-        $this->opts =  $this->get_opts($this->post_obj);
+    public function __construct( WP_Post $slide ){
+        $this->slide_obj =  $slide;
+        $this->opts =  $this->retrieve_opts($this->slide_obj);
     }
 
-    protected function get_post_obj($id){
-        $this->post_obj = get_post($id);
-    }
-    
+	private function retrieve_opts( WP_Post $post ){
+		$opts = array();
+		$opts['title'] = $post->post_title;
+		$opts['desc'] = $post->post_content;
+		$opts['hide_title'] =sanitize_title(get_post_meta($post->ID, '_cts_slide_hide_title', true));
+		$opts['title_position'] = get_post_meta($post->ID, '_cts_slide_title_position', true);
+		$opts['link_url'] = esc_url(get_post_meta($post->ID, '_cts_slide_link_url', true));
+		$opts['img_url'] = esc_url(get_post_meta($post->ID, '_cts_slide_img_url', true));
+
+		return $opts;
+	}
+
     public function get_style($selector){
         switch ($selector){
             case 'content':
@@ -35,20 +42,6 @@ class Constara_Slider_Slide{
         }
     }
 
-    private function get_opts(WP_Post $post){
-        $opts = array();
-        $opts['title'] = $post->post_title;
-        $opts['desc'] = $post->post_content;
-        $opts['hide_title'] =sanitize_title(get_post_meta($post->ID, '_cts_slide_hide_title', true));
-        $opts['title_position'] = get_post_meta($post->ID, '_cts_slide_title_position', true);
-        $opts['link_url'] = esc_url(get_post_meta($post->ID, '_cts_slide_link_url', true));
-        $opts['img_url'] = esc_url(get_post_meta($post->ID, '_cts_slide_img_url', true));
-
-        return $opts;
-    }
-    public function get_content(){
-        the_content();
-    }
 
     public function has_link(){
         if (empty($this->opts['link_url'])){
@@ -63,7 +56,25 @@ class Constara_Slider_Slide{
         return $option;
     }
 
-    public function the_img(){
+
+    public function the_slide_style(){
+
+    	echo sprintf('background-image: url(%s);', $this->get_opt('img_url'));
+
+    }
+
+    public function the_content_style(){
+    	echo 'top: ' . $this->get_opt('title_position') . '%;';
+    }
+
+    public function the_title(){
+    	$title =  sprintf('<h1 class="cts-slide-title">%s</h1>', $this->get_opt('title'));
+
+	    if ( $this->get_opt('link_url') ){
+	    	$title = sprintf('<a href="%s">%s</a>', esc_url($this->get_opt('link_url')), $title);
+	    }
+
+	    echo $title;
     }
 
     public function show_title(){
@@ -72,6 +83,11 @@ class Constara_Slider_Slide{
         } else {
             return $this->opts['title'];
         }
+    }
+
+    public function the_desc(){
+    	$desc = sprintf('<div class="cts-slide-description">%s</div>', $this->get_opt('desc'));
+	    echo $desc;
     }
 
     private function get_id(){

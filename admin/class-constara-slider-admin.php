@@ -405,17 +405,11 @@ class Constara_Slider_Admin {
 			$data_slider['slick']['dots'] 			= sanitize_text_field( $options['dots'] );
 			$data_slider['slick']['arrows'] 			= sanitize_text_field( $options['arrows'] );
 			$data_slider['slider']['height_type'] 		= sanitize_text_field( $options['height_type'] );
-			switch ($options['height_type']){
-				case 'fixed':
-					$data_slider['slider']['height_value'] = sanitize_text_field($options['height_value']);
-					break;
-				case 'ratio':
-					$data_slider['slider']['ratio_width'] 	= sanitize_text_field($options['ratio_width']);
-					$data_slider['slider']['ratio_height'] = sanitize_text_field($options['ratio_height']);
-					break;
-				default:
-					break;
-			}
+			$data_slider['slider']['height_value'] = sanitize_text_field($options['height_value']);
+			$data_slider['slider']['ratio_width'] 	= sanitize_text_field($options['ratio_width']);
+			$data_slider['slider']['ratio_height'] = sanitize_text_field($options['ratio_height']);
+
+
 
 
 			update_option($option_name, $data_slider);

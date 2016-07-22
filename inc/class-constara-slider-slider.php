@@ -93,7 +93,9 @@ class Constara_Slider_Slider{
         //options for slider from user
         $data_slider = "data-slider='{";
         foreach ($this->data_slider as $opt => $val){
-            $data_slider .= sprintf('"%s": "%s", ', $opt, $val);
+        	if (!empty($val)){
+		        $data_slider .= sprintf('"%s": "%s", ', $opt, $val);
+	        }
         }
         $data_slider = substr($data_slider, 0, -2);
         $data_slider .= "}'";
