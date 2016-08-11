@@ -68,7 +68,7 @@ class Constara_Slider_Slide{
     }
 
     public function the_title(){
-    	$title =  sprintf('<h1 class="cts-slide-title">%s</h1>', $this->get_opt('title'));
+    	$title =  sprintf('<span class="cts-slide-title">%s</span>', $this->get_opt('title'));
 
 	    if ( $this->get_opt('link_url') ){
 	    	$title = sprintf('<a href="%s">%s</a>', esc_url($this->get_opt('link_url')), $title);
