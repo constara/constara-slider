@@ -103,7 +103,6 @@ class Constara_Slider_Slider{
 
         $opts .= $data_slick . ' ' . $data_slider;
         return $opts;
-        error_log($opts);
     }
 
 
