@@ -12,18 +12,19 @@ jQuery(document).ready(function($){
 	function set_slider_height( slider ) {
 		var height_data = $(slider).data('slider');
 
+		console.log(height_data.height_type);
 		switch ( height_data.height_type ){
 			case 'fixed':
-				$(slider).children('.cts-slide').css({
-					'height': height_data.height_value + 'px',
-					'min-height': height_data.height_value + 'px'
+				$(slider).css({
+					'height': height_data.height_value + 'px'
+					//'min-height': height_data.height_value + 'px'
 				});
 				break;
 			case 'auto':
-				$(slider).css('height', '100%');
+				//$(slider).css('height', 'auto');
 				break;
 			case 'full':
-				$(slider).children('.cts-slide').css('height', '100%');
+				$(slider).css('height', '100vh');
 				break;
 
 		}

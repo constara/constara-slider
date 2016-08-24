@@ -299,11 +299,11 @@ class Constara_Slider_Admin {
 					<label for="trc_slider_opts[ratio_width]"></label>
 					<input type="text" name="trc_slider_opts[ratio_width]" />:
 					<input type="text" name="trc_slider_opts[ratio_height]" />
-				</p>
-				<p>
-					<label for="trc_slider_opts[height_type]"><?php /*_e('Full', 'cts-slider'); */?></label>
-					<input type="radio" name="trc_slider_opts[height_type]" value="full" />
 				</p>-->
+				<p>
+					<label for="trc_slider_opts[height_type]"><?php _e('Full', 'cts-slider'); ?></label>
+					<input type="radio" name="trc_slider_opts[height_type]" value="full" />
+				</p>
 			</div>
 
 
@@ -384,11 +384,11 @@ class Constara_Slider_Admin {
 				<label for="trc_slider_opts[ratio_width]"></label>
 				<input type="text" name="trc_slider_opts[ratio_width]" value="<?php /*echo esc_attr($slider_opts['ratio_width']); */?>" />:
 				<input type="text" name="trc_slider_opts[ratio_height]" value="<?php /*echo esc_attr($slider_opts['ratio_height']); */?>" />
-			</div>
-			<div>
-				<label for="trc_slider_opts[height_type]"><?php /*_e('Full', 'cts-slider'); */?></label>
-				<input type="radio" name="trc_slider_opts[height_type]" value="full" <?php /*checked('full', $slider_opts['height_type']); */?> />
 			</div>-->
+			<div>
+				<label for="trc_slider_opts[height_type]"><?php _e('Full', 'cts-slider'); ?></label>
+				<input type="radio" name="trc_slider_opts[height_type]" value="full" <?php /*checked('full', $slider_opts['height_type']); */?> />
+			</div>
 			</td>
 		</tr>
 	<?php }
