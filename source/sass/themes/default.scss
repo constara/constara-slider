@@ -95,14 +95,14 @@ button.slick-prev.slick-arrow {
 ul.slick-dots {
   display: inline-flex;
   position: absolute;
-  bottom: 0;
+  bottom: -12px;
   left: 45%;
   list-style: none;
   margin-left: 0;
   padding: 0;
 
   li {
-    width: 28px;
+    width: 26px;
     height: 26px;
 
     button{
@@ -112,7 +112,7 @@ ul.slick-dots {
       margin: 2px;
       font: 0/0 a;
       color: transparent;
-      background-size: 22px!important;
+      background-size: 18px!important;
       background: url(../../img/icon_circle-empty.svg) no-repeat;
     }
   }
