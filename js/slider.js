@@ -14,10 +14,13 @@ jQuery(document).ready(function($){
 
 		switch ( height_data.height_type ){
 			case 'fixed':
-				$(slider).children('.cts-slide').css('height', height_data.height_value + 'px');
+				$(slider).children('.cts-slide').css({
+					'height': height_data.height_value + 'px',
+					'min-height': height_data.height_value + 'px'
+				});
 				break;
 			case 'auto':
-				$(slider).children('.cts-slide').css('height', 'auto');
+				$(slider).css('height', '100%');
 				break;
 			case 'full':
 				$(slider).children('.cts-slide').css('height', '100%');

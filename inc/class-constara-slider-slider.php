@@ -39,7 +39,7 @@ class Constara_Slider_Slider{
         $data_slick['autoplayspeed']    = intval($slick_options['autoplayspeed']);
         $data_slick['speed']            = intval($slick_options['speed']);
         $data_slick['fade']             = $slick_options['fade'];
-        $data_slick['adaptiveheight']   = $slick_options['adaptiveheight'];
+        //$data_slick['adaptiveheight']   = $slick_options['adaptiveheight'];
         $data_slick['dots']             = $slick_options['dots'];
         $data_slick['arrows']           = $slick_options['arrows'];
 
@@ -103,7 +103,6 @@ class Constara_Slider_Slider{
 
         $opts .= $data_slick . ' ' . $data_slider;
         return $opts;
-        error_log($opts);
     }
 
 
