@@ -259,13 +259,13 @@ class Constara_Slider_Admin {
 						<option value="false"><?php _e('No', 'cts-slider'); ?></option>
 					</select>
 				</p>
-				<p>
-					<label for="trc_slider_opts[adaptiveheight]"><?php _e('Adaptive height', 'cts-slider'); ?></label>
+				<!--<p>
+					<label for="trc_slider_opts[adaptiveheight]"><?php /*_e('Adaptive height', 'cts-slider'); */?></label>
 					<select name="trc_slider_opts[adaptiveheight]">
-						<option value="false"><?php _e('No', 'cts-slider'); ?></option>
-						<option value="true"><?php _e('Yes', 'cts-slider'); ?></option>
+						<option value="false"><?php /*_e('No', 'cts-slider'); */?></option>
+						<option value="true"><?php /*_e('Yes', 'cts-slider'); */?></option>
 					</select>
-				</p>
+				</p>-->
 				<p>
 					<label for="trc_slider_opts[dots]"><?php _e('Dots', 'cts-slider'); ?></label>
 					<select name="trc_slider_opts[dots]">
@@ -344,13 +344,13 @@ class Constara_Slider_Admin {
 						<option value="false" <?php selected('false', $slick_opts['fade']); ?> ><?php _e('No', 'cts-slider'); ?></option>
 					</select>
 				</p>
-				<p>
-					<label for="trc_slider_opts[adaptiveheight]"><?php _e('Adaptive height', 'cts-slider'); ?></label>
+				<!--<p>
+					<label for="trc_slider_opts[adaptiveheight]"><?php /*_e('Adaptive height', 'cts-slider'); */?></label>
 					<select name="trc_slider_opts[adaptiveheight]">
-						<option value="false" <?php selected('false', $slick_opts['adaptiveheight']); ?> ><?php _e('No', 'cts-slider'); ?></option>
-						<option value="true" <?php selected('true', $slick_opts['adaptiveheight']); ?> ><?php _e('Yes', 'cts-slider'); ?></option>
+						<option value="false" <?php /*selected('false', $slick_opts['adaptiveheight']); */?> ><?php /*_e('No', 'cts-slider'); */?></option>
+						<option value="true" <?php /*selected('true', $slick_opts['adaptiveheight']); */?> ><?php /*_e('Yes', 'cts-slider'); */?></option>
 					</select>
-				</p>
+				</p>-->
 				<p>
 					<label for="trc_slider_opts[dots]"><?php _e('Dots', 'cts-slider'); ?></label>
 					<select name="trc_slider_opts[dots]">
@@ -403,7 +403,7 @@ class Constara_Slider_Admin {
 			$data_slider['slick']['autoplayspeed'] 	= sanitize_text_field( $options['autoplayspeed'] );
 			$data_slider['slick']['speed'] 			= sanitize_text_field( $options['speed'] );
 			$data_slider['slick']['fade'] 			= sanitize_text_field( $options['fade'] );
-			$data_slider['slick']['adaptiveheight'] 	= sanitize_text_field( $options['adaptiveheight'] );
+			//$data_slider['slick']['adaptiveheight'] 	= sanitize_text_field( $options['adaptiveheight'] );
 			$data_slider['slick']['dots'] 			= sanitize_text_field( $options['dots'] );
 			$data_slider['slick']['arrows'] 			= sanitize_text_field( $options['arrows'] );
 			$data_slider['slider']['height_type'] 		= sanitize_text_field( $options['height_type'] );
