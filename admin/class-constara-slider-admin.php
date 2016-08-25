@@ -387,7 +387,7 @@ class Constara_Slider_Admin {
 			</div>-->
 			<div>
 				<label for="trc_slider_opts[height_type]"><?php _e('Full', 'cts-slider'); ?></label>
-				<input type="radio" name="trc_slider_opts[height_type]" value="full" <?php /*checked('full', $slider_opts['height_type']); */?> />
+				<input type="radio" name="trc_slider_opts[height_type]" value="full" <?php checked('full', $slider_opts['height_type']); ?> />
 			</div>
 			</td>
 		</tr>
