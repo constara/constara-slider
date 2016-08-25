@@ -2,51 +2,68 @@
 //Default theme for slider//
 .cts-slider {
 
+  max-height: 100vh;
 
-  div.cts-slide{
+  .slick-list {
 
-    min-height: 400px;
-    background-position: center 0;
-    background-repeat: no-repeat;
-    background-size: cover;
-    width: 100%;
     height: 100%;
 
-    .cts-content-box{
-      position: relative;
-      top:36%;
-      width: 80%;
-      margin: 0 auto;
+    .slick-track {
 
-      a {
-        text-align: center;
-        color: #fff;
-        display: inline-block;
+      height: 100%;
+
+      div.cts-slide{
+
+        min-height: 400px;
+        background-position: center 0;
+        background-repeat: no-repeat;
+        background-size: cover;
         width: 100%;
-      }
+        height: 100%;
 
-      span.cts-slide-title {
-        font-size: 64px;
-        font-weight: bold;
-        color: #fff;
-        text-align: center;
-        display: inline-block;
-        line-height: 1.1em;
-        width: 100%;
-      }
+        .cts-content-box{
+          position: relative;
+          top:36%;
+          width: 80%;
+          margin: 0 auto;
 
-      .cts-slide-description{
-        font-size: 22px;
-        color: #fff;
-        font-weight: lighter;
-        text-align: center;
-        margin-top: 30px;
-        word-spacing: 6px;
-        line-height: 1.3em;
+          a {
+            text-align: center;
+            color: #fff;
+            display: inline-block;
+            width: 100%;
+          }
+
+          span.cts-slide-title {
+            font-size: 64px;
+            font-weight: bold;
+            color: #fff;
+            text-align: center;
+            display: inline-block;
+            line-height: 1.1em;
+            width: 100%;
+          }
+
+          .cts-slide-description{
+            font-size: 22px;
+            color: #fff;
+            font-weight: lighter;
+            text-align: center;
+            margin-top: 30px;
+            word-spacing: 6px;
+            line-height: 1.3em;
+          }
+        }
+
       }
     }
 
   }
+
+
+
+
+
 }
 
 a.btn.btn-primary.btn-lg {

@@ -1,36 +1,42 @@
-.cts-slider div.cts-slide {
-  min-height: 400px;
-  background-position: center 0;
-  background-repeat: no-repeat;
-  background-size: cover;
-  width: 100%;
-  height: 100%; }
-  .cts-slider div.cts-slide .cts-content-box {
-    position: relative;
-    top: 36%;
-    width: 80%;
-    margin: 0 auto; }
-    .cts-slider div.cts-slide .cts-content-box a {
-      text-align: center;
-      color: #fff;
-      display: inline-block;
-      width: 100%; }
-    .cts-slider div.cts-slide .cts-content-box span.cts-slide-title {
-      font-size: 64px;
-      font-weight: bold;
-      color: #fff;
-      text-align: center;
-      display: inline-block;
-      line-height: 1.1em;
-      width: 100%; }
-    .cts-slider div.cts-slide .cts-content-box .cts-slide-description {
-      font-size: 22px;
-      color: #fff;
-      font-weight: lighter;
-      text-align: center;
-      margin-top: 30px;
-      word-spacing: 6px;
-      line-height: 1.3em; }
+.cts-slider {
+  max-height: 100vh; }
+  .cts-slider .slick-list {
+    height: 100%; }
+    .cts-slider .slick-list .slick-track {
+      height: 100%; }
+      .cts-slider .slick-list .slick-track div.cts-slide {
+        min-height: 400px;
+        background-position: center 0;
+        background-repeat: no-repeat;
+        background-size: cover;
+        width: 100%;
+        height: 100%; }
+        .cts-slider .slick-list .slick-track div.cts-slide .cts-content-box {
+          position: relative;
+          top: 36%;
+          width: 80%;
+          margin: 0 auto; }
+          .cts-slider .slick-list .slick-track div.cts-slide .cts-content-box a {
+            text-align: center;
+            color: #fff;
+            display: inline-block;
+            width: 100%; }
+          .cts-slider .slick-list .slick-track div.cts-slide .cts-content-box span.cts-slide-title {
+            font-size: 64px;
+            font-weight: bold;
+            color: #fff;
+            text-align: center;
+            display: inline-block;
+            line-height: 1.1em;
+            width: 100%; }
+          .cts-slider .slick-list .slick-track div.cts-slide .cts-content-box .cts-slide-description {
+            font-size: 22px;
+            color: #fff;
+            font-weight: lighter;
+            text-align: center;
+            margin-top: 30px;
+            word-spacing: 6px;
+            line-height: 1.3em; }
 
 a.btn.btn-primary.btn-lg {
   background: transparent;
