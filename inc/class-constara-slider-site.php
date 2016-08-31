@@ -47,6 +47,7 @@ class Constara_Slider_Site {
 					<div class="cts-content-box" style="<?php $slide->the_content_style(); ?>">
 						<?php $slide->the_title();
 						$slide->the_desc();
+						$slide->the_link_btn();
 						?>
 					</div>
 				</div>

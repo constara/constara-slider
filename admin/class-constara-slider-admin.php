@@ -113,14 +113,15 @@ class Constara_Slider_Admin {
 	}
 
 	public function cts_slide_media($post){
-		wp_create_nonce(__FILE__, 'cts_slide_media');
 		$post_id = $post->ID;
-		$slide_img_url = get_post_meta($post_id, '_cts_slide_img_url', true);
+		$slide_media = get_post_meta( $post_id, '_cts_slide_media', true );
+		$img_url     = isset( $slide_media['img_url'] ) ? (string) $slide_media['img_url'] : '';
+		wp_nonce_field( __FILE__, 'cts_slide_media' );
 		?>
 		<p class="cts-slide-media">
-			<img class="img-preview" src="<?php echo esc_url($slide_img_url); ?>">
+			<img class="img-preview" src="<?php echo esc_url($img_url); ?>">
 			<label for="cts_slide_img_url"><?php _e('Slide image url', 'cts-slider'); ?></label>
-			<input type="text" class="widefat" name="cts_slide_img_url" id="cts_slide_img_url" value="<?php echo esc_url($slide_img_url); ?>">
+			<input type="text" class="widefat" name="slide_media[img_url]" id="cts_slide_img_url" value="<?php echo esc_url($img_url); ?>">
 			<span class="button" id="get-slide-img-url" ><?php _e('Get image', 'cts-slider');?></span>
 			<span class="button" id="rm-slide-img-url" ><?php _e('Remove image', 'cts-slider'); ?></span>
 		</p>
@@ -128,66 +129,83 @@ class Constara_Slider_Admin {
 	<?php }
 
 	public function cts_slide_option($post){
-		wp_create_nonce(__FILE__, 'cts_slide_options');
-		$post_id = $post->ID;
-		$show_title = get_post_meta($post_id, '_cts_slide_hide_title', true);
-		$title_position = get_post_meta($post_id, '_cts_slide_title_position', true);
-		$slide_link = get_post_meta($post_id, '_cts_slide_link_url', true);
+		$post_id        = $post->ID;
+		$slide_meta     = get_post_meta( $post_id, '_cts_slide_meta', true );
+		$hide_title     = isset( $slide_meta['hide_title'] ) ? (bool) $slide_meta['hide_title'] : false;
+		$title_position = isset( $slide_meta['title_position'] ) ? (integer) $slide_meta['title_position'] : 40;
+		$link_url       = isset( $slide_meta['link_url'] ) ? (string) $slide_meta['link_url'] : '';
+		$btn_link_text  = isset( $slide_meta['btn_link_text'] ) ? (string) $slide_meta['btn_link_text'] : '';
+
+		wp_nonce_field( __FILE__, 'cts_slide_options' );
 		?>
-		<p> <label for="cts_slide_hide_title"><?php _e('Hide slide title', 'cts-slider'); ?></label>
-			<input type="checkbox" name="cts_slide_hide_title" value="true" <?php checked($show_title, 'true'); ?>>
+		<p>
+			<input type="checkbox" id="cts_slide_hide_title" name="slide[hide_title]" <?php checked( $hide_title ); ?>>
+			<label for="cts_slide_hide_title"><?php _e('Hide slide title', 'cts-slider'); ?></label>
 		</p>
 		<p>
 			<label for="cts_slide_title_position"><?php _e('Title position', 'cts-slider'); ?></label>
-			<input type="text" size="5" name="cts_slide_title_position" id="cts_slide_title_position" value="<?php echo $title_position; ?>">
+			<input type="text" size="5" name="slide[title_position]" id="cts_slide_title_position" value="<?php echo esc_attr( $title_position ) ; ?>">
 			<span id="set_default_title_position" class="button"><?php _e('set default', 'cts-slider'); ?></span>
 		<div id="title-position"></div>
 		<div class="title-position-desc"><?php _e('Choose title position for slide. Less value - higher title position', 'cts-slider'); ?></div>
 		</p>
 		<p>
 			<label for="cts_slide_link_url"><?php _e('Slide link', 'cts-slider'); ?></label>
-			<input type="text" name="cts_slide_link_url" id="cts_slide_link_url" size="70" value="<?php echo esc_attr($slide_link); ?>">
+			<input type="text" name="slide[link_url]" id="cts_slide_link_url" size="70" value="<?php echo esc_url( $link_url ); ?>">
+		</p>
+		<p>
+			<label for="cts_btn_link_text"><?php _e( 'Button text', 'cts-slider' ); ?></label>
+			<input type="text" name="slide[btn_link_text]" id="cts_btn_link_text" size="50" value="<?php echo esc_attr( $btn_link_text ) ?>" />
 		</p>
 	<?php }
 
 	public function save_metaboxes($post_id){
 		//slide options
-		if (isset($_POST['cts_slide_title_position'])){
+		if (isset($_POST['cts_slide_options'])){
 			if(defined('DOING_AUTOSAVE') && DOING_AUTOSAVE){
 				return;
 			}
-			wp_verify_nonce(__FILE__, 'cts_slide_options');
+			if ( ! current_user_can( 'edit_post', $post_id ) ){
+				return;
+			}
+			if ( ! wp_verify_nonce( $_POST['cts_slide_options'], __FILE__ ) ){
+				return;
+			}
+
+			$slide_meta = array();
+			$slide_meta['hide_title'] = isset( $_POST['slide']['hide_title'] ) ? true : false;
+			$slide_meta['title_position'] = (int) intval( $_POST['slide']['title_position'] );
+			$slide_meta['link_url'] = esc_url_raw( $_POST['slide']['link_url'] );
+			$slide_meta['btn_link_text'] = sanitize_text_field( $_POST['slide']['btn_link_text'] );
+
 
 			update_post_meta(
 				$post_id,
-				'_cts_slide_hide_title',
-				$_POST['cts_slide_hide_title']
+				'_cts_slide_meta',
+				$slide_meta
 			);
 
-			update_post_meta(
-				$post_id,
-				'_cts_slide_title_position',
-				sanitize_text_field($_POST['cts_slide_title_position'])
-			);
-
-			update_post_meta(
-				$post_id,
-				'_cts_slide_link_url',
-				esc_url_raw($_POST['cts_slide_link_url'])
-			);
 		}
 
 		//slide media
-		if (isset($_POST['cts_slide_img_url'])){
+		if ( isset( $_POST['cts_slide_media'] ) ){
 			if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE){
 				return;
 			}
-			wp_verify_nonce(__FILE__, 'cts_slide_media');
+			if ( ! current_user_can( 'edit_post', $post_id ) ){
+				return;
+			}
+			if ( !wp_verify_nonce( $_POST['cts_slide_media'], __FILE__ ) ){
+				return;
+			}
+
+			$slide_media = array();
+			$slide_media['img_url'] = esc_url_raw( $_POST['slide_media']['img_url'] );
 
 			update_post_meta(
 				$post_id,
-				'_cts_slide_img_url',
-				esc_url_raw($_POST['cts_slide_img_url'])
+				'_cts_slide_media',
+				$slide_media
 			);
 		}
 	}

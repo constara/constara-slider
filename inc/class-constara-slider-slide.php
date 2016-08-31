@@ -10,23 +10,26 @@ class Constara_Slider_Slide{
 
 
 
-    private $slide_obj;
+    private $post_obj;
 
     protected $opts;
 
-    public function __construct( WP_Post $slide ){
-        $this->slide_obj =  $slide;
-        $this->opts =  $this->retrieve_opts($this->slide_obj);
+    public function __construct( WP_Post $post ){
+        $this->post_obj = $post;
+        $this->opts     = $this->retrieve_opts( $this->post_obj );
     }
 
 	private function retrieve_opts( WP_Post $post ){
-		$opts = array();
-		$opts['title'] = $post->post_title;
-		$opts['desc'] = $post->post_content;
-		$opts['hide_title'] =sanitize_title(get_post_meta($post->ID, '_cts_slide_hide_title', true));
-		$opts['title_position'] = get_post_meta($post->ID, '_cts_slide_title_position', true);
-		$opts['link_url'] = esc_url(get_post_meta($post->ID, '_cts_slide_link_url', true));
-		$opts['img_url'] = esc_url(get_post_meta($post->ID, '_cts_slide_img_url', true));
+		$slide_meta             = get_post_meta( $post->ID, '_cts_slide_meta', true );
+		$slide_media            = get_post_meta( $post->ID, '_cts_slide_media', true);
+		$opts                   = array();
+		$opts['title']          = $post->post_title;
+		$opts['desc']           = $post->post_content;
+		$opts['hide_title']     = (bool) $slide_meta['hide_title'];
+		$opts['title_position'] = (integer) $slide_meta['title_position'];
+		$opts['link_url']       = (string) $slide_meta['link_url'];
+		$opts['btn_link_text']  = (string) $slide_meta['btn_link_text'];
+		$opts['img_url']        = (string) $slide_media['img_url'];
 
 		return $opts;
 	}
@@ -34,7 +37,7 @@ class Constara_Slider_Slide{
     public function get_style($selector){
         switch ($selector){
             case 'content':
-                return 'style="top:' . $this->get_opt('title_position') . '%;"';
+                return 'style="top:' . esc_attr( $this->get_opt('title_position') ) . '%;"';
                 break;
             default:
                 return null;
@@ -59,37 +62,45 @@ class Constara_Slider_Slide{
 
     public function the_slide_style(){
 
-    	echo sprintf('background-image: url(%s);', $this->get_opt('img_url'));
+    	echo sprintf('background-image: url(%s);', esc_url( $this->get_opt('img_url') ) );
 
     }
 
     public function the_content_style(){
-    	echo 'top: ' . $this->get_opt('title_position') . '%;';
+    	$style = 'top: ' . $this->get_opt('title_position') . '%;';
+    	echo esc_attr( $style );
     }
 
     public function the_title(){
-    	$title =  sprintf('<span class="cts-slide-title">%s</span>', $this->get_opt('title'));
+    	//do not show title if hide_title is true
+    	if ( $this->get_opt( 'hide_title' ) ){
+    		return;
+	    }
+    	$title =  sprintf('<span class="cts-slide-title">%s</span>', sanitize_title( $this->get_opt('title') ) );
 
-	    if ( $this->get_opt('link_url') ){
+	    if ( ! empty( $this->get_opt('link_url') ) ){
 	    	$title = sprintf('<a href="%s">%s</a>', esc_url($this->get_opt('link_url')), $title);
 	    }
 
 	    echo $title;
     }
 
-    public function show_title(){
-        if ($this->opts['hide_title']){
-            return '';
-        } else {
-            return $this->opts['title'];
-        }
-    }
 
     public function the_desc(){
     	$desc = sprintf('<div class="cts-slide-description">%s</div>', $this->get_opt('desc'));
 	    echo $desc;
     }
 
+	public function the_link_btn(){
+		if ( ! empty( $this->get_opt('btn_link_text') ) ){
+			$btn_html = sprintf( '<a href="%s" title="%s"><button class="cts-slide-button">%s</button></a>',
+				esc_url($this->get_opt('link_url')),
+				esc_attr($this->get_opt('title')),
+				sanitize_title($this->get_opt('btn_link_text')) );
+
+			echo $btn_html;
+		}
+	}
     private function get_id(){
         return $this->id;
     }

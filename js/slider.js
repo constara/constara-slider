@@ -1,18 +1,16 @@
 jQuery(document).ready(function($){
+	'use strict';
 	var sliders = $('.cts-slider');
 	if (sliders.length ){
 		$.each(sliders, function (i, slider) {
 			set_slider_height( slider );
             $(slider).slick();
-        })
-
+        });
 	}
 
 
 	function set_slider_height( slider ) {
 		var height_data = $(slider).data('slider');
-
-		console.log(height_data.height_type);
 		switch ( height_data.height_type ){
 			case 'fixed':
 				$(slider).css({
