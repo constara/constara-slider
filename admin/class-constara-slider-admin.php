@@ -33,7 +33,6 @@ class Constara_Slider_Admin {
 		add_action('init', array($this, 'register_taxonomy') );
 		add_action('save_post', array($this, 'save_metaboxes') );
 		add_action('manage_edit-cts_slides_category_columns', array($this, 'slider_column') );
-		add_action('after_switch_theme' ,array($this, 'flush_rewrite_rules') );
 		add_filter('manage_cts_slides_category_custom_column', array($this, 'manage_slider_columns') , 10, 3);
 		add_action('cts_slides_category_add_form_fields', array($this, 'slider_create_add_options') );
 		add_action('cts_slides_category_edit_form_fields', array($this, 'slider_edit_add_options') );
@@ -104,7 +103,6 @@ class Constara_Slider_Admin {
 			'show_ui' 			=> true,
 			'query_var' 		=> true,
 			'show_admin_column' => true,
-			'rewrite' 			=> array('slug' => 'slides-category'),
 		));
 	}
 
@@ -416,11 +414,6 @@ class Constara_Slider_Admin {
 
 			update_option($option_name, $data_slider);
 		}
-	}
-	
-
-	public function flush_rewrite_rules(){
-		flush_rewrite_rules();
 	}
 
 	public function get_version(){
