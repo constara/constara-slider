@@ -78,7 +78,7 @@ class Constara_Slider_Slide{
 	    }
     	$title =  sprintf('<span class="cts-slide-title">%s</span>', sanitize_title( $this->get_opt('title') ) );
 
-	    if ( ! empty( $this->get_opt('link_url') ) ){
+	    if ( $this->get_opt('link_url') ){
 	    	$title = sprintf('<a href="%s">%s</a>', esc_url($this->get_opt('link_url')), $title);
 	    }
 
@@ -92,7 +92,7 @@ class Constara_Slider_Slide{
     }
 
 	public function the_link_btn(){
-		if ( ! empty( $this->get_opt('btn_link_text') ) ){
+		if ( $this->get_opt('btn_link_text') ){
 			$btn_html = sprintf( '<a href="%s" title="%s"><button class="cts-slide-button">%s</button></a>',
 				esc_url($this->get_opt('link_url')),
 				esc_attr($this->get_opt('title')),
