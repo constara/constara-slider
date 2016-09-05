@@ -331,7 +331,11 @@ class Constara_Slider_Admin {
 		$options = get_option($term->slug);
 		$slick_opts 	= $options['slick'];
 		$slider_opts 	= $options['slider'];
-		print_r($options);?>
+		$autoplay_speed = isset( $slick_opts['autoplayspeed'] ) ? $slick_opts['autoplayspeed'] : '2000' ;
+		$speed          = isset( $slick_opts['speed'] ) ? $slick_opts['speed'] : '600' ;
+		$height_type    = isset( $slider_opts['height_type'] ) ? $slider_opts['height_type'] : 'auto';
+		$height_value   = isset( $slider_opts['height_value'] ) ? $slider_opts['height_value'] : '450' ;
+		var_dump($options);?>
 		<tr class="form-field cts-slider-edit-options">
 			<th scope="row" valign="top"><?php _e('Slider settings', 'cts-slider'); ?></th>
 			<td>
@@ -345,12 +349,12 @@ class Constara_Slider_Admin {
 				</p>
 				<p>
 					<label for="trc_slider_opts[autoplayspeed]"><?php _e('Autoplay speed', 'cts-slider'); ?></label>
-					<input type="number" min="0" size="6" name="trc_slider_opts[autoplayspeed]" value="<?php echo $slick_opts['autoplayspeed']; ?>" />
+					<input type="number" min="0" size="6" name="trc_slider_opts[autoplayspeed]" value="<?php echo esc_attr( $autoplay_speed ); ?>" />
 					<span><?php _e('ms.', 'cts-slider'); ?></span>
 				</p>
 				<p>
 					<label for="trc_slider_opts[speed]"><?php _e('Speed', 'cts-slider'); ?></label>
-					<input type="number" min="0" size="6" name="trc_slider_opts[speed]" value="<?php echo $slick_opts['speed']; ?>" />
+					<input type="number" min="0" size="6" name="trc_slider_opts[speed]" value="<?php echo esc_attr( $speed ); ?>" />
 					<span><?php _e('ms.', 'cts-slider'); ?></span>
 				</p>
 				<p>
@@ -386,24 +390,24 @@ class Constara_Slider_Admin {
 			<h3><?php _e('Slider height', 'cts-slider'); ?></h3>
 			<p>
 				<label for="trc-slider-height-type-auto"><?php _e('Auto', 'cts-slider'); ?></label>
-				<input type="radio" id="trc-slider-height-type-auto" name="trc_slider_opts[height_type]" value="auto" <?php checked('auto', $slider_opts['height_type']); ?> />
+				<input type="radio" id="trc-slider-height-type-auto" name="trc_slider_opts[height_type]" value="auto" <?php checked('auto', $height_type); ?> />
 			</p>
 			<p>
 				<label for="trc-slider-height-type-fixed"><?php _e('Fixed', 'cts-slider'); ?></label>
-				<input type="radio" id="trc-slider-height-type-fixed" name="trc_slider_opts[height_type]" value="fixed" <?php checked('fixed', $slider_opts['height_type']); ?> />
-				<input type="number" min="0" size="6" name="trc_slider_opts[height_value]" value="<?php echo esc_attr($slider_opts['height_value']); ?>" />
+				<input type="radio" id="trc-slider-height-type-fixed" name="trc_slider_opts[height_type]" value="fixed" <?php checked('fixed', $height_type); ?> />
+				<input type="number" min="0" size="6" name="trc_slider_opts[height_value]" value="<?php echo esc_attr( $height_value ); ?>" />
 				<span><?php  _e('px.', 'cts-slider'); ?></span>
 			</p>
 			<!--<div>
 				<label for="trc_slider_opts[height_type]"><?php /*_e('Ratio', 'cts-slider'); */?></label>
-				<input type="radio" name="trc_slider_opts[height_type]" value="ratio" <?php /*checked('ratio', $slider_opts['height_type']); */?> />
+				<input type="radio" name="trc_slider_opts[height_type]" value="ratio" <?php /*checked('ratio', $height_type); */?> />
 				<label for="trc_slider_opts[ratio_width]"></label>
 				<input type="text" name="trc_slider_opts[ratio_width]" value="<?php /*echo esc_attr($slider_opts['ratio_width']); */?>" />:
 				<input type="text" name="trc_slider_opts[ratio_height]" value="<?php /*echo esc_attr($slider_opts['ratio_height']); */?>" />
 			</div>-->
 			<div>
 				<label for="trc_slider_opts[height_type]"><?php _e('Full', 'cts-slider'); ?></label>
-				<input type="radio" name="trc_slider_opts[height_type]" value="full" <?php checked('full', $slider_opts['height_type']); ?> />
+				<input type="radio" name="trc_slider_opts[height_type]" value="full" <?php checked('full', $height_type); ?> />
 			</div>
 			</td>
 		</tr>
