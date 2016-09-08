@@ -38,7 +38,7 @@ class Constara_Slider_Site {
 	$slider = new Constara_Slider_Slider($attr);
 		if ($slider->query->have_posts()){?>
 
-		<div class="cts-slider" <?php echo $slider->get_opts(); ?> >
+		<div class="cts-slider" id="cts-slider" <?php echo $slider->get_opts(); ?> >
 			<?php while ($slider->query->have_posts()){
 				$slider->query->the_post();
 				$slide = new Constara_Slider_Slide( get_post() );?>
