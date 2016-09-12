@@ -27,6 +27,7 @@ class Constara_Slider_Slide{
 		$opts['desc']           = $post->post_content;
 		$opts['hide_title']     = (bool) $slide_meta['hide_title'];
 		$opts['title_position'] = (integer) $slide_meta['title_position'];
+		$opts['slide_desc']     = (string) $slide_meta['slide_desc'];
 		$opts['link_url']       = (string) $slide_meta['link_url'];
 		$opts['btn_link_text']  = (string) $slide_meta['btn_link_text'];
 		$opts['img_url']        = (string) $slide_media['img_url'];
@@ -87,7 +88,7 @@ class Constara_Slider_Slide{
 
 
     public function the_desc(){
-    	$desc = sprintf('<div class="cts-slide-description">%s</div>', $this->get_opt('desc'));
+    	$desc = sprintf('<div class="cts-slide-description">%s</div>', $this->get_opt('slide_desc'));
 	    echo $desc;
     }
 

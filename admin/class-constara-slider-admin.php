@@ -79,7 +79,7 @@ class Constara_Slider_Admin {
 			'show_ui'		=>	true,
 			'has_archive'	=>	false,
 			'hierarchical'	=>	false,
-			'supports'		=>	array('title','editor'),
+			'supports'		=>	array('title'),
 			'menu_icon'		=>  CTS_PLUGIN_URL . 'img/menu_icon.svg',
 		));
 	}
@@ -133,6 +133,7 @@ class Constara_Slider_Admin {
 		$slide_meta     = get_post_meta( $post_id, '_cts_slide_meta', true );
 		$hide_title     = isset( $slide_meta['hide_title'] ) ? (bool) $slide_meta['hide_title'] : false;
 		$title_position = isset( $slide_meta['title_position'] ) ? (integer) $slide_meta['title_position'] : 40;
+		$slide_desc     = isset( $slide_meta['slide_desc'] ) ? (string) $slide_meta['slide_desc'] : '';
 		$link_url       = isset( $slide_meta['link_url'] ) ? (string) $slide_meta['link_url'] : '';
 		$btn_link_text  = isset( $slide_meta['btn_link_text'] ) ? (string) $slide_meta['btn_link_text'] : '';
 
@@ -148,6 +149,11 @@ class Constara_Slider_Admin {
 			<span id="set_default_title_position" class="button"><?php _e('set default', 'cts-slider'); ?></span>
 		<div id="title-position"></div>
 		<div class="title-position-desc"><?php _e('Choose title position for slide. Less value - higher title position', 'cts-slider'); ?></div>
+		</p>
+		<p>
+			<label ><?php _e( 'Slide description', 'cts-slider' ); ?>
+				<textarea class="widefat" rows="3" name="slide[slide_desc]"><?php echo esc_textarea( $slide_desc ); ?></textarea>
+			</label>
 		</p>
 		<p>
 			<label for="cts_slide_link_url"><?php _e('Slide link', 'cts-slider'); ?></label>
@@ -173,10 +179,11 @@ class Constara_Slider_Admin {
 			}
 
 			$slide_meta = array();
-			$slide_meta['hide_title'] = isset( $_POST['slide']['hide_title'] ) ? true : false;
-			$slide_meta['title_position'] = (int) intval( $_POST['slide']['title_position'] );
-			$slide_meta['link_url'] = esc_url_raw( $_POST['slide']['link_url'] );
-			$slide_meta['btn_link_text'] = sanitize_text_field( $_POST['slide']['btn_link_text'] );
+			$slide_meta['hide_title']       = isset( $_POST['slide']['hide_title'] ) ? true : false;
+			$slide_meta['title_position']   = (int) intval( $_POST['slide']['title_position'] );
+			$slide_meta['slide_desc']       = sanitize_text_field( $_POST['slide']['slide_desc'] );
+			$slide_meta['link_url']         = esc_url_raw( $_POST['slide']['link_url'] );
+			$slide_meta['btn_link_text']    = sanitize_text_field( $_POST['slide']['btn_link_text'] );
 
 
 			update_post_meta(
