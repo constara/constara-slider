@@ -53,7 +53,7 @@ class Constara_Slider_Admin {
 		if ( 'edit-tags.php' == $hook || 'cts_slide' == get_post_type() || 'term.php' == $hook ){
 			wp_enqueue_style('jquery-ui', CTS_PLUG_ADMIN_URL . 'css/jquery-ui.css');
 			wp_enqueue_script('jquery-ui-slider', array('jquery'));
-			wp_enqueue_style('cts-slider', CTS_PLUG_ADMIN_URL . 'css/slider.css', $this->get_version());
+			wp_enqueue_style('cts-slider', CTS_PLUG_ADMIN_URL . 'css/slider.css',array('wp-color-picker'), $this->get_version());
 			wp_enqueue_script('cts-slider', CTS_PLUG_ADMIN_URL . 'js/slider.js', array('jquery'), $this->get_version());
 		}
 
@@ -139,6 +139,7 @@ class Constara_Slider_Admin {
 		$desc_font_size = isset( $slide_meta['desc_font_size'] ) ? $slide_meta['desc_font_size'] : '30';
 		$link_url       = isset( $slide_meta['link_url'] ) ? (string) $slide_meta['link_url'] : '';
 		$btn_link_text  = isset( $slide_meta['btn_link_text'] ) ? (string) $slide_meta['btn_link_text'] : '';
+		$btn_background_color = isset( $slide_meta['btn_background_color'] ) ? (string) $slide_meta['btn_background_color'] : '';
 		$btn_ghost_style= isset( $slide_meta['btn_ghost_style'] ) ? (bool) $slide_meta['btn_ghost_style'] : false;
 
 		wp_nonce_field( __FILE__, 'cts_slide_options' );
@@ -158,8 +159,6 @@ class Constara_Slider_Admin {
 			<label ><?php _e( 'Slide description', 'cts-slider' ); ?>
 				<textarea class="widefat" rows="3" name="slide[slide_desc]"><?php echo esc_textarea( $slide_desc ); ?></textarea>
 			</label>
-		</p>
-		<p>
 			<label>
 				<?php _e( 'Bold', 'cts-slider' ); ?>
 				<input type="checkbox" name="slide[desc_bold]" <?php checked( $desc_bold ); ?> />
@@ -170,19 +169,20 @@ class Constara_Slider_Admin {
 			<label><?php _e( 'Font size', 'cts-slider' ); ?>
 				<input type="number" min="6" max="50" step="1" name="slide[desc_font_size]" value="<?php echo esc_attr( $desc_font_size ); ?>" />
 			</label>
-
+		</p>
 		</p>
 		<p>
 			<label for="cts_slide_link_url"><?php _e('Slide link', 'cts-slider'); ?></label>
-			<input type="text" name="slide[link_url]" id="cts_slide_link_url" size="70" value="<?php echo esc_url( $link_url ); ?>">
+			<input type="text" class="widefat" name="slide[link_url]" id="cts_slide_link_url" size="70" value="<?php echo esc_url( $link_url ); ?>">
 		</p>
 		<p>
 			<label for="cts_btn_link_text"><?php _e( 'Button text', 'cts-slider' ); ?></label>
-			<input type="text" name="slide[btn_link_text]" id="cts_btn_link_text" size="50" value="<?php echo esc_attr( $btn_link_text ) ?>" />
-		</p>
-		<p>
+			<input type="text" name="slide[btn_link_text]" id="cts_btn_link_text" size="30" value="<?php echo esc_attr( $btn_link_text ) ?>" />
 			<label><?php _e( 'Ghost button style', 'cts-slider' ); ?>
-				<input type="checkbox" name="slide[btn_ghost_style]" <?php checked( $btn_ghost_style ); ?> />
+				<input type="checkbox" class="cts-btn-ghost-style" name="slide[btn_ghost_style]" <?php checked( $btn_ghost_style ); ?> />
+			</label>
+			<label class="cts-btn-background-color"><?php _e( 'Button color', 'cts-slider' ); ?>
+				<input type="text" name="slide[btn_background_color]" id="cts-slide-link-btn-color" value="<?php echo esc_attr( $btn_background_color ); ?>" />
 			</label>
 		</p>
 	<?php }
@@ -209,8 +209,8 @@ class Constara_Slider_Admin {
 			$slide_meta['desc_font_size']   = sanitize_text_field( $_POST['slide']['desc_font_size'] );
 			$slide_meta['link_url']         = esc_url_raw( $_POST['slide']['link_url'] );
 			$slide_meta['btn_link_text']    = sanitize_text_field( $_POST['slide']['btn_link_text'] );
+			$slide_meta['btn_background_color'] = sanitize_text_field( $_POST['slide']['btn_background_color'] );
 			$slide_meta['btn_ghost_style']  = isset( $_POST['slide']['btn_ghost_style'] ) ? true : false;
-
 
 			update_post_meta(
 				$post_id,

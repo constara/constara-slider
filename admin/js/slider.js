@@ -66,4 +66,22 @@ jQuery(document).ready(function ($) {
         $('#cts_slide_title_position').val(default_position);
         $('#title-position').slider('option', 'value', default_position);
     });
+
+    //Link btn color
+    $('#cts-slide-link-btn-color').wpColorPicker();
+    $('.cts-btn-ghost-style').click(function () {
+        toggleBtnBackgroundColor( $(this).is(':checked') );
+
+    });
+
+    toggleBtnBackgroundColor( $('.cts-btn-ghost-style').is(':checked') );
+
+
+    function toggleBtnBackgroundColor( tag ) {
+        if ( tag ){
+            $('.cts-btn-background-color').fadeOut(200);
+        } else {
+            $('.cts-btn-background-color').fadeIn(200);
+        }
+    }
 });

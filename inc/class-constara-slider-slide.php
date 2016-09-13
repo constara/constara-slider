@@ -34,6 +34,7 @@ class Constara_Slider_Slide{
 		$opts['desc_font_size'] = (string) $slide_meta['desc_font_size'];
 		$opts['link_url']       = (string) $slide_meta['link_url'];
 		$opts['btn_link_text']  = (string) $slide_meta['btn_link_text'];
+		$opts['btn_background_color']  = (string) $slide_meta['btn_background_color'];
 		$opts['btn_ghost_style']= (bool) $slide_meta['btn_ghost_style'];
 		//media
 		$opts['img_url']        = (string) $slide_media['img_url'];
@@ -70,7 +71,7 @@ class Constara_Slider_Slide{
     public function the_slide_style(){
     	$style = '';
 	    $style .= sprintf( 'background-image: url(%s);', esc_url( $this->get_opt('img_url') ) );
-	    
+
 		echo esc_attr( $style );
     }
 
@@ -106,10 +107,14 @@ class Constara_Slider_Slide{
 
 	public function the_link_btn(){
 		if ( $this->get_opt('btn_link_text') ){
-			$btn_html = sprintf( '<a href="%s" title="%s"><button class="cts-slide-button %s">%s</button></a>',
+			$class =  ( $this->get_opt('btn_ghost_style') ) ? 'cts-ghost-btn' : '';
+			$style =  empty( $this->get_opt('btn_background_color') ) ? '' : sprintf( 'background-color: %s;', $this->get_opt('btn_background_color') );
+
+			$btn_html = sprintf( '<a href="%s" title="%s"><button class="cts-slide-button %s" style="%s" >%s</button></a>',
 				esc_url($this->get_opt('link_url')),
 				esc_attr($this->get_opt('title')),
-				( $this->get_opt('btn_ghost_style') ) ? 'cts-ghost-btn' : '',
+				esc_attr( $class ),
+				esc_attr( $style ),
 				sanitize_title($this->get_opt('btn_link_text')) );
 
 			echo $btn_html;
