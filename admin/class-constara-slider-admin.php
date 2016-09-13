@@ -134,6 +134,9 @@ class Constara_Slider_Admin {
 		$hide_title     = isset( $slide_meta['hide_title'] ) ? (bool) $slide_meta['hide_title'] : false;
 		$title_position = isset( $slide_meta['title_position'] ) ? (integer) $slide_meta['title_position'] : 40;
 		$slide_desc     = isset( $slide_meta['slide_desc'] ) ? (string) $slide_meta['slide_desc'] : '';
+		$desc_bold      = isset( $slide_meta['desc_bold'] ) ? (bool) $slide_meta['desc_bold'] : false;
+		$desc_italic    = isset( $slide_meta['desc_italic'] ) ? (bool) $slide_meta['desc_italic'] : false;
+		$desc_font_size = isset( $slide_meta['desc_font_size'] ) ? $slide_meta['desc_font_size'] : '30';
 		$link_url       = isset( $slide_meta['link_url'] ) ? (string) $slide_meta['link_url'] : '';
 		$btn_link_text  = isset( $slide_meta['btn_link_text'] ) ? (string) $slide_meta['btn_link_text'] : '';
 
@@ -154,6 +157,19 @@ class Constara_Slider_Admin {
 			<label ><?php _e( 'Slide description', 'cts-slider' ); ?>
 				<textarea class="widefat" rows="3" name="slide[slide_desc]"><?php echo esc_textarea( $slide_desc ); ?></textarea>
 			</label>
+		</p>
+		<p>
+			<label>
+				<?php _e( 'Bold', 'cts-slider' ); ?>
+				<input type="checkbox" name="slide[desc_bold]" <?php checked( $desc_bold ); ?> />
+			</label>
+			<label><?php _e( 'Italic', 'cts-slider' ); ?>
+				<input type="checkbox" name="slide[desc_italic]" <?php checked( $desc_italic ); ?> />
+			</label>
+			<label><?php _e( 'Font size', 'cts-slider' ); ?>
+				<input type="number" min="6" max="50" step="1" name="slide[desc_font_size]" value="<?php echo esc_attr( $desc_font_size ); ?>" />
+			</label>
+
 		</p>
 		<p>
 			<label for="cts_slide_link_url"><?php _e('Slide link', 'cts-slider'); ?></label>
@@ -182,6 +198,9 @@ class Constara_Slider_Admin {
 			$slide_meta['hide_title']       = isset( $_POST['slide']['hide_title'] ) ? true : false;
 			$slide_meta['title_position']   = (int) intval( $_POST['slide']['title_position'] );
 			$slide_meta['slide_desc']       = sanitize_text_field( $_POST['slide']['slide_desc'] );
+			$slide_meta['desc_bold']        = isset( $_POST['slide']['desc_bold'] ) ? true : false;
+			$slide_meta['desc_italic']      = isset( $_POST['slide']['desc_italic'] ) ? true : false;
+			$slide_meta['desc_font_size']   = sanitize_text_field( $_POST['slide']['desc_font_size'] );
 			$slide_meta['link_url']         = esc_url_raw( $_POST['slide']['link_url'] );
 			$slide_meta['btn_link_text']    = sanitize_text_field( $_POST['slide']['btn_link_text'] );
 
