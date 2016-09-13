@@ -23,12 +23,20 @@ class Constara_Slider_Slide{
 		$slide_meta             = get_post_meta( $post->ID, '_cts_slide_meta', true );
 		$slide_media            = get_post_meta( $post->ID, '_cts_slide_media', true);
 		$opts                   = array();
+		//meta
 		$opts['title']          = $post->post_title;
 		$opts['desc']           = $post->post_content;
 		$opts['hide_title']     = (bool) $slide_meta['hide_title'];
 		$opts['title_position'] = (integer) $slide_meta['title_position'];
+		$opts['slide_desc']     = (string) $slide_meta['slide_desc'];
+		$opts['desc_bold']      = (bool) $slide_meta['desc_bold'];
+		$opts['desc_italic']    = (bool) $slide_meta['desc_italic'];
+		$opts['desc_font_size'] = (string) $slide_meta['desc_font_size'];
 		$opts['link_url']       = (string) $slide_meta['link_url'];
 		$opts['btn_link_text']  = (string) $slide_meta['btn_link_text'];
+		$opts['btn_background_color']  = (string) $slide_meta['btn_background_color'];
+		$opts['btn_ghost_style']= (bool) $slide_meta['btn_ghost_style'];
+		//media
 		$opts['img_url']        = (string) $slide_media['img_url'];
 
 		return $opts;
@@ -61,9 +69,10 @@ class Constara_Slider_Slide{
 
 
     public function the_slide_style(){
+    	$style = '';
+	    $style .= sprintf( 'background-image: url(%s);', esc_url( $this->get_opt('img_url') ) );
 
-    	echo sprintf('background-image: url(%s);', esc_url( $this->get_opt('img_url') ) );
-
+		echo esc_attr( $style );
     }
 
     public function the_content_style(){
@@ -87,15 +96,25 @@ class Constara_Slider_Slide{
 
 
     public function the_desc(){
-    	$desc = sprintf('<div class="cts-slide-description">%s</div>', $this->get_opt('desc'));
+    	$style = '';
+	    $style .= sprintf( 'font-weight: %s;', ( $this->get_opt('desc_bold') ) ? 'bold' : '200' );
+	    $style .= sprintf( 'font-style: %s;', ( $this->get_opt('desc_italic') ) ? 'italic' : 'normal' );
+	    $style .= sprintf( 'font-size: %s;', $this->get_opt('desc_font_size') . 'px' );
+
+    	$desc = sprintf('<div class="cts-slide-description" style="%s">%s</div>', esc_attr($style) , $this->get_opt('slide_desc'));
 	    echo $desc;
     }
 
 	public function the_link_btn(){
 		if ( $this->get_opt('btn_link_text') ){
-			$btn_html = sprintf( '<a href="%s" title="%s"><button class="cts-slide-button">%s</button></a>',
+			$class =  ( $this->get_opt('btn_ghost_style') ) ? 'cts-ghost-btn' : '';
+			$style =  empty( $this->get_opt('btn_background_color') ) ? '' : sprintf( 'background-color: %s;', $this->get_opt('btn_background_color') );
+
+			$btn_html = sprintf( '<a href="%s" title="%s"><button class="cts-slide-button %s" style="%s" >%s</button></a>',
 				esc_url($this->get_opt('link_url')),
 				esc_attr($this->get_opt('title')),
+				esc_attr( $class ),
+				esc_attr( $style ),
 				sanitize_title($this->get_opt('btn_link_text')) );
 
 			echo $btn_html;
