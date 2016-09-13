@@ -139,6 +139,7 @@ class Constara_Slider_Admin {
 		$desc_font_size = isset( $slide_meta['desc_font_size'] ) ? $slide_meta['desc_font_size'] : '30';
 		$link_url       = isset( $slide_meta['link_url'] ) ? (string) $slide_meta['link_url'] : '';
 		$btn_link_text  = isset( $slide_meta['btn_link_text'] ) ? (string) $slide_meta['btn_link_text'] : '';
+		$btn_ghost_style= isset( $slide_meta['btn_ghost_style'] ) ? (bool) $slide_meta['btn_ghost_style'] : false;
 
 		wp_nonce_field( __FILE__, 'cts_slide_options' );
 		?>
@@ -179,6 +180,11 @@ class Constara_Slider_Admin {
 			<label for="cts_btn_link_text"><?php _e( 'Button text', 'cts-slider' ); ?></label>
 			<input type="text" name="slide[btn_link_text]" id="cts_btn_link_text" size="50" value="<?php echo esc_attr( $btn_link_text ) ?>" />
 		</p>
+		<p>
+			<label><?php _e( 'Ghost button style', 'cts-slider' ); ?>
+				<input type="checkbox" name="slide[btn_ghost_style]" <?php checked( $btn_ghost_style ); ?> />
+			</label>
+		</p>
 	<?php }
 
 	public function save_metaboxes($post_id){
@@ -203,6 +209,7 @@ class Constara_Slider_Admin {
 			$slide_meta['desc_font_size']   = sanitize_text_field( $_POST['slide']['desc_font_size'] );
 			$slide_meta['link_url']         = esc_url_raw( $_POST['slide']['link_url'] );
 			$slide_meta['btn_link_text']    = sanitize_text_field( $_POST['slide']['btn_link_text'] );
+			$slide_meta['btn_ghost_style']  = isset( $_POST['slide']['btn_ghost_style'] ) ? true : false;
 
 
 			update_post_meta(

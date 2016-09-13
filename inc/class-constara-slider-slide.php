@@ -23,6 +23,7 @@ class Constara_Slider_Slide{
 		$slide_meta             = get_post_meta( $post->ID, '_cts_slide_meta', true );
 		$slide_media            = get_post_meta( $post->ID, '_cts_slide_media', true);
 		$opts                   = array();
+		//meta
 		$opts['title']          = $post->post_title;
 		$opts['desc']           = $post->post_content;
 		$opts['hide_title']     = (bool) $slide_meta['hide_title'];
@@ -33,6 +34,8 @@ class Constara_Slider_Slide{
 		$opts['desc_font_size'] = (string) $slide_meta['desc_font_size'];
 		$opts['link_url']       = (string) $slide_meta['link_url'];
 		$opts['btn_link_text']  = (string) $slide_meta['btn_link_text'];
+		$opts['btn_ghost_style']= (bool) $slide_meta['btn_ghost_style'];
+		//media
 		$opts['img_url']        = (string) $slide_media['img_url'];
 
 		return $opts;
@@ -67,8 +70,7 @@ class Constara_Slider_Slide{
     public function the_slide_style(){
     	$style = '';
 	    $style .= sprintf( 'background-image: url(%s);', esc_url( $this->get_opt('img_url') ) );
-
-    	//echo sprintf('background-image: url(%s); ', esc_url( $this->get_opt('img_url') ) );
+	    
 		echo esc_attr( $style );
     }
 
@@ -104,9 +106,10 @@ class Constara_Slider_Slide{
 
 	public function the_link_btn(){
 		if ( $this->get_opt('btn_link_text') ){
-			$btn_html = sprintf( '<a href="%s" title="%s"><button class="cts-slide-button">%s</button></a>',
+			$btn_html = sprintf( '<a href="%s" title="%s"><button class="cts-slide-button %s">%s</button></a>',
 				esc_url($this->get_opt('link_url')),
 				esc_attr($this->get_opt('title')),
+				( $this->get_opt('btn_ghost_style') ) ? 'cts-ghost-btn' : '',
 				sanitize_title($this->get_opt('btn_link_text')) );
 
 			echo $btn_html;
