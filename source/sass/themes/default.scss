@@ -25,9 +25,9 @@
           top:36%;
           width: 80%;
           margin: 0 auto;
+          text-align: center;
 
           a {
-            text-align: center;
             color: #fff;
             display: inline-block;
             width: 100%;
@@ -37,7 +37,6 @@
             font-size: 64px;
             font-weight: bold;
             color: #fff;
-            text-align: center;
             display: inline-block;
             line-height: 1.1em;
             width: 100%;
@@ -47,10 +46,21 @@
             font-size: 22px;
             color: #fff;
             font-weight: lighter;
-            text-align: center;
             margin-top: 30px;
             word-spacing: 6px;
             line-height: 1.3em;
+          }
+          button.cts-slide-button {
+            display: inline-block;
+            &.cts-ghost-btn {
+              background: none;
+              border: 1px solid #fff;
+              color: #fff;
+              &:hover {
+                background: #fff;
+                color: #000;
+              }
+            }
           }
         }
 
@@ -76,6 +86,7 @@
     color: #000;
   }
 
+
   button.slick-arrow{
     display: inline-block;
     position: absolute;
@@ -86,15 +97,13 @@
     font: 0/0 a;
     color: transparent;
     background-size: 20px;
-  }
-
-  button.slick-arrow:hover{
-    opacity: 0.7;
-  }
-
-  button.slick-next.slick-arrow {
-    right: 1%;
-    background: url(../../img/arrow_right.svg) no-repeat;
+    &:hover{
+      opacity: 0.7;
+    }
+    &.slick-next {
+      right: 1%;
+      background: url(../../img/arrow_right.svg) no-repeat;
+    }
   }
 
   ul.slick-dots {
@@ -120,22 +129,11 @@
         background-size: 18px!important;
         background: url(../../img/icon_circle-empty.svg) no-repeat;
       }
+      &.slick-active button{
+        background: url(../../img/icon_circle-slelected.svg) no-repeat;
+      }
     }
   }
-
-  ul.slick-dots li.slick-active button{
-    background: url(../../img/icon_circle-slelected.svg) no-repeat;
-  }
-
-  .slide-link{
-    display: block;
-    height: 100%;
-    width: 100%;
-  }
-  .cts-content-box{
-    position: relative;
-  }
-
 }
 
 
