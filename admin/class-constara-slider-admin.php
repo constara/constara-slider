@@ -51,10 +51,11 @@ class Constara_Slider_Admin {
 
 	public function enqueue_scripts($hook){
 		if ( 'edit-tags.php' == $hook || 'cts_slide' == get_post_type() || 'term.php' == $hook ){
+			wp_enqueue_media();
 			wp_enqueue_style('jquery-ui', CTS_PLUG_ADMIN_URL . 'css/jquery-ui.css');
 			wp_enqueue_script('jquery-ui-slider', array('jquery'));
 			wp_enqueue_style('cts-slider', CTS_PLUG_ADMIN_URL . 'css/slider.css',array('wp-color-picker'), $this->get_version());
-			wp_enqueue_script('cts-slider', CTS_PLUG_ADMIN_URL . 'js/slider.js', array('jquery'), $this->get_version());
+			wp_enqueue_script('cts-slider', CTS_PLUG_ADMIN_URL . 'js/slider.js', array('jquery', 'wp-color-picker'), $this->get_version());
 		}
 
 	}
