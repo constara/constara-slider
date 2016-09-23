@@ -24,7 +24,7 @@ class Constara_Slider_Slide{
 		$slide_media            = get_post_meta( $post->ID, '_cts_slide_media', true);
 		$opts                   = array();
 		//meta
-		$opts['title']          = $post->post_title;
+		$opts['title']          = get_the_title($post);
 		$opts['desc']           = $post->post_content;
 		$opts['hide_title']     = (bool) $slide_meta['hide_title'];
 		$opts['title_position'] = (integer) $slide_meta['title_position'];
@@ -85,7 +85,7 @@ class Constara_Slider_Slide{
     	if ( $this->get_opt( 'hide_title' ) ){
     		return;
 	    }
-    	$title =  sprintf('<span class="cts-slide-title">%s</span>', sanitize_title( $this->get_opt('title') ) );
+    	$title =  sprintf('<span class="cts-slide-title">%s</span>',  $this->get_opt('title')  );
 
 	    if ( $this->get_opt('link_url') ){
 	    	$title = sprintf('<a href="%s">%s</a>', esc_url($this->get_opt('link_url')), $title);
