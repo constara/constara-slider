@@ -46,16 +46,22 @@ jQuery(document).ready(function ($) {
         url_field.val('');
         img.attr('src', '');
     });
-    //options
-    var default_position = 40;//set default value
+    //Title position
+    var customTitlePosition = $('#cts-slide-custom-title-position');
+
+    customTitlePosition.click(function () {
+       toggleTitlePositionVisible($(this).is(':checked'));
+    });
+
+    var default_position = 50;//set default value
     var title_position = parseInt($('#cts_slide_title_position').val());
     if(isNaN(title_position)){
         title_position = default_position;
     }
     $('#cts_slide_title_position').val(title_position);
     $('#title-position').slider({
-        min: 0,
-        max: 70,
+        min: 1,
+        max: 100,
         value: title_position,
         slide: function (event, ui) {
             $('#cts_slide_title_position').val(ui.value);
@@ -67,21 +73,34 @@ jQuery(document).ready(function ($) {
         $('#title-position').slider('option', 'value', default_position);
     });
 
+
+
     //Link btn color
     $('#cts-slide-link-btn-color').wpColorPicker();
+    //$('#cts-slide-link-btn-color-hover').wpColorPicker();
+    $('#cts-slide-link-btn-text-color').wpColorPicker();
+    //$('#cts-slide-link-btn-text-color-hover').wpColorPicker();
     $('.cts-btn-ghost-style').click(function () {
-        toggleBtnBackgroundColor( $(this).is(':checked') );
+        toggleBtnBackgroundColorVisible( $(this).is(':checked') );
 
     });
 
-    toggleBtnBackgroundColor( $('.cts-btn-ghost-style').is(':checked') );
+    toggleBtnBackgroundColorVisible( $('.cts-btn-ghost-style').is(':checked') );
+    toggleTitlePositionVisible( customTitlePosition.is(':checked') );
 
-
-    function toggleBtnBackgroundColor( tag ) {
+    function toggleBtnBackgroundColorVisible(tag ) {
         if ( tag ){
-            $('.cts-btn-background-color').fadeOut(200);
+            $('.cts-btn-style').fadeOut(200);
         } else {
-            $('.cts-btn-background-color').fadeIn(200);
+            $('.cts-btn-style').fadeIn(200);
         }
+    }
+
+    function toggleTitlePositionVisible(tag) {
+            if ( tag ){
+                $('.cts-title-position').fadeIn(200);
+            } else {
+                $('.cts-title-position').fadeOut(200);
+            }
     }
 });

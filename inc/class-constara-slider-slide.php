@@ -27,6 +27,7 @@ class Constara_Slider_Slide{
 		$opts['title']          = get_the_title($post);
 		$opts['desc']           = $post->post_content;
 		$opts['hide_title']     = (bool) $slide_meta['hide_title'];
+		$opts['custom_title_position'] = (bool) $slide_meta['custom_title_position'];
 		$opts['title_position'] = (integer) $slide_meta['title_position'];
 		$opts['slide_desc']     = (string) $slide_meta['slide_desc'];
 		$opts['desc_bold']      = (bool) $slide_meta['desc_bold'];
@@ -35,14 +36,16 @@ class Constara_Slider_Slide{
 		$opts['desc_align']     = $slide_meta['desc_align'];
 		$opts['link_url']       = $slide_meta['link_url'];
 		$opts['btn_link_text']  = $slide_meta['btn_link_text'];
-		$opts['btn_background_color']  = (string) $slide_meta['btn_background_color'];
+		$opts['btn_bg_color']   = (string) $slide_meta['btn_bg_color'];
+		//$opts['btn_bg_color_hover'] = (string) $slide_meta['btn_bg_color_hover'];
+		$opts['btn_text_color'] = (string) $slide_meta['btn_text_color'];
+		//$opts['btn_text_color_hover'] = (string) $slide_meta['btn_text_color_hover'];
 		$opts['btn_ghost_style']= (bool) $slide_meta['btn_ghost_style'];
 		//media
 		$opts['img_url']        = (string) $slide_media['img_url'];
 
 		return $opts;
 	}
-
     public function get_style($selector){
         switch ($selector){
             case 'content':
@@ -77,12 +80,19 @@ class Constara_Slider_Slide{
     }
 
     public function the_content_style(){
-    	$style = 'top: ' . $this->get_opt('title_position') . '%;';
+    	$style = '';
+
 	    $style .= 'text-align: ' . $this->get_opt('desc_align') .';';
-	    if ( $this->get_opt('title_position') != 40 ){
-	    	$style .= ' left: auto; transform: none;';
+	    error_log($this->get_opt('custom_title_position'));
+	    if ( $this->get_opt('custom_title_position') ){
+		    $style .= 'top: ' . $this->calculate_title_position($this->get_opt('title_position')) . '%;';
+		    $style .= ' left: auto; transform: none;';
 	    }
     	echo esc_attr( $style );
+    }
+
+    private function calculate_title_position($position){
+		return round($position * 0.8);
     }
 
     public function the_title(){
@@ -113,13 +123,20 @@ class Constara_Slider_Slide{
 	public function the_link_btn(){
 		if ( $this->get_opt('btn_link_text') ){
 			$class =  ( $this->get_opt('btn_ghost_style') ) ? 'cts-ghost-btn' : '';
-			$style =  empty( $this->get_opt('btn_background_color') ) ? '' : sprintf( 'background-color: %s;', $this->get_opt('btn_background_color') );
+			$style_rules = '';
+			if ( !$this->get_opt('btn_ghost_style') ){
+				$style_rules .=  empty( $this->get_opt('btn_bg_color') ) ? '' : sprintf( 'background-color: %s;', $this->get_opt('btn_bg_color') );
+				$style_rules .= ( $this->get_opt('btn_text_color') ) ? sprintf( 'color: %s;', esc_attr( $this->get_opt('btn_text_color') ) ) : '';
+			}
 
-			$btn_html = sprintf( '<a href="%s" title="%s"><button class="cts-slide-button %s" style="%s" >%s</button></a>',
+			$style = sprintf( 'style="%s"', esc_attr( $style_rules) );
+
+
+			$btn_html = sprintf( '<a href="%s" title="%s"><button class="cts-slide-button %s" %s >%s</button></a>',
 				esc_url($this->get_opt('link_url')),
 				esc_attr($this->get_opt('title')),
 				esc_attr( $class ),
-				esc_attr( $style ),
+				$style,
 				sanitize_title($this->get_opt('btn_link_text')) );
 
 			echo $btn_html;

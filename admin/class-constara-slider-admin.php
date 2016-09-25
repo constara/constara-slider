@@ -133,6 +133,7 @@ class Constara_Slider_Admin {
 		$post_id        = $post->ID;
 		$slide_meta     = get_post_meta( $post_id, '_cts_slide_meta', true );
 		$hide_title     = isset( $slide_meta['hide_title'] ) ? (bool) $slide_meta['hide_title'] : false;
+		$custom_title_position = isset( $slide_meta['custom_title_position'] ) ? $slide_meta['custom_title_position'] : false;
 		$title_position = isset( $slide_meta['title_position'] ) ? (integer) $slide_meta['title_position'] : 40;
 		$slide_desc     = isset( $slide_meta['slide_desc'] ) ? (string) $slide_meta['slide_desc'] : '';
 		$desc_bold      = isset( $slide_meta['desc_bold'] ) ? (bool) $slide_meta['desc_bold'] : false;
@@ -141,23 +142,30 @@ class Constara_Slider_Admin {
 		$desc_align     = isset( $slide_meta['desc_align'] ) ? $slide_meta['desc_align'] : 'center';
 		$link_url       = isset( $slide_meta['link_url'] ) ? (string) $slide_meta['link_url'] : '';
 		$btn_link_text  = isset( $slide_meta['btn_link_text'] ) ? (string) $slide_meta['btn_link_text'] : '';
-		$btn_background_color = isset( $slide_meta['btn_background_color'] ) ? (string) $slide_meta['btn_background_color'] : '';
+		$btn_bg_color   = isset( $slide_meta['btn_bg_color'] ) ? (string) $slide_meta['btn_bg_color'] : '';
+		//$btn_bg_color_hover = isset( $slide_meta['btn_bg_color_hover'] ) ? $slide_meta['btn_bg_color_hover'] : '';
+		$btn_text_color = isset( $slide_meta['btn_text_color'] ) ? $slide_meta['btn_text_color'] : '';
+		//$btn_text_color_hover = isset( $slide_meta['btn_text_color_hover'] ) ? $slide_meta['btn_text_color_hover'] : '';
 		$btn_ghost_style= isset( $slide_meta['btn_ghost_style'] ) ? (bool) $slide_meta['btn_ghost_style'] : false;
 
 		wp_nonce_field( __FILE__, 'cts_slide_options' );
 		?>
-		<p>
+		<fieldset>
 			<input type="checkbox" id="cts_slide_hide_title" name="slide[hide_title]" <?php checked( $hide_title ); ?>>
 			<label for="cts_slide_hide_title"><?php _e('Hide slide title', 'cts-slider'); ?></label>
-		</p>
-		<p>
+		</fieldset>
+		<fieldset>
+			<input id="cts-slide-custom-title-position" type="checkbox" name="slide[custom_title_position]" <?php checked( $custom_title_position ); ?> />
+			<label for="cts-slide-custom-title-position"><?php _e('Custom title position', 'cts-slider'); ?></label>
+		</fieldset>
+		<fieldset class="cts-title-position">
 			<label for="cts_slide_title_position"><?php _e('Title position', 'cts-slider'); ?></label>
 			<input type="text" size="5" name="slide[title_position]" id="cts_slide_title_position" value="<?php echo esc_attr( $title_position ) ; ?>">
 			<span id="set_default_title_position" class="button"><?php _e('set default', 'cts-slider'); ?></span>
 		<div id="title-position"></div>
 		<div class="title-position-desc"><?php _e('Choose title position for slide. Less value - higher title position', 'cts-slider'); ?></div>
-		</p>
-		<p>
+		</fieldset>
+		<fieldset>
 			<label ><?php _e( 'Slide description', 'cts-slider' ); ?>
 				<textarea class="widefat" rows="3" name="slide[slide_desc]"><?php echo esc_textarea( $slide_desc ); ?></textarea>
 			</label>
@@ -178,21 +186,38 @@ class Constara_Slider_Admin {
 					<option value="right" <?php selected( 'right', $desc_align ); ?>><?php _e('Right', 'cts-slider'); ?></option>
 				</select>
 			</label>
-		</p>
-		<p>
+		</fieldset>
+		<fieldset>
 			<label for="cts_slide_link_url"><?php _e('Slide link', 'cts-slider'); ?></label>
 			<input type="text" class="widefat" name="slide[link_url]" id="cts_slide_link_url" size="70" value="<?php echo esc_url( $link_url ); ?>">
-		</p>
-		<p>
-			<label for="cts_btn_link_text"><?php _e( 'Button text', 'cts-slider' ); ?></label>
-			<input type="text" name="slide[btn_link_text]" id="cts_btn_link_text" size="30" value="<?php echo esc_attr( $btn_link_text ) ?>" />
-			<label><?php _e( 'Ghost button style', 'cts-slider' ); ?>
-				<input type="checkbox" class="cts-btn-ghost-style" name="slide[btn_ghost_style]" <?php checked( $btn_ghost_style ); ?> />
+		</fieldset>
+		<fieldset>
+		<label for="cts_btn_link_text"><?php _e( 'Button text', 'cts-slider' ); ?></label>
+		<input type="text" name="slide[btn_link_text]" id="cts_btn_link_text" size="30" value="<?php echo esc_attr( $btn_link_text ) ?>" />
+		<label><?php _e( 'Ghost button style', 'cts-slider' ); ?>
+			<input type="checkbox" class="cts-btn-ghost-style" name="slide[btn_ghost_style]" <?php checked( $btn_ghost_style ); ?> />
+		</label>
+		<div class="cts-btn-style">
+			<p>
+			<label><?php _e( 'Button color', 'cts-slider' ); ?>
+				<input type="text" name="slide[btn_bg_color]" id="cts-slide-link-btn-color" value="<?php echo esc_attr( $btn_bg_color ); ?>" />
 			</label>
-			<label class="cts-btn-background-color"><?php _e( 'Button color', 'cts-slider' ); ?>
-				<input type="text" name="slide[btn_background_color]" id="cts-slide-link-btn-color" value="<?php echo esc_attr( $btn_background_color ); ?>" />
+			<label><?php _e('Button text color', 'cts-slider'); ?>
+				<input type="text" name="slide[btn_text_color]" id="cts-slide-link-btn-text-color" value="<?php echo esc_attr( $btn_text_color ); ?>" />
 			</label>
-		</p>
+				<!--<label><?php /*_e('Button color on hover', 'cts-slider'); */?>
+					<input type="text" name="slide[btn_bg_color_hover]" id="cts-slide-link-btn-color-hover" value="<?php /*echo esc_attr( $btn_bg_color_hover ); */?>" />
+				</label>-->
+			</p>
+			<p>
+
+				<!--<label><?php /*_e('Button text color on hover', 'cts-slider'); */?>
+					<input type="text" name="slide[btn_text_color_hover]" id="cts-slide-link-btn-text-color-hover" value="<?php /*echo esc_attr( $btn_text_color_hover ); */?>" />
+				</label>-->
+			</p>
+
+		</div>
+		</fieldset>
 	<?php }
 
 	public function save_metaboxes($post_id){
@@ -210,6 +235,7 @@ class Constara_Slider_Admin {
 
 			$slide_meta = array();
 			$slide_meta['hide_title']       = isset( $_POST['slide']['hide_title'] ) ? true : false;
+			$slide_meta['custom_title_position'] = isset( $_POST['slide']['custom_title_position'] ) ? true : false;
 			$slide_meta['title_position']   = (int) intval( $_POST['slide']['title_position'] );
 			$slide_meta['slide_desc']       = sanitize_text_field( $_POST['slide']['slide_desc'] );
 			$slide_meta['desc_bold']        = isset( $_POST['slide']['desc_bold'] ) ? true : false;
@@ -218,7 +244,10 @@ class Constara_Slider_Admin {
 			$slide_meta['desc_align']       = sanitize_text_field( $_POST['slide']['desc_align'] );
 			$slide_meta['link_url']         = esc_url_raw( $_POST['slide']['link_url'] );
 			$slide_meta['btn_link_text']    = sanitize_text_field( $_POST['slide']['btn_link_text'] );
-			$slide_meta['btn_background_color'] = sanitize_text_field( $_POST['slide']['btn_background_color'] );
+			$slide_meta['btn_bg_color']     = sanitize_text_field( $_POST['slide']['btn_bg_color'] );
+			//$slide_meta['btn_bg_color_hover'] = sanitize_text_field( $_POST['slide']['btn_bg_color_hover'] );
+			$slide_meta['btn_text_color']   = sanitize_text_field( $_POST['slide']['btn_text_color'] );
+			//$slide_meta['btn_text_color_hover'] = sanitize_text_field( $_POST['slide']['btn_text_color_hover'] );
 			$slide_meta['btn_ghost_style']  = isset( $_POST['slide']['btn_ghost_style'] ) ? true : false;
 
 			update_post_meta(
