@@ -108,6 +108,10 @@
       right: 1%;
       background: url(../../img/arrow_right.svg) no-repeat;
     }
+    &.slick-prev{
+      left: 1%;
+      background: url(../../img/arrow_left.svg) no-repeat;
+    }
   }
 
   ul.slick-dots {

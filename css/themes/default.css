@@ -75,6 +75,9 @@
   #cts-slider.cts-slider button.slick-arrow.slick-next {
     right: 1%;
     background: url(../../img/arrow_right.svg) no-repeat; }
+  #cts-slider.cts-slider button.slick-arrow.slick-prev {
+    left: 1%;
+    background: url(../../img/arrow_left.svg) no-repeat; }
 #cts-slider.cts-slider ul.slick-dots {
   display: inline-flex;
   position: absolute;
