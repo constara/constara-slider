@@ -138,6 +138,7 @@ class Constara_Slider_Admin {
 		$desc_bold      = isset( $slide_meta['desc_bold'] ) ? (bool) $slide_meta['desc_bold'] : false;
 		$desc_italic    = isset( $slide_meta['desc_italic'] ) ? (bool) $slide_meta['desc_italic'] : false;
 		$desc_font_size = isset( $slide_meta['desc_font_size'] ) ? $slide_meta['desc_font_size'] : '30';
+		$desc_align     = isset( $slide_meta['desc_align'] ) ? $slide_meta['desc_align'] : 'center';
 		$link_url       = isset( $slide_meta['link_url'] ) ? (string) $slide_meta['link_url'] : '';
 		$btn_link_text  = isset( $slide_meta['btn_link_text'] ) ? (string) $slide_meta['btn_link_text'] : '';
 		$btn_background_color = isset( $slide_meta['btn_background_color'] ) ? (string) $slide_meta['btn_background_color'] : '';
@@ -170,7 +171,13 @@ class Constara_Slider_Admin {
 			<label><?php _e( 'Font size', 'cts-slider' ); ?>
 				<input type="number" min="6" max="50" step="1" name="slide[desc_font_size]" value="<?php echo esc_attr( $desc_font_size ); ?>" />
 			</label>
-		</p>
+			<label><?php _e('Text align', 'cts-slider'); ?>
+				<select name="slide[desc_align]">
+					<option value="center" <?php selected( 'center', $desc_align ); ?>><?php _e('Center', 'cts-slider'); ?></option>
+					<option value="left" <?php selected( 'left', $desc_align ); ?>><?php _e('Left', 'cts-slider'); ?></option>
+					<option value="right" <?php selected( 'right', $desc_align ); ?>><?php _e('Right', 'cts-slider'); ?></option>
+				</select>
+			</label>
 		</p>
 		<p>
 			<label for="cts_slide_link_url"><?php _e('Slide link', 'cts-slider'); ?></label>
@@ -208,6 +215,7 @@ class Constara_Slider_Admin {
 			$slide_meta['desc_bold']        = isset( $_POST['slide']['desc_bold'] ) ? true : false;
 			$slide_meta['desc_italic']      = isset( $_POST['slide']['desc_italic'] ) ? true : false;
 			$slide_meta['desc_font_size']   = sanitize_text_field( $_POST['slide']['desc_font_size'] );
+			$slide_meta['desc_align']       = sanitize_text_field( $_POST['slide']['desc_align'] );
 			$slide_meta['link_url']         = esc_url_raw( $_POST['slide']['link_url'] );
 			$slide_meta['btn_link_text']    = sanitize_text_field( $_POST['slide']['btn_link_text'] );
 			$slide_meta['btn_background_color'] = sanitize_text_field( $_POST['slide']['btn_background_color'] );

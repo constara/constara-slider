@@ -31,9 +31,10 @@ class Constara_Slider_Slide{
 		$opts['slide_desc']     = (string) $slide_meta['slide_desc'];
 		$opts['desc_bold']      = (bool) $slide_meta['desc_bold'];
 		$opts['desc_italic']    = (bool) $slide_meta['desc_italic'];
-		$opts['desc_font_size'] = (string) $slide_meta['desc_font_size'];
-		$opts['link_url']       = (string) $slide_meta['link_url'];
-		$opts['btn_link_text']  = (string) $slide_meta['btn_link_text'];
+		$opts['desc_font_size'] = $slide_meta['desc_font_size'];
+		$opts['desc_align']     = $slide_meta['desc_align'];
+		$opts['link_url']       = $slide_meta['link_url'];
+		$opts['btn_link_text']  = $slide_meta['btn_link_text'];
 		$opts['btn_background_color']  = (string) $slide_meta['btn_background_color'];
 		$opts['btn_ghost_style']= (bool) $slide_meta['btn_ghost_style'];
 		//media
@@ -77,6 +78,7 @@ class Constara_Slider_Slide{
 
     public function the_content_style(){
     	$style = 'top: ' . $this->get_opt('title_position') . '%;';
+	    $style .= 'text-align: ' . $this->get_opt('desc_align') .';';
     	echo esc_attr( $style );
     }
 
