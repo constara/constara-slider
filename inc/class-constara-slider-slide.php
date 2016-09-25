@@ -79,6 +79,9 @@ class Constara_Slider_Slide{
     public function the_content_style(){
     	$style = 'top: ' . $this->get_opt('title_position') . '%;';
 	    $style .= 'text-align: ' . $this->get_opt('desc_align') .';';
+	    if ( $this->get_opt('title_position') != 40 ){
+	    	$style .= ' left: auto; transform: none;';
+	    }
     	echo esc_attr( $style );
     }
 
