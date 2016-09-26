@@ -2,7 +2,8 @@
   height: 340px;
   visibility: hidden; }
   #cts-slider.cts-slider.slick-initialized {
-    visibility: visible; }
+    visibility: visible;
+    background-color: black; }
   #cts-slider.cts-slider .slick-list {
     height: 100%; }
     #cts-slider.cts-slider .slick-list .slick-track {

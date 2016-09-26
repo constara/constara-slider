@@ -4,6 +4,7 @@
   visibility: hidden;
   &.slick-initialized {
     visibility: visible;
+    background-color: black;
   }
 
   .slick-list {
