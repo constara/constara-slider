@@ -44,7 +44,7 @@ class Constara_Slider_Site {
 				$slide = new Constara_Slider_Slide( get_post() );?>
 
 				<div class="cts-slide" style="<?php $slide->the_slide_style(); ?>">
-					<div class="cts-content-box" style="<?php $slide->the_content_style(); ?>">
+					<div class="cts-content-box container" style="<?php $slide->the_content_style(); ?>">
 						<?php $slide->the_title();
 						$slide->the_desc();
 						$slide->the_link_btn();
