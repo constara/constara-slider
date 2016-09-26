@@ -1,6 +1,10 @@
 //Default theme for slider//
 #cts-slider.cts-slider {
   height: 340px;
+  visibility: hidden;
+  &.slick-initialized {
+    visibility: visible;
+  }
 
   .slick-list {
 

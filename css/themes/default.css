@@ -1,5 +1,8 @@
 #cts-slider.cts-slider {
-  height: 340px; }
+  height: 340px;
+  visibility: hidden; }
+  #cts-slider.cts-slider.slick-initialized {
+    visibility: visible; }
   #cts-slider.cts-slider .slick-list {
     height: 100%; }
     #cts-slider.cts-slider .slick-list .slick-track {
