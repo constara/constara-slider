@@ -138,7 +138,7 @@ class Constara_Slider_Admin {
 		$slide_desc     = isset( $slide_meta['slide_desc'] ) ? (string) $slide_meta['slide_desc'] : '';
 		$desc_bold      = isset( $slide_meta['desc_bold'] ) ? (bool) $slide_meta['desc_bold'] : false;
 		$desc_italic    = isset( $slide_meta['desc_italic'] ) ? (bool) $slide_meta['desc_italic'] : false;
-		$desc_font_size = isset( $slide_meta['desc_font_size'] ) ? $slide_meta['desc_font_size'] : '30';
+		$desc_font_size = isset( $slide_meta['desc_font_size'] ) ? $slide_meta['desc_font_size'] : '18';
 		$desc_align     = isset( $slide_meta['desc_align'] ) ? $slide_meta['desc_align'] : 'center';
 		$link_url       = isset( $slide_meta['link_url'] ) ? (string) $slide_meta['link_url'] : '';
 		$btn_link_text  = isset( $slide_meta['btn_link_text'] ) ? (string) $slide_meta['btn_link_text'] : '';
@@ -159,27 +159,31 @@ class Constara_Slider_Admin {
 			<label for="cts-slide-custom-title-position"><?php _e('Custom title position', 'cts-slider'); ?></label>
 		</fieldset>
 		<fieldset class="cts-title-position">
-			<label for="cts_slide_title_position"><?php _e('Title position', 'cts-slider'); ?></label>
+			<span for="cts_slide_title_position"><?php _e('Title position', 'cts-slider'); ?></span>
 			<input type="text" size="5" name="slide[title_position]" id="cts_slide_title_position" value="<?php echo esc_attr( $title_position ) ; ?>">
 			<span id="set_default_title_position" class="button"><?php _e('set default', 'cts-slider'); ?></span>
 		<div id="title-position"></div>
 		<div class="title-position-desc"><?php _e('Choose title position for slide. Less value - higher title position', 'cts-slider'); ?></div>
 		</fieldset>
 		<fieldset>
-			<label ><?php _e( 'Slide description', 'cts-slider' ); ?>
+			<label >
+				<span style="padding-bottom: 10px; display: inline-block;"><?php _e( 'Slide description', 'cts-slider' ); ?></span>
 				<textarea class="widefat" rows="3" name="slide[slide_desc]"><?php echo esc_textarea( $slide_desc ); ?></textarea>
 			</label>
 			<label>
-				<?php _e( 'Bold', 'cts-slider' ); ?>
 				<input type="checkbox" name="slide[desc_bold]" <?php checked( $desc_bold ); ?> />
+				<?php _e( 'Bold', 'cts-slider' ); ?>
 			</label>
-			<label><?php _e( 'Italic', 'cts-slider' ); ?>
+			<label>
 				<input type="checkbox" name="slide[desc_italic]" <?php checked( $desc_italic ); ?> />
+				<?php _e( 'Italic', 'cts-slider' ); ?>
 			</label>
 			<label><?php _e( 'Font size', 'cts-slider' ); ?>
 				<input type="number" min="6" max="50" step="1" name="slide[desc_font_size]" value="<?php echo esc_attr( $desc_font_size ); ?>" />
 			</label>
-			<label><?php _e('Text align', 'cts-slider'); ?>
+			<br/>
+			<label>
+				<span style="padding-top: 10px; display: inline-block;"><?php _e('Text align', 'cts-slider'); ?><span>
 				<select name="slide[desc_align]">
 					<option value="center" <?php selected( 'center', $desc_align ); ?>><?php _e('Center', 'cts-slider'); ?></option>
 					<option value="left" <?php selected( 'left', $desc_align ); ?>><?php _e('Left', 'cts-slider'); ?></option>
@@ -188,14 +192,15 @@ class Constara_Slider_Admin {
 			</label>
 		</fieldset>
 		<fieldset>
-			<label for="cts_slide_link_url"><?php _e('Slide link', 'cts-slider'); ?></label>
+			<label for="cts_slide_link_url"><span style="padding-bottom: 10px; display: inline-block;"><?php _e('Slide link', 'cts-slider'); ?></span></label>
 			<input type="text" class="widefat" name="slide[link_url]" id="cts_slide_link_url" size="70" value="<?php echo esc_url( $link_url ); ?>">
 		</fieldset>
 		<fieldset>
 		<label for="cts_btn_link_text"><?php _e( 'Button text', 'cts-slider' ); ?></label>
 		<input type="text" name="slide[btn_link_text]" id="cts_btn_link_text" size="30" value="<?php echo esc_attr( $btn_link_text ) ?>" />
-		<label><?php _e( 'Ghost button style', 'cts-slider' ); ?>
-			<input type="checkbox" class="cts-btn-ghost-style" name="slide[btn_ghost_style]" <?php checked( $btn_ghost_style ); ?> />
+			<br/><br/>
+		<label>
+			<input type="checkbox" class="cts-btn-ghost-style" name="slide[btn_ghost_style]" <?php checked( $btn_ghost_style ); ?> /><?php _e( 'Ghost button style', 'cts-slider' ); ?>
 		</label>
 		<div class="cts-btn-style">
 			<p>
