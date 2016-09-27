@@ -410,8 +410,7 @@ class Constara_Slider_Admin {
 		$autoplay_speed = isset( $slick_opts['autoplayspeed'] ) ? $slick_opts['autoplayspeed'] : '2000' ;
 		$speed          = isset( $slick_opts['speed'] ) ? $slick_opts['speed'] : '600' ;
 		$height_type    = isset( $slider_opts['height_type'] ) ? $slider_opts['height_type'] : 'auto';
-		$height_value   = isset( $slider_opts['height_value'] ) ? $slider_opts['height_value'] : '450' ;
-		var_dump($options);?>
+		$height_value   = isset( $slider_opts['height_value'] ) ? $slider_opts['height_value'] : '450' ; ?>
 		<tr class="form-field cts-slider-edit-options">
 			<th scope="row" valign="top"><?php _e('Slider settings', 'cts-slider'); ?></th>
 			<td>
