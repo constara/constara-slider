@@ -116,7 +116,7 @@ class Constara_Slider_Slide{
 	    $style .= sprintf( 'font-style: %s;', ( $this->get_opt('desc_italic') ) ? 'italic' : 'normal' );
 	    $style .= sprintf( 'font-size: %s;', $this->get_opt('desc_font_size') . 'px' );
 
-    	$desc = sprintf('<div class="cts-slide-description" style="%s">%s</div>', esc_attr($style) , $this->get_opt('slide_desc'));
+    	$desc = sprintf('<br/><div class="cts-slide-description" style="%s">%s</div><br/>', esc_attr($style) , $this->get_opt('slide_desc'));
 	    echo $desc;
     }
 

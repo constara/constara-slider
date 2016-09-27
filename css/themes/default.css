@@ -28,6 +28,8 @@
             display: inline-block;
             width: 100%;
             max-width: 800px; }
+          #cts-slider.cts-slider .slick-list .slick-track div.cts-slide .cts-content-box br {
+            line-height: 0; }
   #cts-slider.cts-slider .cts-slide-title {
     font-weight: bold;
     color: #fff;
