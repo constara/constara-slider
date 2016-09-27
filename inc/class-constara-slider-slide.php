@@ -137,7 +137,7 @@ class Constara_Slider_Slide{
 				esc_attr($this->get_opt('title')),
 				esc_attr( $class ),
 				$style,
-				sanitize_title($this->get_opt('btn_link_text')) );
+				esc_html($this->get_opt('btn_link_text')) );
 
 			echo $btn_html;
 		}
