@@ -125,8 +125,10 @@ class Constara_Slider_Slide{
 			$class =  ( $this->get_opt('btn_ghost_style') ) ? 'cts-ghost-btn' : '';
 			$style_rules = '';
 			if ( !$this->get_opt('btn_ghost_style') ){
-				$style_rules .=  empty( $this->get_opt('btn_bg_color') ) ? '' : sprintf( 'background-color: %s;', $this->get_opt('btn_bg_color') );
-				$style_rules .= ( $this->get_opt('btn_text_color') ) ? sprintf( 'color: %s;', esc_attr( $this->get_opt('btn_text_color') ) ) : '';
+				$btn_bg_color = $this->get_opt('btn_bg_color');
+				$btn_text_color = $this->get_opt('btn_text_color');
+				$style_rules .=  empty( $btn_bg_color ) ? '' : sprintf( 'background-color: %s;', $btn_bg_color );
+				$style_rules .= ( $btn_text_color ) ? sprintf( 'color: %s;', esc_attr( $btn_text_color ) ) : '';
 			}
 
 			$style = sprintf( 'style="%s"', esc_attr( $style_rules) );
