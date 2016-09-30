@@ -74,9 +74,10 @@
   button.cts-slide-button {
     display: inline-block;
     margin-top: 30px;
+    border: none!important;
     &.cts-ghost-btn {
       background: none;
-      border: 1px solid #fff;
+      border: 2px solid #fff!important;
       color: #fff;
       &:hover {
         background: #fff;
@@ -118,6 +119,8 @@
     font: 0/0 a;
     color: transparent;
     background-size: 20px;
+    border: none!important;
+    background-color: transparent!important;
     &:hover{
       opacity: 0.7;
     }
@@ -135,10 +138,11 @@
     display: inline-flex;
     position: absolute;
     bottom: -12px;
-    left: 45%;
+    left: 50%;
     list-style: none;
     margin-left: 0;
     padding: 0;
+    transform: translateX(-50%);
 
     li {
       width: 26px;
@@ -146,19 +150,23 @@
 
       button{
         display: block;
-        background: transparent;
         box-shadow: none;
         margin: 2px;
         font: 0/0 a;
         color: transparent;
         background-size: 18px!important;
         background: url(../../img/icon_circle-empty.svg) no-repeat;
+        border: none!important;
+        background-color: transparent!important;
       }
       &.slick-active button{
         background: url(../../img/icon_circle-slelected.svg) no-repeat;
+
       }
     }
   }
+
+
 }
 
 
@@ -172,17 +180,12 @@
     .cts-slide-description{
       font-size: 1.1em;
     }
-    ul.slick-dots {
-      left: 27%;
-    }
+
   }
 }
 
 @media (min-width: 400px) {
   #cts-slider.cts-slider {
-    ul.slick-dots {
-      left: 35%;
-    }
   }
 }
 
@@ -193,9 +196,6 @@
     }
     .cts-slide-description{
       font-size: 1.2em;
-    }
-    ul.slick-dots {
-      left: 41%;
     }
   }
 }
@@ -230,9 +230,6 @@
     }
     .cts-slide-description{
       font-size: 1.4em;
-    }
-    ul.slick-dots {
-      left: 45%;
     }
   }
 }
