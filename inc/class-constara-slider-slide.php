@@ -83,7 +83,6 @@ class Constara_Slider_Slide{
     	$style = '';
 
 	    $style .= 'text-align: ' . $this->get_opt('desc_align') .';';
-	    error_log($this->get_opt('custom_title_position'));
 	    if ( $this->get_opt('custom_title_position') ){
 		    $style .= 'top: ' . $this->calculate_title_position($this->get_opt('title_position')) . '%;';
 		    $style .= ' left: auto; transform: none;';
