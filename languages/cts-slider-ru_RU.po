@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Constara Slider\n"
-"POT-Creation-Date: 2016-04-26 17:30+0300\n"
-"PO-Revision-Date: 2016-04-26 17:34+0300\n"
+"POT-Creation-Date: 2016-09-30 04:45+0300\n"
+"PO-Revision-Date: 2016-09-30 05:22+0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: ru_RU\n"
@@ -21,124 +21,271 @@ msgstr ""
 "X-Poedit-SearchPath-0: .\n"
 "X-Poedit-SearchPathExcluded-0: *.js\n"
 
-#: admin/class-constara-slider-admin.php:44
-#: admin/class-constara-slider-admin.php:69
+#: admin/class-constara-slider-admin.php:67
+#: admin/class-constara-slider-admin.php:92
 msgid "Slider"
 msgstr "Слайдер"
 
-#: admin/class-constara-slider-admin.php:45
+#: admin/class-constara-slider-admin.php:68
 msgid "CT Slider"
 msgstr "CT Слайдер"
 
-#: admin/class-constara-slider-admin.php:46
-#: admin/class-constara-slider-admin.php:178
+#: admin/class-constara-slider-admin.php:69
+#: admin/class-constara-slider-admin.php:310
 msgid "Slides"
 msgstr "Слайды"
 
-#: admin/class-constara-slider-admin.php:47
-#: admin/class-constara-slider-admin.php:50
+#: admin/class-constara-slider-admin.php:70
+#: admin/class-constara-slider-admin.php:73
 msgid "Add New Slide"
 msgstr "Добавить слайд"
 
-#: admin/class-constara-slider-admin.php:48
+#: admin/class-constara-slider-admin.php:71
 msgid "Slide"
 msgstr "Слайд"
 
-#: admin/class-constara-slider-admin.php:49
+#: admin/class-constara-slider-admin.php:72
 msgid "New Slide"
 msgstr "Новый слайд"
 
-#: admin/class-constara-slider-admin.php:51
+#: admin/class-constara-slider-admin.php:74
 msgid "Edit Slide"
 msgstr "Редактировать слайд"
 
-#: admin/class-constara-slider-admin.php:68
-#: admin/class-constara-slider-admin.php:78
+#: admin/class-constara-slider-admin.php:91
+#: admin/class-constara-slider-admin.php:101
 msgid "Sliders"
 msgstr "Слайдеры"
 
-#: admin/class-constara-slider-admin.php:70
+#: admin/class-constara-slider-admin.php:93
 msgid "Search Sliders"
 msgstr "Искать слайдеры"
 
-#: admin/class-constara-slider-admin.php:71
+#: admin/class-constara-slider-admin.php:94
 msgid "All Sliders"
 msgstr "Все слайдеры"
 
-#: admin/class-constara-slider-admin.php:72
+#: admin/class-constara-slider-admin.php:95
 msgid "Parent Slider"
-msgstr ""
+msgstr "Родительский Слайд"
 
-#: admin/class-constara-slider-admin.php:73
+#: admin/class-constara-slider-admin.php:96
 msgid "Parent Slider:"
-msgstr ""
+msgstr "Родительский Слайд:"
 
-#: admin/class-constara-slider-admin.php:74
+#: admin/class-constara-slider-admin.php:97
 msgid "Edit Slider"
 msgstr "Редактировать слайдер"
 
-#: admin/class-constara-slider-admin.php:75
+#: admin/class-constara-slider-admin.php:98
 msgid "Update Slider"
 msgstr "Обновить слайдер"
 
-#: admin/class-constara-slider-admin.php:76
+#: admin/class-constara-slider-admin.php:99
 msgid "Add New Slider"
 msgstr "Добавить новый слайдер"
 
-#: admin/class-constara-slider-admin.php:77
+#: admin/class-constara-slider-admin.php:100
 msgid "New Slider Name"
 msgstr "Имя нового слайдера"
 
-#: admin/class-constara-slider-admin.php:89
+#: admin/class-constara-slider-admin.php:111
 msgid "Slide media"
 msgstr "Медиа слайда"
 
-#: admin/class-constara-slider-admin.php:90
+#: admin/class-constara-slider-admin.php:112
 msgid "Slide Options"
 msgstr "Настройка слайда"
 
-#: admin/class-constara-slider-admin.php:99
+#: admin/class-constara-slider-admin.php:124
 msgid "Slide image url"
 msgstr "URL изображения слайда"
 
-#: admin/class-constara-slider-admin.php:113
+#: admin/class-constara-slider-admin.php:126
+msgid "Get image"
+msgstr "Выбрать Фото"
+
+#: admin/class-constara-slider-admin.php:127
+msgid "Remove image"
+msgstr "Удалить Фото"
+
+#: admin/class-constara-slider-admin.php:155
 msgid "Hide slide title"
 msgstr "Не показывать заголовок"
 
-#: admin/class-constara-slider-admin.php:117
+#: admin/class-constara-slider-admin.php:159
+msgid "Custom title position"
+msgstr "Изменить позицию заголовка"
+
+#: admin/class-constara-slider-admin.php:162
 msgid "Title position"
 msgstr "Позиция заголовка"
 
-#: admin/class-constara-slider-admin.php:119
+#: admin/class-constara-slider-admin.php:164
 msgid "set default"
 msgstr "сбросить"
 
-#: admin/class-constara-slider-admin.php:121
+#: admin/class-constara-slider-admin.php:166
 msgid "Choose title position for slide. Less value - higher title position"
 msgstr ""
 "Укажите позицию заголовка. Чем меньше значение - тем выше расположение "
 "заголовка"
 
-#: admin/class-constara-slider-admin.php:124
+#: admin/class-constara-slider-admin.php:170
+msgid "Slide description"
+msgstr "Описание слайда"
+
+#: admin/class-constara-slider-admin.php:175
+msgid "Bold"
+msgstr "Жирный"
+
+#: admin/class-constara-slider-admin.php:179
+msgid "Italic"
+msgstr "Курсив"
+
+#: admin/class-constara-slider-admin.php:181
+msgid "Font size"
+msgstr "Размер шрифта"
+
+#: admin/class-constara-slider-admin.php:186
+msgid "Text align"
+msgstr "Выровнять текст"
+
+#: admin/class-constara-slider-admin.php:188
+msgid "Center"
+msgstr "По центру"
+
+#: admin/class-constara-slider-admin.php:189
+msgid "Left"
+msgstr "Слева"
+
+#: admin/class-constara-slider-admin.php:190
+msgid "Right"
+msgstr "Справа"
+
+#: admin/class-constara-slider-admin.php:195
 msgid "Slide link"
 msgstr "Ссылка слайда"
 
-#: admin/class-constara-slider-admin.php:174
+#: admin/class-constara-slider-admin.php:199
+msgid "Button text"
+msgstr "Текст кнопки"
+
+#: admin/class-constara-slider-admin.php:203
+msgid "Ghost button style"
+msgstr "Прозрачная кнопка"
+
+#: admin/class-constara-slider-admin.php:207
+msgid "Button color"
+msgstr "Цвет кнопки"
+
+#: admin/class-constara-slider-admin.php:210
+msgid "Button text color"
+msgstr "Цвет текста кнопки"
+
+#: admin/class-constara-slider-admin.php:290
+msgid "Thumbnail"
+msgstr "Миниатюра"
+
+#: admin/class-constara-slider-admin.php:306
 msgid "Name"
 msgstr "Имя"
 
-#: admin/class-constara-slider-admin.php:175
+#: admin/class-constara-slider-admin.php:307
 msgid "Shortcode"
 msgstr "Шорткод"
 
-#: admin/class-constara-slider-admin.php:177
+#: admin/class-constara-slider-admin.php:309
 msgid "Slug"
 msgstr "Краткое название"
 
-#: admin/class-constara-slider-admin.php:205
-#: admin/class-constara-slider-admin.php:215
+#: admin/class-constara-slider-admin.php:331
+#: admin/class-constara-slider-admin.php:419
+msgid "Autoplay"
+msgstr "Автопроигрование"
+
+#: admin/class-constara-slider-admin.php:333
+#: admin/class-constara-slider-admin.php:350
+#: admin/class-constara-slider-admin.php:364
+#: admin/class-constara-slider-admin.php:371
+#: admin/class-constara-slider-admin.php:421
+#: admin/class-constara-slider-admin.php:438
+#: admin/class-constara-slider-admin.php:452
+#: admin/class-constara-slider-admin.php:459
+msgid "Yes"
+msgstr "Да"
+
+#: admin/class-constara-slider-admin.php:334
+#: admin/class-constara-slider-admin.php:351
+#: admin/class-constara-slider-admin.php:365
+#: admin/class-constara-slider-admin.php:372
+#: admin/class-constara-slider-admin.php:422
+#: admin/class-constara-slider-admin.php:439
+#: admin/class-constara-slider-admin.php:453
+#: admin/class-constara-slider-admin.php:460
+msgid "No"
+msgstr "Нет"
+
+#: admin/class-constara-slider-admin.php:338
+#: admin/class-constara-slider-admin.php:426
+msgid "Autoplay speed"
+msgstr "Скорость смены слайда"
+
+#: admin/class-constara-slider-admin.php:340
+#: admin/class-constara-slider-admin.php:345
+#: admin/class-constara-slider-admin.php:428
+#: admin/class-constara-slider-admin.php:433
+msgid "ms."
+msgstr "мс."
+
+#: admin/class-constara-slider-admin.php:343
+#: admin/class-constara-slider-admin.php:431
+msgid "Speed"
+msgstr "Скорость"
+
+#: admin/class-constara-slider-admin.php:348
+#: admin/class-constara-slider-admin.php:436
+msgid "Fade"
+msgstr "Плавный переход"
+
+#: admin/class-constara-slider-admin.php:362
+#: admin/class-constara-slider-admin.php:450
+msgid "Dots"
+msgstr "Точки навигации"
+
+#: admin/class-constara-slider-admin.php:369
+#: admin/class-constara-slider-admin.php:457
+msgid "Arrows"
+msgstr "Кнопки навигации"
+
+#: admin/class-constara-slider-admin.php:377
+#: admin/class-constara-slider-admin.php:465
 msgid "Slider height"
 msgstr "Высота слайдера"
+
+#: admin/class-constara-slider-admin.php:379
+#: admin/class-constara-slider-admin.php:467
+msgid "Auto"
+msgstr "Авто"
+
+#: admin/class-constara-slider-admin.php:383
+#: admin/class-constara-slider-admin.php:471
+msgid "Fixed"
+msgstr "Фиксированная"
+
+#: admin/class-constara-slider-admin.php:386
+#: admin/class-constara-slider-admin.php:474
+msgid "px."
+msgstr "пикс."
+
+#: admin/class-constara-slider-admin.php:396
+#: admin/class-constara-slider-admin.php:484
+msgid "Full"
+msgstr "По всей ширине"
+
+#: admin/class-constara-slider-admin.php:415
+msgid "Slider settings"
+msgstr "Настройки слайдера"
 
 #. Plugin Name of the plugin/theme
 msgid "Constara Slider"
