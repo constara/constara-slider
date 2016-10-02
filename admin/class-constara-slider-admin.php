@@ -242,7 +242,7 @@ class Constara_Slider_Admin {
 			$slide_meta['hide_title']       = isset( $_POST['slide']['hide_title'] ) ? true : false;
 			$slide_meta['custom_title_position'] = isset( $_POST['slide']['custom_title_position'] ) ? true : false;
 			$slide_meta['title_position']   = (int) intval( $_POST['slide']['title_position'] );
-			$slide_meta['slide_desc']       = sanitize_text_field( $_POST['slide']['slide_desc'] );
+			$slide_meta['slide_desc']       = wp_kses( $_POST['slide']['slide_desc'] , array('br'=> array())) ;
 			$slide_meta['desc_bold']        = isset( $_POST['slide']['desc_bold'] ) ? true : false;
 			$slide_meta['desc_italic']      = isset( $_POST['slide']['desc_italic'] ) ? true : false;
 			$slide_meta['desc_font_size']   = sanitize_text_field( $_POST['slide']['desc_font_size'] );
