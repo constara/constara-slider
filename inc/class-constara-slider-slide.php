@@ -37,9 +37,9 @@ class Constara_Slider_Slide{
 		$opts['link_url']       = $slide_meta['link_url'];
 		$opts['btn_link_text']  = $slide_meta['btn_link_text'];
 		$opts['btn_bg_color']   = (string) $slide_meta['btn_bg_color'];
-		//$opts['btn_bg_color_hover'] = (string) $slide_meta['btn_bg_color_hover'];
+		$opts['btn_bg_color_hover'] = (string) $slide_meta['btn_bg_color_hover'];
 		$opts['btn_text_color'] = (string) $slide_meta['btn_text_color'];
-		//$opts['btn_text_color_hover'] = (string) $slide_meta['btn_text_color_hover'];
+		$opts['btn_text_color_hover'] = (string) $slide_meta['btn_text_color_hover'];
 		$opts['btn_ghost_style']= (bool) $slide_meta['btn_ghost_style'];
 		//media
 		$opts['img_url']        = (string) $slide_media['img_url'];
@@ -130,19 +130,37 @@ class Constara_Slider_Slide{
 				$style_rules .= ( $btn_text_color ) ? sprintf( 'color: %s;', esc_attr( $btn_text_color ) ) : '';
 			}
 
-			$style = sprintf( 'style="%s"', esc_attr( $style_rules) );
+			$style  = sprintf( 'style="%s"', esc_attr( $style_rules) );
+			$data   = $this->get_link_btn_data();
 
 
-			$btn_html = sprintf( '<a href="%s" title="%s"><button class="cts-slide-button %s" %s >%s</button></a>',
+			$btn_html = sprintf( '<a href="%s" title="%s"><button class="cts-slide-button %s" %s %s>%s</button></a>',
 				esc_url($this->get_opt('link_url')),
 				esc_attr($this->get_opt('title')),
 				esc_attr( $class ),
 				$style,
-				esc_html($this->get_opt('btn_link_text')) );
+				$data,
+				esc_html($this->get_opt('btn_link_text'))
+			);
 
 			echo $btn_html;
 		}
 	}
+
+	private function get_link_btn_data(){
+		$params_array = array(
+			'btn_bg_color_hover'    => $this->get_opt('btn_bg_color_hover'),
+			'btn_text_color_hover'  => $this->get_opt('btn_text_color_hover'),
+			'btn_text_color'        => $this->get_opt('btn_text_color'),
+			'btn_bg_color'          => $this->get_opt('btn_bg_color'),
+		);
+
+		$data = "data-cts-slide-btn='". json_encode($params_array). "'";
+
+
+		return $data;
+	}
+
     private function get_id(){
         return $this->id;
     }
