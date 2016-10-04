@@ -23,7 +23,6 @@ class Constara_Slider_Admin {
 	private function __construct($version) {
 		$this->version = $version;
 		$this->wp_hooks();
-
 	}
 
 	private function wp_hooks(){
@@ -171,11 +170,11 @@ class Constara_Slider_Admin {
 			</label>
 			<label>
 				<input type="checkbox" name="slide[desc_bold]" <?php checked( $desc_bold ); ?> />
-				<?php _e( 'Bold', 'cts-slider' ); ?>
+				<b><?php _e( 'Bold', 'cts-slider' ); ?></b>
 			</label>
 			<label>
 				<input type="checkbox" name="slide[desc_italic]" <?php checked( $desc_italic ); ?> />
-				<?php _e( 'Italic', 'cts-slider' ); ?>
+				<i><?php _e( 'Italic', 'cts-slider' ); ?></i>
 			</label>
 			<label><?php _e( 'Font size', 'cts-slider' ); ?>
 				<input type="number" min="6" max="50" step="1" name="slide[desc_font_size]" value="<?php echo esc_attr( $desc_font_size ); ?>" />
@@ -230,9 +229,7 @@ class Constara_Slider_Admin {
 			if(defined('DOING_AUTOSAVE') && DOING_AUTOSAVE){
 				return;
 			}
-			if ( ! current_user_can( 'edit_post', $post_id ) ){
-				return;
-			}
+
 			if ( ! wp_verify_nonce( $_POST['cts_slide_options'], __FILE__ ) ){
 				return;
 			}
@@ -259,7 +256,6 @@ class Constara_Slider_Admin {
 				'_cts_slide_meta',
 				$slide_meta
 			);
-
 		}
 
 		//slide media
@@ -267,9 +263,7 @@ class Constara_Slider_Admin {
 			if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE){
 				return;
 			}
-			if ( ! current_user_can( 'edit_post', $post_id ) ){
-				return;
-			}
+
 			if ( !wp_verify_nonce( $_POST['cts_slide_media'], __FILE__ ) ){
 				return;
 			}
@@ -291,11 +285,14 @@ class Constara_Slider_Admin {
 	}
 
 	public function slide_columns($column, $post_id){
-
 		switch ($column){
 			case 'image-preview':
-				$img_url = get_post_meta($post_id, '_cts_slide_img_url', true);
+				$slide_media = get_post_meta($post_id, '_cts_slide_media', true);
+				$img_url = esc_url($slide_media['img_url']);
 				echo sprintf('<img src="%s" class="slide-preview">', $img_url);
+				break;
+			default:
+				break;
 		}
 	}
 	
@@ -304,7 +301,6 @@ class Constara_Slider_Admin {
 		'cb' => '<input type="checkbox" />',
 		'name' => __('Name', 'cts-slider'),
 		'shortcode' => __('Shortcode', 'cts-slider'),
-		//'description' => __('Description', 'cts-slider'),
 		'slug' => __('Slug', 'cts-slider'),
 		'posts' => __('Slides', 'cts-slider')
 		);
@@ -317,7 +313,6 @@ class Constara_Slider_Admin {
 			case 'shortcode':
 				echo "[cts_slider slider='".$slider->slug."' ]";
 				break;
-
 			default:
 				break;
 		}
@@ -396,10 +391,7 @@ class Constara_Slider_Admin {
 					<input type="radio" name="trc_slider_opts[height_type]" value="full" />
 				</p>
 			</div>
-
-
 		</div>
-
 	<?php }
 
 	public function slider_edit_add_options($term){
@@ -504,9 +496,6 @@ class Constara_Slider_Admin {
 			$data_slider['slider']['height_value'] = sanitize_text_field($options['height_value']);
 			//$data_slider['slider']['ratio_width'] 	= sanitize_text_field($options['ratio_width']);
 			//$data_slider['slider']['ratio_height'] = sanitize_text_field($options['ratio_height']);
-
-
-
 
 			update_option($option_name, $data_slider);
 		}

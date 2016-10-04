@@ -99,7 +99,6 @@ class Constara_Slider_Slider{
         $data_slider = substr($data_slider, 0, -2);
         $data_slider .= "}'";
 
-
         $opts .= $data_slick . ' ' . $data_slider;
         return $opts;
     }
