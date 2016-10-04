@@ -30,7 +30,7 @@ jQuery(document).ready(function($){
 
 	$('.cts-slide-button ').hover(function () {
 		var data = $(this).data('cts-slide-btn');
-		if ( 'undefined' !== typeof data ){
+		if ( 'undefined' !== typeof data && !$(this).hasClass('cts-ghost-btn') ){
 			$(this).css({
 				'background-color'	: data.btn_bg_color_hover,
 				'color'				: data.btn_text_color_hover
@@ -40,7 +40,7 @@ jQuery(document).ready(function($){
 	function () {
 		var data = $(this).data('cts-slide-btn');
 
-		if ( 'undefined' !== typeof data ){
+		if ( 'undefined' !== typeof data && !$(this).hasClass('cts-ghost-btn') ){
 			$(this).css({
 				'background-color'	: data.btn_bg_color,
 				'color'				: data.btn_text_color
