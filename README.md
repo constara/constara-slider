@@ -1,7 +1,7 @@
 Constara Slider
 ---
 
-Contributors: kutas,
+Contributors: serjconstant, kutas
 
 Donate link: constara.com/donate
 
