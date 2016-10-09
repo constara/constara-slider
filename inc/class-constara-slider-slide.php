@@ -27,6 +27,7 @@ class Constara_Slider_Slide{
 		$opts['title']          = get_the_title($post);
 		$opts['desc']           = $post->post_content;
 		$opts['hide_title']     = (bool) $slide_meta['hide_title'];
+		$opts['title_color']    = $slide_meta['title_color'];
 		$opts['custom_title_position'] = (bool) $slide_meta['custom_title_position'];
 		$opts['title_position'] = (integer) $slide_meta['title_position'];
 		$opts['slide_desc']     = (string) $slide_meta['slide_desc'];
@@ -34,6 +35,7 @@ class Constara_Slider_Slide{
 		$opts['desc_italic']    = (bool) $slide_meta['desc_italic'];
 		$opts['desc_font_size'] = $slide_meta['desc_font_size'];
 		$opts['desc_align']     = $slide_meta['desc_align'];
+		$opts['desc_color']     = $slide_meta['desc_color'];
 		$opts['link_url']       = $slide_meta['link_url'];
 		$opts['btn_link_text']  = $slide_meta['btn_link_text'];
 		$opts['btn_bg_color']   = (string) $slide_meta['btn_bg_color'];
@@ -99,7 +101,8 @@ class Constara_Slider_Slide{
     	if ( $this->get_opt( 'hide_title' ) ){
     		return;
 	    }
-    	$title =  sprintf('<span class="cts-slide-title">%s</span>',  $this->get_opt('title')  );
+	    $title_style = 'style="color: '. $this->get_opt('title_color') . ';"';
+    	$title =  sprintf('<span class="cts-slide-title" %s>%s</span>', $title_style, $this->get_opt('title')  );
 
 	    if ( $this->get_opt('link_url') ){
 	    	$title = sprintf('<a href="%s">%s</a>', esc_url($this->get_opt('link_url')), $title);
@@ -114,6 +117,7 @@ class Constara_Slider_Slide{
 	    $style .= sprintf( 'font-weight: %s;', ( $this->get_opt('desc_bold') ) ? 'bold' : '200' );
 	    $style .= sprintf( 'font-style: %s;', ( $this->get_opt('desc_italic') ) ? 'italic' : 'normal' );
 	    $style .= sprintf( 'font-size: %s;', $this->get_opt('desc_font_size') . 'px' );
+	    $style .= sprintf( 'color: %s;', $this->get_opt('desc_color') );
 
     	$desc = sprintf('<br/><div class="cts-slide-description" style="%s">%s</div><br/>', esc_attr($style) , $this->get_opt('slide_desc'));
 	    echo $desc;

@@ -79,6 +79,8 @@ jQuery(document).ready(function ($) {
 
 
     //Link btn color
+    $('#cts-slide-title-color').wpColorPicker();
+    $('#cts-slide-desc-color').wpColorPicker();
     $('#cts-slide-link-btn-color').wpColorPicker();
     $('#cts-slide-link-btn-color-hover').wpColorPicker();
     $('#cts-slide-link-btn-text-color').wpColorPicker();
