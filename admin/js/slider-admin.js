@@ -24,13 +24,16 @@ jQuery(document).ready(function ($) {
         frame.open();
 
         frame.on('select', function(){
-            var url_field = $('#cts_slide_img_url');
+            var urlField = $('#cts_slide_img_url');
             var img = $('.img-preview');
+            var imgIdField = $('.img-id');
             var attachment = frame.state().get('selection').first().toJSON();
-            var url = attachment.url;
-            url_field.val(url);
-            img.attr('src', url);
+            var url = attachment.url,
+                imgId = attachment.id;
 
+            urlField.val(url);
+            img.attr('src', url);
+            imgIdField.val(imgId);
         });
 
     });

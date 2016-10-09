@@ -115,12 +115,14 @@ class Constara_Slider_Admin {
 		$post_id = $post->ID;
 		$slide_media = get_post_meta( $post_id, '_cts_slide_media', true );
 		$img_url     = isset( $slide_media['img_url'] ) ? (string) $slide_media['img_url'] : '';
+		$img_id      = isset( $slide_media['img_id'] ) ? $slide_media['img_id'] : '';
 		wp_nonce_field( __FILE__, 'cts_slide_media' );
 		?>
 		<p class="cts-slide-media">
 			<img class="img-preview" src="<?php echo esc_url($img_url); ?>">
 			<label for="cts_slide_img_url"><?php _e('Slide image url', 'cts-slider'); ?></label>
 			<input type="text" class="widefat" name="slide_media[img_url]" id="cts_slide_img_url" value="<?php echo esc_url($img_url); ?>">
+			<input type="hidden" class="img-id" name="slide_media[img_id]" value="<?php echo esc_attr( $img_id ); ?>" />
 			<span class="button" id="get-slide-img-url" ><?php _e('Get image', 'cts-slider');?></span>
 			<span class="button" id="rm-slide-img-url" ><?php _e('Remove image', 'cts-slider'); ?></span>
 		</p>
@@ -270,6 +272,7 @@ class Constara_Slider_Admin {
 
 			$slide_media = array();
 			$slide_media['img_url'] = esc_url_raw( $_POST['slide_media']['img_url'] );
+			$slide_media['img_id']  = sanitize_text_field( $_POST['slide_media']['img_id'] );
 
 			update_post_meta(
 				$post_id,
@@ -288,8 +291,11 @@ class Constara_Slider_Admin {
 		switch ($column){
 			case 'image-preview':
 				$slide_media = get_post_meta($post_id, '_cts_slide_media', true);
-				$img_url = esc_url($slide_media['img_url']);
-				echo sprintf('<img src="%s" class="slide-preview">', $img_url);
+
+				$img_src = wp_get_attachment_image_src( $slide_media['img_id'], 'medium' );
+				$img_url = $img_src[0];
+
+				echo sprintf('<img src="%s" class="slide-preview">', $img_url );
 				break;
 			default:
 				break;
