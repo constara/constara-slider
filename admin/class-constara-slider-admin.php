@@ -37,8 +37,8 @@ class Constara_Slider_Admin {
 		add_filter('manage_cts_slider_category_custom_column', array($this, 'manage_slider_columns') , 10, 3);
 		add_action('cts_slider_category_add_form_fields', array($this, 'slider_create_add_options') );
 		add_action('cts_slider_category_edit_form_fields', array($this, 'slider_edit_add_options') );
-		add_action('edited_cts_slider_category', array($this, 'slider_add_options_save') );
-		add_action('create_cts_slider_category', array($this, 'slider_add_options_save') );
+		add_action('edited_cts_slider_category', array($this, 'slider_add_options_save'),10, 2);
+		add_action('created_cts_slider_category', array($this, 'slider_add_options_save'), 10 , 2 );
 		add_filter('manage_cts_slide_posts_columns', array($this, 'set_slide_columns') );
 		add_action('manage_cts_slide_posts_custom_column', array($this, 'slide_columns') , 10 ,2);
 		if ( is_admin() ){
@@ -402,7 +402,7 @@ class Constara_Slider_Admin {
 	<?php }
 
 	public function slider_edit_add_options($term){
-		$options        = get_option($term->slug);
+		$options        = get_option( Constara_Slider_Plugin::$plugin_prefix . $term->slug);
 		$default_opt    = Constara_Slider_Slider::$default_opt;
 		$autoplay       = isset( $options['autoplay'] ) ? $options['autoplay'] : $default_opt['autoplay'];
 		$autoplay_speed = isset( $options['autoplayspeed'] ) ? $options['autoplayspeed'] : $default_opt['autoplayspeed'];
@@ -477,7 +477,7 @@ class Constara_Slider_Admin {
 		</tr>
 	<?php }
 
-	public function slider_add_options_save($term_id){
+	public function slider_add_options_save($term_id, $tt_id){
 		$term = get_term($term_id, 'cts_slider_category');
 		$option_name = Constara_Slider_Plugin::$plugin_prefix . $term->slug;
 		if (isset($_POST['cts_slider_opts'])){

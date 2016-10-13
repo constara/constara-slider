@@ -24,7 +24,7 @@ class Constara_Slider_Plugin {
 
 	private function __construct() {
 		static::$plugin_prefix = 'cts_slider_';
-		$this->version       = 'beta-0.8.2';
+		$this->version       = 'beta-0.8.3';
 		$this->load_dependencies();
 	}
 
