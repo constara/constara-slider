@@ -42,9 +42,9 @@ class Constara_Slider_Slider{
 
 
 	protected function set_name($slider_slug){
-		$name =  Constara_Slider_Plugin::$plugin_prefix . $slider_slug;
+		$this->name =  Constara_Slider_Plugin::$plugin_prefix . $slider_slug;
 
-		return $name;
+
 	}
 
 	private function set_data(){
@@ -65,6 +65,7 @@ class Constara_Slider_Slider{
 	}
 
 	protected function get_slider_options($slider_name){
+		error_log($slider_name);
 		$slider_options = get_option($slider_name);
 		if ( !$slider_options ){
 			$slider_options = self::$default_opt;
