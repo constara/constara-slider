@@ -24,7 +24,7 @@ class Constara_Slider_Plugin {
 
 	private function __construct() {
 		$this->plugin_slug = 'constara-slider';
-		$this->version = '0.1';
+		$this->version = 'beta-0.8.0';
 		$this->load_dependencies();
 	}
 

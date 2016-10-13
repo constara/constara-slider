@@ -12,54 +12,61 @@ class Constara_Slider_Slider{
 
     protected $slider_options;
 
-    protected $data_slick;
+    private $data_slick;
 
-    protected $data_slider;
+    private $data_slider;
+
+	public static $default_opt = array(
+		'autoplay'      => 'true',
+		'autoplayspeed' => 2000,
+		'speed'         => 600,
+		'fade'          => 'true',
+		'dots'          => 'true',
+		'arrows'        => 'true',
+		'height_type'   => 'auto',
+		'height_value'  => '400',
+	);
 
     public $query;
 
     public function __construct($attr){
         $this->name = $this->set_name($attr);
         $this->slider_options = $this->get_slider_options($this->name);
+		$this->set_data();
         $this->query = $this->get_query($this->name);
     }
 
 
 	protected function set_name($attr){
-		$name = '' ;
-		if ( !empty( $attr['slider'] ) ){
-			$name = $attr['slider'];
-		}
+		$name = ( empty( $attr['slider'] ) ) ? '' : $attr['slider'];
+
 		return $name;
+	}
+
+	private function set_data(){
+		$opts = $this->slider_options;
+		$this->data_slick = array(
+			'autoplay'      => $opts['autoplay'],
+			'autoplayspeed' => $opts['autoplayspeed'],
+			'speed'         => $opts['speed'],
+			'fade'          => $opts['fade'],
+			'dots'          => $opts['dots'],
+			'arrows'        => $opts['arrows'],
+		);
+
+		$this->data_slider = array(
+			'height_type' => $opts['height_type'],
+			'height_value' => $opts['height_value'],
+		);
 	}
 
 	protected function get_slider_options($slider_name){
         $slider_options = get_option($slider_name);
 	    if ( !$slider_options ){
-            $slider_options = $this->get_default_slider_options();
+            $slider_options = self::$default_opt;
 	    }
         return $slider_options;
     }
-
-    private function get_default_slider_options(){
-
-    	$defaults = array(
-    	    'slick'     => array(
-    	    	'autoplay'      => 'true',
-		        'autoplayspeed' => '2000',
-		        'speed'         => '600',
-		        'fade'          => 'true',
-		        'dots'          => 'true',
-		        'arrows'        => 'true',
-	        ),
-		    'slider'    => array(
-		    	'height_type'   => 'auto',
-		    ),
-	    );
-
-	    return $defaults;
-    }
-
 
     public function get_query($name){
         //set attr for query
@@ -69,7 +76,7 @@ class Constara_Slider_Slider{
             'order'             => 'ASC',
             'tax_query'         => array(
                 array(
-                    'taxonomy'  => 'cts_slides_category',
+                    'taxonomy'  => 'cts_slider_category',
                     'field'     => 'slug',
                     'terms'     => $name,
                 )
@@ -83,7 +90,7 @@ class Constara_Slider_Slider{
         $opts = '';
         //options for slick.js script
         $data_slick = "data-slick='{";
-        foreach ($this->slider_options['slick'] as $opt => $value){
+        foreach ($this->data_slick as $opt => $value){
             $data_slick .= sprintf('"%s": %s, ',$opt, $value);
         }
         $data_slick = substr($data_slick,0,-2);
@@ -91,7 +98,7 @@ class Constara_Slider_Slider{
 
         //options for slider from user
         $data_slider = "data-slider='{";
-        foreach ($this->slider_options['slider'] as $opt => $val){
+        foreach ($this->data_slider as $opt => $val){
         	if (!empty($val)){
 		        $data_slider .= sprintf('"%s": "%s", ', $opt, $val);
 	        }
