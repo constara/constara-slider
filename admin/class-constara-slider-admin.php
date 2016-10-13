@@ -479,7 +479,7 @@ class Constara_Slider_Admin {
 
 	public function slider_add_options_save($term_id){
 		$term = get_term($term_id, 'cts_slider_category');
-		$option_name = $term->slug;
+		$option_name = Constara_Slider_Plugin::$plugin_prefix . $term->slug;
 		if (isset($_POST['cts_slider_opts'])){
 			$options = $_POST['cts_slider_opts'];
 			$data_slider = array();

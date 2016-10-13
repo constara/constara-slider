@@ -9,7 +9,7 @@ class Constara_Slider_Plugin {
 
 	protected $loader;
 
-	protected $plugin_slug;
+	public static $plugin_prefix;
 
 	protected $version;
 
@@ -23,8 +23,8 @@ class Constara_Slider_Plugin {
 	}
 
 	private function __construct() {
-		$this->plugin_slug = 'constara-slider';
-		$this->version = 'beta-0.8.0';
+		static::$plugin_prefix = 'cts_slider_';
+		$this->version       = 'beta-0.8.2';
 		$this->load_dependencies();
 	}
 
@@ -43,10 +43,6 @@ class Constara_Slider_Plugin {
 
 	public function get_version(){
 		return $this->version;
-	}
-
-	public function get_plugin_slug(){
-		return $this->plugin_slug;
 	}
 
 }

@@ -10,6 +10,8 @@ class Constara_Slider_Slider{
 
     protected $name;
 
+	protected $slider_slug;
+
     protected $slider_options;
 
     private $data_slick;
@@ -30,15 +32,17 @@ class Constara_Slider_Slider{
     public $query;
 
     public function __construct($attr){
-        $this->name = $this->set_name($attr);
+    	$this->slider_slug = $attr['slider'];
+        $this->set_name($this->slider_slug);
         $this->slider_options = $this->get_slider_options($this->name);
 		$this->set_data();
-        $this->query = $this->get_query($this->name);
+        $this->query = $this->get_query($this->slider_slug);
     }
 
 
-	protected function set_name($attr){
-		$name = ( empty( $attr['slider'] ) ) ? '' : $attr['slider'];
+
+	protected function set_name($slider_slug){
+		$name =  Constara_Slider_Plugin::$plugin_prefix . $slider_slug;
 
 		return $name;
 	}
@@ -61,11 +65,11 @@ class Constara_Slider_Slider{
 	}
 
 	protected function get_slider_options($slider_name){
-        $slider_options = get_option($slider_name);
-	    if ( !$slider_options ){
-            $slider_options = self::$default_opt;
-	    }
-        return $slider_options;
+		$slider_options = get_option($slider_name);
+		if ( !$slider_options ){
+			$slider_options = self::$default_opt;
+		}
+		return $slider_options;
     }
 
     public function get_query($name){
